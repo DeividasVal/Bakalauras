@@ -79,7 +79,7 @@ public class registruotis extends AppCompatActivity {
                                 {
                                     Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                 }
-                                //Log.i("PutData", result);
+                                Log.i("PutData", result);
                             }
                         }
                     }
