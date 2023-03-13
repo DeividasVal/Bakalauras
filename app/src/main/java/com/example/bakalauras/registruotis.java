@@ -54,14 +54,14 @@ public class registruotis extends AppCompatActivity {
                     @Override
                     public void run() {
                         String[] field = new String[4];
-                        field[0] = "kliento_slaptazodis";
-                        field[1] = "pilnas_vardas";
-                        field[2] = "kliento_vartotojo_vardas";
-                        field[3] = "kliento_pastas ";
+                        field[0] = "pilnas_mokinio_vardas";
+                        field[1] = "mokinio_vartotojo_vardas";
+                        field[2] = "mokinio_slaptazodis";
+                        field[3] = "mokinio_el_pastas";
                         String[] data = new String[4];
-                        data[0] = password;
-                        data[1] = fullname;
-                        data[2] = username;
+                        data[0] = fullname;
+                        data[1] = username;
+                        data[2] = password;
                         data[3] = email;
                         PutData putData = new PutData("http://192.168.1.150/PHPscriptai/signup.php", "POST", field, data);
                         if (putData.startPut()) {

@@ -8,65 +8,64 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/fullnameField"
-        android:layout_width="238dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="196dp"
         android:ems="10"
         android:hint="Pilnas vardas"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/emailRegisterField"
-        android:layout_width="225dp"
+        android:layout_width="343dp"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="El. paštas"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullnameField" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/vartotojoVardasRegister"
-        android:layout_width="221dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Vartotojo vardas"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailRegisterField" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/passwordRegister"
-        android:layout_width="230dp"
+        android:layout_width="343dp"
         android:layout_height="48dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Slaptažodis"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vartotojoVardasRegister" />
 
     <Button
+        android:textColor="@color/white"
         android:id="@+id/registruotisButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="152dp"
+        android:layout_width="233dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="148dp"
+        android:background="@drawable/button_shape"
         android:text="Prisiregistruoti"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,11 +75,10 @@
         android:id="@+id/prisijungtiText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="40dp"
         android:text="Jau turite paskyrą? Prisijunkite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
@@ -93,4 +91,40 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordRegister" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/fullnameField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:text="Mokinys"
+            android:textAlignment="center"
+            android:textColor="@drawable/text_color" />
+
+        <RadioButton
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:text="Korepetitorius"
+            android:textAlignment="center"
+            android:textColor="@drawable/text_color" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

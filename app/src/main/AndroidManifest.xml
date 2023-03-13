@@ -16,6 +16,7 @@
         android:theme="@style/Theme.Bakalauras"
         tools:targetApi="31">
         <activity android:name=".prisijungti"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".registruotis"
             android:exported="false" />
     </application>

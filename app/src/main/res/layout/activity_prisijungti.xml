@@ -7,38 +7,38 @@
     tools:context=".prisijungti">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/usernameField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:id="@+id/prisijungtiVardas"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="340dp"
         android:ems="10"
+        android:hint="Vartotojo vardas"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:hint="Vartotojo vardas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/passwordField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:id="@+id/slaptazodisPrisijungti"
+        android:layout_width="343dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="Slaptažodis"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:hint="Slaptažodis"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameField" />
+        app:layout_constraintTop_toBottomOf="@+id/prisijungtiVardas" />
 
     <TextView
         android:id="@+id/registerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="40dp"
         android:text="Neturite paskyros? Prisiregistruokite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,12 +47,48 @@
 
     <Button
         android:id="@+id/prisijungtiButton"
+        android:layout_width="233dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/button_shape"
+        android:text="Prisijungti"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slaptazodisPrisijungti" />
+
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Prisijungti"
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/prisijungtiVardas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:text="Mokinys"
+            android:textAlignment="center"
+            android:textColor="@drawable/text_color" />
+
+        <RadioButton
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:text="Korepetitorius"
+            android:textAlignment="center"
+            android:textColor="@drawable/text_color" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
