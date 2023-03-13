@@ -68,6 +68,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
+            android:id="@+id/mokinioPasirinkimasLogin"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -80,6 +81,7 @@
             android:textColor="@drawable/text_color" />
 
         <RadioButton
+            android:id="@+id/korepetitoriausPasirinkimasLogin"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
