@@ -3,6 +3,7 @@ package com.example.bakalauras;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,13 +19,19 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class registruotis extends AppCompatActivity {
 
-    TextInputEditText usernameField, passwordField, emailField, fullnameField;
-    TextView loginTextField;
-    Button signup;
-    ProgressBar progress;
-    RadioButton radioMokinys, radioKorepetitorius;
+    public TextInputEditText usernameField, passwordField, emailField, fullnameField;
+    public TextView loginTextField;
+    public Button signup;
+    public ProgressBar progress;
+    public RadioButton radioMokinys, radioKorepetitorius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,121 +44,44 @@ public class registruotis extends AppCompatActivity {
         emailField = findViewById(R.id.emailRegisterField);
         fullnameField = findViewById(R.id.fullnameField);
         loginTextField = findViewById(R.id.prisijungtiText);
-        progress = findViewById(R.id.progressBar);
         signup = findViewById(R.id.registruotisButton);
-            signup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v)
-                {
-                    if (radioMokinys.isChecked())
-                    {
-                        String username, password, email, fullname;
-                        username = String.valueOf(usernameField.getText());
-                        password = String.valueOf(passwordField.getText());
-                        email = String.valueOf(emailField.getText());
-                        fullname = String.valueOf(fullnameField.getText());
-                        progress.setVisibility(View.VISIBLE);
-                        if (!username.equals("") && !password.equals("") && !email.equals("") && !fullname.equals(""))
-                        {
-                            Handler handler = new Handler(Looper.getMainLooper());
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    String[] field = new String[4];
-                                    field[0] = "pilnas_mokinio_vardas";
-                                    field[1] = "mokinio_vartotojo_vardas";
-                                    field[2] = "mokinio_slaptazodis";
-                                    field[3] = "mokinio_el_pastas";
-                                    String[] data = new String[4];
-                                    data[0] = fullname;
-                                    data[1] = username;
-                                    data[2] = password;
-                                    data[3] = email;
-                                    PutData putData = new PutData("http://192.168.1.150/PHPscriptai/signupMokinys.php", "POST", field, data);
-                                    if (putData.startPut()) {
-                                        if (putData.onComplete()) {
-                                            progress.setVisibility(View.GONE);
-                                            String result = putData.getResult();
-                                            if (result.equals("Registracija sekminga"))
-                                            {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), prisijungti.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                            }
-                                            Log.i("PutData", result);
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                        else
-                        {
-                            Toast.makeText(getApplicationContext(), "Visi laukai turi buti uzpildyti!", Toast.LENGTH_SHORT).show();
-                        }
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (radioMokinys.isChecked()) {
+                    String username, password, email, fullname;
+                    username = String.valueOf(usernameField.getText());
+                    password = String.valueOf(passwordField.getText());
+                    email = String.valueOf(emailField.getText());
+                    fullname = String.valueOf(fullnameField.getText());
+                    if (!username.equals("") && !password.equals("") && !email.equals("") && !fullname.equals("")) {
+                        new RegisterTask().execute(username, password, email, fullname, "registracijaMokinys");
+                        Intent intent = new Intent(getApplicationContext(), prisijungti.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Visi laukai turi buti uzpildyti!", Toast.LENGTH_SHORT).show();
                     }
-                    else if (radioKorepetitorius.isChecked())
-                    {
-                        String username, password, email, fullname;
-                        username = String.valueOf(usernameField.getText());
-                        password = String.valueOf(passwordField.getText());
-                        email = String.valueOf(emailField.getText());
-                        fullname = String.valueOf(fullnameField.getText());
-                        progress.setVisibility(View.VISIBLE);
-                        if (!username.equals("") && !password.equals("") && !email.equals("") && !fullname.equals(""))
-                        {
-                            Handler handler = new Handler(Looper.getMainLooper());
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    String[] field = new String[4];
-                                    field[0] = "pilnas_korepetitoriaus_vardas";
-                                    field[1] = "korepetitoriaus_vartotojo_vardas";
-                                    field[2] = "korepetitoriaus_slaptazodis";
-                                    field[3] = "korepetitoriaus_el_pastas";
-                                    String[] data = new String[4];
-                                    data[0] = fullname;
-                                    data[1] = username;
-                                    data[2] = password;
-                                    data[3] = email;
-                                    PutData putData = new PutData("http://192.168.1.150/PHPscriptai/signupKorepetitorius.php", "POST", field, data);
-                                    if (putData.startPut()) {
-                                        if (putData.onComplete()) {
-                                            progress.setVisibility(View.GONE);
-                                            String result = putData.getResult();
-                                            if (result.equals("Registracija sekminga"))
-                                            {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), prisijungti.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                            }
-                                            Log.i("PutData", result);
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                        else
-                        {
-                            Toast.makeText(getApplicationContext(), "Visi laukai turi buti uzpildyti!", Toast.LENGTH_SHORT).show();
-                        }
+                } else if (radioKorepetitorius.isChecked()) {
+                    String username, password, email, fullname;
+                    username = String.valueOf(usernameField.getText());
+                    password = String.valueOf(passwordField.getText());
+                    email = String.valueOf(emailField.getText());
+                    fullname = String.valueOf(fullnameField.getText());
+                    if (!username.equals("") && !password.equals("") && !email.equals("") && !fullname.equals("")) {
+                        new RegisterTask().execute(username, password, email, fullname, "registracijaKorepetitorius");
+                        Intent intent = new Intent(getApplicationContext(), prisijungti.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Visi laukai turi buti uzpildyti!", Toast.LENGTH_SHORT).show();
                     }
-                    else
-                    {
-                        Toast.makeText(getApplicationContext(), "Pasirinkite: MOKINYS ar KOREPETITORIUS!", Toast.LENGTH_SHORT).show();
-                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Pasirinkite: MOKINYS ar KOREPETITORIUS!", Toast.LENGTH_SHORT).show();
                 }
-            });
-            loginTextField.setOnClickListener(new View.OnClickListener() {
+            }
+        });
+        loginTextField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLogin = new Intent(getApplicationContext(), prisijungti.class);
@@ -159,5 +89,56 @@ public class registruotis extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private class RegisterTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String username = params[0];
+            String password = params[1];
+            String email = params[2];
+            String fullname = params[3];
+            String filename = params[4];
+            URL url;
+            try {
+                if (filename == "registracijaMokinys") {
+                    url = new URL("http://192.168.1.150/PHPscriptai/registracijaMokinys.php");
+                } else {
+                    url = new URL("http://192.168.1.150/PHPscriptai/registracijaKorepetitorius.php");
+                }
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                String data;
+                if (filename == "registracijaMokinys") {
+                    data = "mokinio_el_pastas=" + email + "&mokinio_slaptazodis=" + password + "&pilnas_mokinio_vardas=" + fullname + "&mokinio_vartotojo_vardas=" + username;
+                } else {
+                    data = "korepetitoriaus_el_pastas=" + email + "&korepetitoriaus_slaptazodis=" + password + "&pilnas_korepetitoriaus_vardas=" + fullname + "&korepetitoriaus_vartotojo_vardas=" + username;
+                }
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(data);
+                writer.flush();
+
+                // Read the response from the PHP script
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                return response.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(registruotis.this, result, Toast.LENGTH_SHORT).show();
         }
     }
+}

@@ -4,6 +4,7 @@
     package="com.example.bakalauras">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,12 +13,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Bakalauras"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity android:name=".prisijungti"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:exported="true">
+        <activity
+            android:name=".pagrindinis_langas"
+            android:exported="false"
+            android:label="@string/title_activity_pagrindinis_langas"
+            android:theme="@style/Theme.Bakalauras.NoActionBar" />
+        <activity
+            android:name=".prisijungti"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,9 +32,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".registruotis"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 
 </manifest>
