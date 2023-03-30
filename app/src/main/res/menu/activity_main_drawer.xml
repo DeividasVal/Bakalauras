@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_pagrindinis"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Pagrindinis" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_zinutes"
+            android:icon="@drawable/ic_baseline_message_24"
+            android:title="Žinutės" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_ziureti"
+            android:icon="@drawable/ic_baseline_person_search_24"
+            android:title="Žiūrėti korepetitorius" />
+        <item
+            android:id="@+id/nav_kategorija"
+            android:icon="@drawable/ic_baseline_category_24"
+            android:title="Kategorijos" />
     </group>
+
+    <item android:title="Placeholder" >
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_issaugotikop"
+                android:icon="@drawable/ic_baseline_favorite_24"
+                android:title="Išsaugoti korepetitoriai" />
+
+            <item
+                android:id="@+id/nav_manokor"
+                android:icon="@drawable/ic_baseline_person_24"
+                android:title="Mano korepetitoriai" />
+            <item
+                android:id="@+id/nav_manomok"
+                android:icon="@drawable/ic_baseline_person_24"
+                android:title="Mano mokiniai" />
+            <item
+                android:id="@+id/nav_pammedziaga"
+                android:icon="@drawable/ic_baseline_topic_24"
+                android:title="Pamokų medžiaga" />
+        </menu>
+    </item>
+
+    <item android:title="Profilis">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_redaguotiMokinys"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="Redaguoti" />
+            <item
+                android:id="@+id/nav_redaguotiKor"
+                android:icon="@drawable/ic_baseline_settings_24"
+                android:title="Redaguoti" />
+            <item
+                android:id="@+id/nav_atsijungti"
+                android:icon="@drawable/ic_baseline_login_24"
+                android:title="Atsijungti" />
+        </menu>
+    </item>
 </menu>

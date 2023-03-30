@@ -11,6 +11,7 @@
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:layout_marginTop="340dp"
+        android:theme="@style/TextInputLayoutAppearance"
         android:ems="10"
         android:hint="Vartotojo vardas"
         android:inputType="textPersonName"
@@ -25,6 +26,7 @@
         android:layout_width="343dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
+        android:theme="@style/TextInputLayoutAppearance"
         android:ems="10"
         android:hint="Slaptažodis"
         android:inputType="textPassword"
@@ -93,4 +95,5 @@
             android:textAlignment="center"
             android:textColor="@drawable/text_color" />
     </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

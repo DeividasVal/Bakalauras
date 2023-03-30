@@ -36,19 +36,14 @@ public class pagrindinis_langas extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarPagrindinisLangas.toolbar);
-        binding.appBarPagrindinisLangas.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_pagrindinis, R.id.nav_zinutes, R.id.nav_ziureti, R.id.nav_kategorija ,R.id.nav_ziureti,R.id.nav_issaugotikop,R.id.nav_manokor,R.id.nav_manomok,
+                R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pagrindinis_langas);
@@ -65,6 +60,11 @@ public class pagrindinis_langas extends AppCompatActivity {
             prisijungesPastas = header.findViewById(R.id.prisijungesPastas);
             prisijungesVardas.setText(korepetitorius.getName());
             prisijungesPastas.setText(korepetitorius.getEmail());
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_manokor).setVisible(false);
+            nav_Menu.findItem(R.id.nav_redaguotiMokinys).setVisible(false);
+            nav_Menu.findItem(R.id.nav_issaugotikop).setVisible(false);
         }
         else
         {
@@ -72,6 +72,10 @@ public class pagrindinis_langas extends AppCompatActivity {
             prisijungesPastas = header.findViewById(R.id.prisijungesPastas);
             prisijungesVardas.setText(mokinys.getName());
             prisijungesPastas.setText(mokinys.getEmail());
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_manomok).setVisible(false);
+            nav_Menu.findItem(R.id.nav_redaguotiKor).setVisible(false);
         }
     }
 
