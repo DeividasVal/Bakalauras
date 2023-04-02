@@ -42,7 +42,7 @@ public class pagrindinis_langas extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_pagrindinis, R.id.nav_zinutes, R.id.nav_ziureti, R.id.nav_kategorija ,R.id.nav_ziureti,R.id.nav_issaugotikop,R.id.nav_manokor,R.id.nav_manomok,
+                R.id.nav_sukurti_profili, R.id.nav_pagrindinis, R.id.nav_zinutes, R.id.nav_ziureti, R.id.nav_kategorija ,R.id.nav_ziureti,R.id.nav_issaugotikop,R.id.nav_manokor,R.id.nav_manomok,
                 R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti)
                 .setOpenableLayout(drawer)
                 .build();
@@ -76,6 +76,7 @@ public class pagrindinis_langas extends AppCompatActivity {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_manomok).setVisible(false);
             nav_Menu.findItem(R.id.nav_redaguotiKor).setVisible(false);
+            nav_Menu.findItem(R.id.nav_sukurti_profili).setVisible(false);
         }
     }
 

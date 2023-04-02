@@ -20,4 +20,9 @@
         android:label="Redaguoti"
         android:name="com.example.bakalauras.ui.redaguoti_mokinys.RedaguotiMokinys"
         tools:layout="@layout/fragment_redaguoti_mokinys" />
+    <fragment
+        android:id="@+id/nav_sukurti_profili"
+        android:label="Kurti profili"
+        android:name="com.example.bakalauras.ui.korepetitorius.KorKurtiProfili"
+        tools:layout="@layout/fragment_kor_kurti_profili" />
 </navigation>

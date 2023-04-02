@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,7 +28,7 @@ import java.net.URL;
 
 public class registruotis extends AppCompatActivity {
 
-    public TextInputEditText usernameField, passwordField, emailField, fullnameField;
+    public EditText usernameField, passwordField, emailField, fullnameField;
     public TextView loginTextField;
     public Button signup;
     public ProgressBar progress;

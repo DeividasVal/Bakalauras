@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".ui.korepetitorius.KorKurtiProfili">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/dalykas"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:hint="Dalykas"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/istaigosPav" />
+
+        <EditText
+            android:id="@+id/istaigosPav"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:paddingLeft="10dp"
+            android:hint="Įstaigos pavadinimas"
+            android:inputType="textPersonName"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <EditText
+            android:id="@+id/kainaPerValProfilis"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:hint="Kaina per val."
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pasirinktiDalykai" />
+
+        <CheckBox
+            android:id="@+id/checkBoxGyvai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:text="Gyvai"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilisMiestas" />
+
+        <EditText
+            android:id="@+id/profilisMiestas"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:hint="Miestas"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilisAdresas" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="228dp"
+            android:text="Papasakokite apie save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/profilisAdresas"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:hint="Adresas"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="Mokymo tipas *"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profilisMiestas" />
+
+        <CheckBox
+            android:id="@+id/checkBoxOnline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="27dp"
+            android:text="Nuotoliniu"
+            app:layout_constraintEnd_toStartOf="@+id/checkBoxGyvai"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/profilisMiestas" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="47dp"
+            android:text="Ką galite mokyti? *"
+            app:layout_constraintEnd_toStartOf="@+id/checkBoxOnline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <Spinner
+            android:id="@+id/spinnerDalykai"
+            android:layout_width="333dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:entries="@array/spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <Button
+            android:id="@+id/buttonPridėti"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_shape"
+            android:text="Pridėti"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerDalykai" />
+
+        <ListView
+            android:id="@+id/pasirinktiDalykai"
+            android:layout_width="360dp"
+            android:layout_height="107dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/container_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonPridėti" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="230dp"
+            android:text="Aprašymas apie save *"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kainaPerValProfilis" />
+
+        <EditText
+            android:id="@+id/bioProfilis"
+            android:layout_width="360dp"
+            android:layout_height="185dp"
+            android:inputType="textMultiLine"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:ems="10"
+            android:gravity="top|left"
+            android:hint="Aprašymas"
+            android:background="@drawable/container_border"
+            android:isScrollContainer="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:text="Kvalifikacija *"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bioProfilis" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+            <RadioButton
+                android:id="@+id/kvalAukst"
+                android:layout_width="129dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:padding="16dp"
+                android:text="Aukštasis"
+                android:textAlignment="center"
+                android:textColor="@drawable/text_color" />
+
+            <RadioButton
+                android:id="@+id/kvalVid"
+                android:layout_width="129dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:elevation="4dp"
+                android:padding="16dp"
+                android:text="Vidurinis"
+                android:textAlignment="center"
+                android:textColor="@drawable/text_color" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="272dp"
+            android:text="Prieinamumas *"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dalykas" />
+
+        <HorizontalScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="369dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.291"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBox6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="Pirmadienis"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="Antradienis"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxų"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="Trečiadienis"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8ūšų"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="Ketvirtadienis"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8ūšųū"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:minWidth="48dp"
+
+                    android:text="Penktadienis"
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8šūų"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="Šeštadienis"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8768"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="Sekmadienis"
+
+                    android:textColor="@drawable/text_color" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/nestedScrollView2"
+            android:layout_width="369dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBox6asda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="8:00 - 9:30"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox7asdasd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="9:30 - 11:00"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxasdasdų"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="11:00 - 12:30"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8asdasūšų"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="12:00 - 14:30"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8ūasdasdšųū"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:minWidth="48dp"
+
+                    android:text="14:30 - 16:00"
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox8šadaūų"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="16:00 - 17:30"
+
+                    android:textColor="@drawable/text_color" />
+
+                <CheckBox
+                    android:id="@+id/checkBox87asdasd68"
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@null"
+                    android:text="17:30 - 19:00"
+
+                    android:textColor="@drawable/text_color" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <Button
+            android:id="@+id/buttonSukurtiProfili"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_shape"
+            android:text="Sukurti"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

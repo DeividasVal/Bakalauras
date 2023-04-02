@@ -5,17 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONObject;
 
@@ -24,7 +20,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import Model.Korepetitorius;
 import Model.Mokinys;
@@ -34,7 +29,7 @@ public class prisijungti extends AppCompatActivity {
     public TextView registerText;
     public Button login;
     public RadioButton radioMokinys, radioKorepetitorius;
-    public TextInputEditText usernameField, passwordField;
+    public EditText usernameField, passwordField;
     public static Mokinys currentMokinys;
     public static Korepetitorius currentKorepetitorius;
 
@@ -44,8 +39,8 @@ public class prisijungti extends AppCompatActivity {
         setContentView(R.layout.activity_prisijungti);
         registerText = findViewById(R.id.registerText);
         login = findViewById(R.id.prisijungtiButton);
-        radioMokinys = findViewById(R.id.mokinioPasirinkimasLogin);
-        radioKorepetitorius = findViewById(R.id.korepetitoriausPasirinkimasLogin);
+        radioMokinys = findViewById(R.id.kvalAukst);
+        radioKorepetitorius = findViewById(R.id.kvalVid);
         usernameField = findViewById(R.id.prisijungtiVardas);
         passwordField = findViewById(R.id.slaptazodisPrisijungti);
 
