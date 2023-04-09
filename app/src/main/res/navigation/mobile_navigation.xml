@@ -25,4 +25,14 @@
         android:label="Kurti profili"
         android:name="com.example.bakalauras.ui.korepetitorius.KorKurtiProfili"
         tools:layout="@layout/fragment_kor_kurti_profili" />
+    <fragment
+        android:id="@+id/nav_profilisKorepetitorius"
+        android:label="Mano profilis"
+        android:name="com.example.bakalauras.ui.korepetitorius.Korepetitorius_profilis"
+        tools:layout="@layout/fragment_korepetitorius_profilis" />
+    <fragment
+        android:id="@+id/nav_ziureti"
+        android:label="Korepetitoriai"
+        android:name="com.example.bakalauras.korepetitoriu_sarasas"
+        tools:layout="@layout/fragment_korepetitoriu_sarasas" />
 </navigation>

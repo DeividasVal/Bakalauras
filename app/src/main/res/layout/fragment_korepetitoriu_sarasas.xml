@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".korepetitoriu_sarasas">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/ieskoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Ieškoti"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerKorepetitoriu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

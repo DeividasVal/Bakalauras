@@ -52,6 +52,10 @@
     <item android:title="Profilis">
         <menu android:checkableBehavior="single">
             <item
+                android:id="@+id/nav_profilisKorepetitorius"
+                android:icon="@drawable/ic_round_account_box_24"
+                android:title="Žiūrėti profilį" />
+            <item
                 android:id="@+id/nav_redaguotiMokinys"
                 android:icon="@drawable/ic_baseline_settings_24"
                 android:title="Redaguoti" />

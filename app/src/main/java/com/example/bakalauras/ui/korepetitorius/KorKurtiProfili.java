@@ -1,11 +1,13 @@
 package com.example.bakalauras.ui.korepetitorius;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,15 +15,29 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.bakalauras.R;
+import com.example.bakalauras.prisijungti;
 import com.example.bakalauras.registruotis;
+import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+
+import Model.Korepetitorius;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,15 +46,32 @@ import java.util.ArrayList;
  */
 public class KorKurtiProfili extends Fragment {
 
-    public Button pridetiDalyka;
+    public Button pridetiDalyka, kurtiProfili;
     public ListView dalykuSarasas;
     public Spinner spinnerDalykai;
-    public EditText bio;
-    ArrayList<String> listItems = new ArrayList<String>();
-    ArrayAdapter adapter;
+    public EditText bio, profilisAdresas, profilisMiestas, kainaPerVal, dalykas, istaiga;
+    public CheckBox gyvai, nuotoliniu;
+    public ArrayList<String> listItems = new ArrayList<String>();
+    public ArrayAdapter adapter;
+    Korepetitorius korepetitorius;
 
     public KorKurtiProfili() {
         // Required empty public constructor
+    }
+
+    private boolean[][] getCheckboxState(View v){
+        TableLayout table = v.findViewById(R.id.lentelePasirinkimu);
+        int numRows = table.getChildCount();
+        int numCols = ((TableRow) table.getChildAt(0)).getChildCount() - 1; // Exclude first column
+        boolean[][] checkboxState = new boolean[numRows][numCols];
+        for (int i = 1; i < numRows; i++) { // Exclude first row
+            TableRow row = (TableRow) table.getChildAt(i);
+            for (int j = 1; j <= numCols; j++) {
+                CheckBox checkbox = (CheckBox) row.getChildAt(j);
+                checkboxState[i - 1][j - 1] = checkbox.isChecked();
+            }
+        }
+        return checkboxState;
     }
 
     public static KorKurtiProfili newInstance() {
@@ -60,11 +93,56 @@ public class KorKurtiProfili extends Fragment {
         pridetiDalyka = v.findViewById(R.id.buttonPridėti);
         dalykuSarasas = v.findViewById(R.id.pasirinktiDalykai);
         spinnerDalykai = v.findViewById(R.id.spinnerDalykai);
+        profilisAdresas = v.findViewById(R.id.profilisAdresas);
+        profilisMiestas = v.findViewById(R.id.profilisMiestas);
+        kainaPerVal = v.findViewById(R.id.kainaPerValProfilis);
+        dalykas = v.findViewById(R.id.dalykas);
+        istaiga = v.findViewById(R.id.istaigosPav);
+        gyvai = v.findViewById(R.id.checkBoxGyvai);
+        nuotoliniu = v.findViewById(R.id.checkBoxOnline);
         bio = v.findViewById(R.id.bioProfilis);
         dalykuSarasas.setNestedScrollingEnabled(true);
         bio.setNestedScrollingEnabled(true);
+        kurtiProfili = v.findViewById(R.id.buttonSukurtiProfili);
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listItems);
         dalykuSarasas.setAdapter(adapter);
+
+        kurtiProfili.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean[][] checkboxState = getCheckboxState(v);
+                String miestas, adresas, istaigaGet, bioGet, dalykasGet, kainaGet;
+                miestas = String.valueOf(profilisMiestas.getText());
+                adresas = String.valueOf(profilisAdresas.getText());
+                istaigaGet = String.valueOf(istaiga.getText());
+                bioGet = String.valueOf(bio.getText());
+                dalykasGet = String.valueOf(dalykas.getText());
+                kainaGet = String.valueOf(kainaPerVal.getText());
+
+                if (!miestas.equals("") && !adresas.equals("")
+                        && !istaigaGet.equals("") && !dalykasGet.equals("")
+                        && !bioGet.equals("") && !kainaGet.equals(""))
+                {
+                    if (gyvai.isChecked() && !nuotoliniu.isChecked())
+                    {
+                            new SukurtiProfili().execute(miestas, adresas, 1, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId());
+
+                    }
+                    else if (!gyvai.isChecked() && nuotoliniu.isChecked())
+                    {
+                            new SukurtiProfili().execute(miestas, adresas, 2, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId());
+                    }
+                    else
+                    {
+                            new SukurtiProfili().execute(miestas, adresas, 3, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId());
+                   }
+                }
+                else
+                {
+                    Toast.makeText(getContext(), "Ne visi privalomi laukai užpildyti!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         pridetiDalyka.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,5 +173,65 @@ public class KorKurtiProfili extends Fragment {
         });
 
         return v;
+    }
+
+    private class SukurtiProfili extends AsyncTask<Object, Void, String> {
+
+        @Override
+        protected String doInBackground(Object... params) {
+
+            String miestas = (String) params[0];
+            String adresas = (String) params[1];
+            int mokymoTipas = (int) params[2];
+            ArrayList<String> listViewData = (ArrayList<String>) params[3];
+            String kaina = (String) params[4];
+            String bio = (String) params[5];
+            String istaiga = (String) params[6];
+            String dalykas = (String) params[7];
+            boolean[][] selectionArray = (boolean[][]) params[8];
+            int korepetitoriausId = (int) params[9];
+            URL url;
+            try {
+                url = new URL("http://192.168.1.150/PHPscriptai/korepetitoriusKurtiProfili.php");
+
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                String data;
+
+                data = "korepetitoriaus_id=" + korepetitoriausId + "&korepetitoriaus_adresas=" + adresas + "&korepetitoriaus_miestas=" + miestas + "&korepetitoriaus_mokymo_tipas=" + mokymoTipas + "&korepetitoriaus_val=" + kaina + "&korepetitoriaus_mokymo_tipas=" + mokymoTipas + "&korepetitoriaus_aprasymas=" + bio  + "&korepetitoriaus_istaiga=" + istaiga + "&korepetitoriaus_dalykai_istaigoj=" + dalykas;
+                // Add selectionArray to data as a serialized object
+                Gson gson = new Gson();
+                String selectionArrayString = gson.toJson(selectionArray);
+                data += "&korepetitoriaus_prieinamumas=" + URLEncoder.encode(selectionArrayString, "UTF-8");
+
+                // Add listViewData to data as a serialized object
+                String listViewDataString = gson.toJson(listViewData);
+                data += "&korepetitoriaus_dalykai=" + URLEncoder.encode(listViewDataString, "UTF-8");
+
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(data);
+                writer.flush();
+
+                // Read the response from the PHP script
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                return response.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+        }
     }
 }
