@@ -39,10 +39,10 @@ import java.util.List;
  */
 public class Korepetitorius_profilis extends Fragment {
 
-    public TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText;
-    public String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined;
-    public TableLayout uzpildyti;
-    public boolean[][] prieinamumas;
+    private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText;
+    private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined;
+    private TableLayout uzpildyti;
+    private boolean[][] prieinamumas;
 
     public Korepetitorius_profilis() {
         // Required empty public constructor
@@ -137,22 +137,20 @@ public class Korepetitorius_profilis extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            // Use the prieinamumas and dalykai variables to update your UI here
-            // ...
             vardasText.setText(prisijungti.currentKorepetitorius.getName());
             dalykaiText.setText("Dalykai: " + dalykaiJoined);
             adresasText.setText(adresas + ", " + miestas);
             if (Integer.parseInt(tipas) == 1)
             {
-                mokymoBudasText.setText("Gyvai");
+                mokymoBudasText.setText("Mokymo tipas: Gyvai");
             }
             else if (Integer.parseInt(tipas) == 2)
             {
-                mokymoBudasText.setText("Nuotoliniu");
+                mokymoBudasText.setText("Mokymo tipas: Nuotoliniu");
             }
             else
             {
-                mokymoBudasText.setText("Gyvai ir nuotoliniu");
+                mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
             kainaText.setText("Kaina: " + val + "€/val.");
             bioText.setText(bio);

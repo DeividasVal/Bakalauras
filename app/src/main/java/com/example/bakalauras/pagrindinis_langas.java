@@ -2,12 +2,16 @@ package com.example.bakalauras;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,7 +26,7 @@ import Model.Mokinys;
 
 public class pagrindinis_langas extends AppCompatActivity {
 
-    public TextView prisijungesVardas, prisijungesPastas;
+    private TextView prisijungesVardas, prisijungesPastas;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityPagrindinisLangasBinding binding;
 
@@ -37,8 +41,6 @@ public class pagrindinis_langas extends AppCompatActivity {
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_sukurti_profili, R.id.nav_pagrindinis, R.id.nav_zinutes, R.id.nav_ziureti, R.id.nav_kategorija ,R.id.nav_ziureti,R.id.nav_issaugotikop,R.id.nav_manokor,R.id.nav_manomok,
                 R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti, R.id.nav_profilisKorepetitorius)
@@ -54,6 +56,7 @@ public class pagrindinis_langas extends AppCompatActivity {
         View header = navigationView.getHeaderView(0);
         if (korepetitorius != null)
         {
+
             prisijungesVardas = header.findViewById(R.id.prisijungesVardas);
             prisijungesPastas = header.findViewById(R.id.prisijungesPastas);
             prisijungesVardas.setText(korepetitorius.getName());
@@ -63,7 +66,7 @@ public class pagrindinis_langas extends AppCompatActivity {
             nav_Menu.findItem(R.id.nav_manokor).setVisible(false);
             nav_Menu.findItem(R.id.nav_redaguotiMokinys).setVisible(false);
             nav_Menu.findItem(R.id.nav_issaugotikop).setVisible(false);
-
+            nav_Menu.findItem(R.id.nav_uzklausosMokiniai).setVisible(false);
         }
         else
         {
@@ -76,7 +79,31 @@ public class pagrindinis_langas extends AppCompatActivity {
             nav_Menu.findItem(R.id.nav_manomok).setVisible(false);
             nav_Menu.findItem(R.id.nav_redaguotiKor).setVisible(false);
             nav_Menu.findItem(R.id.nav_sukurti_profili).setVisible(false);
+            nav_Menu.findItem(R.id.nav_uzklausosKorepetitoriai).setVisible(false);
         }
+
+        //when item R.id.nav_atsijungti is clicked, open a new activity and close all other opened fragments?
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_atsijungti:
+                        prisijungti.currentKorepetitorius = null;
+                        prisijungti.currentMokinys = null;
+                        Intent intent = new Intent(pagrindinis_langas.this, prisijungti.class);
+                        startActivity(intent);
+                        finishAffinity(); // Close all previously opened activities along with the current one
+                        return true;
+                    default:
+                        NavController navController = Navigation.findNavController(pagrindinis_langas.this, R.id.nav_host_fragment_content_pagrindinis_langas);
+                        NavigationUI.onNavDestinationSelected(item, navController);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+                        return true;
+                }
+            }
+        });
     }
 
     @Override

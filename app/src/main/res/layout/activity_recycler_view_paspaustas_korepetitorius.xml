@@ -190,6 +190,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/susisiektiButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16">
@@ -203,7 +205,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                            <TableRow>
+                            <TableRow
+                                android:layout_height="50dp">
 
                                 <TextView
                                     android:layout_width="100dp"
@@ -261,47 +264,48 @@
                                     android:layout_height="wrap_content"
                                     android:text="9:00 - 10:30" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:layout_width="100dp"
+                                    android:layout_height="50dp"
+                                    android:enabled="false"
+                                    android:gravity="center" />
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
                                     android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
                                     android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
                                     android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
                                     android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
                                     android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
                                     android:gravity="center" />
 
-                                <CheckBox
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:enabled="false"
-                                    android:gravity="center" />
                             </TableRow>
 
                             <TableRow>
@@ -311,40 +315,49 @@
                                     android:layout_height="wrap_content"
                                     android:text="10:30 - 12:00" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:layout_height="50dp"
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
+
+
                             </TableRow>
 
                             <TableRow>
@@ -354,41 +367,49 @@
                                     android:layout_height="wrap_content"
                                     android:text="12:00 - 13:30" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:layout_width="100dp"
+                                    android:layout_height="50dp"
+                                    android:enabled="false"
+                                    android:gravity="center" />
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"
-                                    android:gravity="center"/>
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:enabled="false" />
+
                             </TableRow>
 
                             <TableRow>
@@ -398,40 +419,49 @@
                                     android:layout_height="wrap_content"
                                     android:text="13:30 - 15:00" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:layout_height="50dp"
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
+
+
                             </TableRow>
 
                             <TableRow>
@@ -441,40 +471,49 @@
                                     android:layout_height="wrap_content"
                                     android:text="15:00 - 16:30" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:layout_height="50dp"
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
+
+
                             </TableRow>
 
                             <TableRow>
@@ -484,40 +523,49 @@
                                     android:layout_height="wrap_content"
                                     android:text="16:30 - 18:00" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:layout_height="50dp"
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
+
+
                             </TableRow>
 
                             <TableRow>
@@ -527,40 +575,49 @@
                                     android:layout_height="wrap_content"
                                     android:text="18:00 - 19:30" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:layout_height="50dp"
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false" />
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false"/>
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false"/>
+                                    android:enabled="false"
+                                    android:gravity="center" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false"/>
+                                    android:enabled="false"
+                                    android:gravity="center" />
+
+
                             </TableRow>
 
                         </TableLayout>
@@ -572,13 +629,15 @@
                     android:id="@+id/susisiektiButton"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textColor="@color/white"
                     android:background="@drawable/button_shape"
                     android:text="Susisiekti"
+                    android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
                     app:layout_constraintVertical_bias="1.0" />

@@ -29,11 +29,11 @@ import Model.Mokinys;
 
 public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
-    public TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText;
-    public String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined, vardas;
-    public TableLayout uzpildyti;
-    public boolean[][] prieinamumas;
-    public Button susisiekti;
+    private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText;
+    private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined;
+    private TableLayout uzpildyti;
+    private boolean[][] prieinamumas;
+    private Button susisiekti;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,13 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             susisiekti.setVisibility(View.GONE);
         }
 
+        susisiekti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         vardasText = findViewById(R.id.vardasPavardeisDBActivity);
         adresasText = findViewById(R.id.adresasIsDBActivity);
         mokymoBudasText = findViewById(R.id.mokymoBudasIsDBActivity);
@@ -58,6 +65,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         dalykaiText = findViewById(R.id.dalykaiIsDBActivity);
         kainaText = findViewById(R.id.kainaIsDBActivity);
         uzpildyti = findViewById(R.id.lentelePasirinkimuActivity);
+
 
         UzpildytiProfili task = new UzpildytiProfili(korepetitorius_id, vardas);
         task.execute();
@@ -119,22 +127,20 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            // Use the prieinamumas and dalykai variables to update your UI here
-            // ...
             vardasText.setText(vardas);
             dalykaiText.setText("Dalykai: " + dalykaiJoined);
             adresasText.setText(adresas + ", " + miestas);
             if (Integer.parseInt(tipas) == 1)
             {
-                mokymoBudasText.setText("Gyvai");
+                mokymoBudasText.setText("Mokymo tipas: Gyvai");
             }
             else if (Integer.parseInt(tipas) == 2)
             {
-                mokymoBudasText.setText("Nuotoliniu");
+                mokymoBudasText.setText("Mokymo tipas: Nuotoliniu");
             }
             else
             {
-                mokymoBudasText.setText("Gyvai ir nuotoliniu");
+                mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
             kainaText.setText("Kaina: " + val + "€/val.");
             bioText.setText(bio);

@@ -22,8 +22,8 @@ import Model.KorepetitoriausKortele;
 
 public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitoriusCardHolder> {
 
-    ArrayList<KorepetitoriausKortele> list;
-    Context context;
+    private ArrayList<KorepetitoriausKortele> list;
+    private Context context;
 
     public korepetitoriusCardAdapter(ArrayList<KorepetitoriausKortele> list, Context context) {
         this.list = list;
@@ -49,7 +49,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
         korepetitoriusCardHolder.vardas.setText(sarasas.getVardas());
         korepetitoriusCardHolder.dalykai.setText("Moko: " + sarasas.getDalykai());
         korepetitoriusCardHolder.kaina.setText(sarasas.getKaina() + " Eur/val.");
-        korepetitoriusCardHolder.budasKortele.setText("Mokymo tipas:" + sarasas.getMokymoBudas());
+        korepetitoriusCardHolder.budasKortele.setText("Mokymo tipas: " + sarasas.getMokymoBudas());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,11 +64,17 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (list != null) {
+            return list.size();
+        }
+        else
+        {
+            return 0;
+        }
     }
 
-    public void filterList(ArrayList<KorepetitoriausKortele> newList){
-        list = newList;
+    public void filterList(ArrayList<KorepetitoriausKortele> filteredList) {
+        list = filteredList;
         notifyDataSetChanged();
     }
 }

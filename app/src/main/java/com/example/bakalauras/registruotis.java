@@ -28,11 +28,11 @@ import java.net.URL;
 
 public class registruotis extends AppCompatActivity {
 
-    public EditText usernameField, passwordField, emailField, fullnameField;
-    public TextView loginTextField;
-    public Button signup;
-    public ProgressBar progress;
-    public RadioButton radioMokinys, radioKorepetitorius;
+    private EditText usernameField, passwordField, emailField, fullnameField;
+    private TextView loginTextField;
+    private Button signup;
+    private ProgressBar progress;
+    private RadioButton radioMokinys, radioKorepetitorius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,6 +3,7 @@ package com.example.bakalauras;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,15 +19,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.slider.RangeSlider;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -34,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import Model.KorepetitoriausKortele;
 
@@ -44,10 +50,13 @@ import Model.KorepetitoriausKortele;
  */
 public class korepetitoriu_sarasas extends Fragment {
 
-    public RecyclerView recyclerView;
-    ArrayList<KorepetitoriausKortele> arrayList;
-    korepetitoriusCardAdapter adapter;
-    TextView ieskoti;
+    private RecyclerView recyclerView;
+    private ArrayList<KorepetitoriausKortele> arrayList;
+    private korepetitoriusCardAdapter adapter;
+    private ArrayList<KorepetitoriausKortele> originalList;
+    private TextView ieskoti;
+    private String radioButtonValue = "";
+    private Float minValue, maxValue;
 
     public korepetitoriu_sarasas() {
     }
@@ -62,8 +71,7 @@ public class korepetitoriu_sarasas extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_filtras:
-                FilterBottomSheetDialog dialog = new FilterBottomSheetDialog();
-                dialog.show(getChildFragmentManager(), "FilterBottomSheetDialog");
+                showFilterDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -109,7 +117,7 @@ public class korepetitoriu_sarasas extends Fragment {
                 filterData(editable.toString());
             }
         });
-
+        originalList = new ArrayList<>();
         arrayList = new ArrayList<KorepetitoriausKortele>();
 
         GautiProfilioDuomenis task = new GautiProfilioDuomenis();
@@ -119,14 +127,14 @@ public class korepetitoriu_sarasas extends Fragment {
     }
 
     private void filterData(String text){
-        ArrayList<KorepetitoriausKortele> temp = new ArrayList<>();
-        if(arrayList.size()>0){
-            for (KorepetitoriausKortele newList : arrayList){
-                if(newList.getDalykai().toLowerCase().contains(text.toLowerCase())){
-                    temp.add(newList);
+        ArrayList<KorepetitoriausKortele> filteredList = new ArrayList<>();
+        if(originalList.size()>0){
+            for (KorepetitoriausKortele newList : originalList){
+                if(newList.getDalykai().toLowerCase().contains(text.toLowerCase()) || newList.getVardas().toLowerCase().contains(text.toLowerCase()) || newList.getMokymoBudas().toLowerCase().contains(text.toLowerCase()) ||  newList.getKaina().toLowerCase().contains(text.toLowerCase())){
+                    filteredList.add(newList);
                 }
             }
-            adapter.filterList(temp);
+            adapter.filterList(filteredList);
         }
     }
 
@@ -154,7 +162,7 @@ public class korepetitoriu_sarasas extends Fragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String vardas = obj.getString("pilnas_korepetitoriaus_vardas");
-                    int kaina = obj.getInt("korepetitoriaus_val");
+                    String kaina = obj.getString("korepetitoriaus_val");
 
                     JSONArray dalykaiJson = obj.getJSONArray("korepetitoriaus_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
@@ -181,7 +189,7 @@ public class korepetitoriu_sarasas extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            originalList = new ArrayList<>(arrayList);
             return null;
         }
 
@@ -192,24 +200,43 @@ public class korepetitoriu_sarasas extends Fragment {
         }
     }
 
-    public static class FilterBottomSheetDialog extends BottomSheetDialogFragment {
+    private void showFilterDialog() {
 
-        public Button patvirtinti;
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+        View bottomSheetView = getLayoutInflater().inflate(R.layout.filter_window, null);
+        Button applyButton = bottomSheetView.findViewById(R.id.patvirtintiFiltra);
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.filter_window, container, false);
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RangeSlider rangeSlider = bottomSheetView.findViewById(R.id.rangas);
+                RadioGroup radioGroup = bottomSheetView.findViewById(R.id.MokymoBūdasRadioGroup);
+                Spinner spinner = bottomSheetDialog.findViewById(R.id.spinnerDalykaiFiltras);
 
-            patvirtinti = v.findViewById(R.id.patvirtintiFiltra);
+                minValue = rangeSlider.getValues().get(0);
+                maxValue = rangeSlider.getValues().get(1);
+                String dalykasPasirinktas = spinner.getSelectedItem().toString();
 
-            patvirtinti.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                int radioButtonId = radioGroup.getCheckedRadioButtonId();
+                if (radioButtonId != -1) {
+                    RadioButton radioButton = bottomSheetView.findViewById(radioButtonId);
+                    radioButtonValue = radioButton.getText().toString();
                 }
-            });
 
-            return v;
-        }
+                ArrayList<KorepetitoriausKortele> filteredList = new ArrayList<>();
+                for (KorepetitoriausKortele item : arrayList) {
+                    if (Integer.parseInt(item.getKaina()) >= Math.round(minValue) && Integer.parseInt(item.getKaina()) <= Math.round(maxValue) && item.getMokymoBudas().equals(radioButtonValue) && item.getDalykai().contains(dalykasPasirinktas)) {
+                        filteredList.add(item);
+                    }
+                }
+
+                adapter.filterList(filteredList);
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
     }
 }
 

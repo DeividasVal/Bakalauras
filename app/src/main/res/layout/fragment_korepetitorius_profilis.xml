@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25"
+            app:layout_constraintGuide_percent="0.23"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -313,37 +313,37 @@
                                     android:layout_height="wrap_content"
                                     android:text="10:30 - 12:00" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
@@ -356,37 +356,37 @@
                                     android:layout_height="wrap_content"
                                     android:text="12:00 - 13:30" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
@@ -399,37 +399,37 @@
                                     android:layout_height="wrap_content"
                                     android:text="13:30 - 15:00" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
@@ -442,37 +442,37 @@
                                     android:layout_height="wrap_content"
                                     android:text="15:00 - 16:30" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
@@ -485,37 +485,37 @@
                                     android:layout_height="wrap_content"
                                     android:text="16:30 - 18:00" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
@@ -528,37 +528,37 @@
                                     android:layout_height="wrap_content"
                                     android:text="18:00 - 19:30" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false" />
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"/>
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"/>
 
-                                <CheckBox
+                                <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:enabled="false"/>

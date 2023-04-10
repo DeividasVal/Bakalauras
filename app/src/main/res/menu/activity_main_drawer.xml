@@ -35,6 +35,14 @@
                 android:title="Išsaugoti korepetitoriai" />
 
             <item
+                android:id="@+id/nav_uzklausosMokiniai"
+                android:title="Užklausos" />
+
+            <item
+                android:id="@+id/nav_uzklausosKorepetitoriai"
+                android:title="Mokinių užklausos" />
+
+            <item
                 android:id="@+id/nav_manokor"
                 android:icon="@drawable/ic_baseline_person_24"
                 android:title="Mano korepetitoriai" />

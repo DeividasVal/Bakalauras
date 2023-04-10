@@ -28,10 +28,10 @@ import Model.Mokinys;
 
 public class prisijungti extends AppCompatActivity {
 
-    public TextView registerText;
-    public Button login;
-    public RadioButton radioMokinys, radioKorepetitorius;
-    public EditText usernameField, passwordField;
+    private TextView registerText;
+    private Button login;
+    private RadioButton radioMokinys, radioKorepetitorius;
+    private EditText usernameField, passwordField;
     public static Mokinys currentMokinys;
     public static Korepetitorius currentKorepetitorius;
 

@@ -3,7 +3,7 @@ package Model;
 public class KorepetitoriausKortele {
 
     private String vardas;
-    private int kaina;
+    private String kaina;
     private String dalykai;
     private int id;
     private String mokymoBudas;
@@ -32,11 +32,11 @@ public class KorepetitoriausKortele {
         this.vardas = vardas;
     }
 
-    public int getKaina() {
+    public String getKaina() {
         return kaina;
     }
 
-    public void setKaina(int kaina) {
+    public void setKaina(String kaina) {
         this.kaina = kaina;
     }
 
@@ -48,7 +48,7 @@ public class KorepetitoriausKortele {
         this.dalykai = dalykai;
     }
 
-    public KorepetitoriausKortele(String vardas, int kaina, String dalykai, int id, String mokymoBudas) {
+    public KorepetitoriausKortele(String vardas, String kaina, String dalykai, int id, String mokymoBudas) {
         this.vardas = vardas;
         this.kaina = kaina;
         this.dalykai = dalykai;

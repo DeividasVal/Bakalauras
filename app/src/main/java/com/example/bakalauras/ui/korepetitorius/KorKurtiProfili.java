@@ -46,14 +46,13 @@ import Model.Korepetitorius;
  */
 public class KorKurtiProfili extends Fragment {
 
-    public Button pridetiDalyka, kurtiProfili;
-    public ListView dalykuSarasas;
-    public Spinner spinnerDalykai;
-    public EditText bio, profilisAdresas, profilisMiestas, kainaPerVal, dalykas, istaiga;
-    public CheckBox gyvai, nuotoliniu;
-    public ArrayList<String> listItems = new ArrayList<String>();
-    public ArrayAdapter adapter;
-    Korepetitorius korepetitorius;
+    private Button pridetiDalyka, kurtiProfili;
+    private ListView dalykuSarasas;
+    private Spinner spinnerDalykai;
+    private EditText bio, profilisAdresas, profilisMiestas, kainaPerVal, dalykas, istaiga;
+    private CheckBox gyvai, nuotoliniu;
+    private ArrayList<String> listItems = new ArrayList<String>();
+    private ArrayAdapter adapter;
 
     public KorKurtiProfili() {
         // Required empty public constructor
@@ -194,19 +193,17 @@ public class KorKurtiProfili extends Fragment {
             try {
                 url = new URL("http://192.168.1.150/PHPscriptai/korepetitoriusKurtiProfili.php");
 
-
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
                 String data;
 
                 data = "korepetitoriaus_id=" + korepetitoriausId + "&korepetitoriaus_adresas=" + adresas + "&korepetitoriaus_miestas=" + miestas + "&korepetitoriaus_mokymo_tipas=" + mokymoTipas + "&korepetitoriaus_val=" + kaina + "&korepetitoriaus_mokymo_tipas=" + mokymoTipas + "&korepetitoriaus_aprasymas=" + bio  + "&korepetitoriaus_istaiga=" + istaiga + "&korepetitoriaus_dalykai_istaigoj=" + dalykas;
-                // Add selectionArray to data as a serialized object
+
                 Gson gson = new Gson();
                 String selectionArrayString = gson.toJson(selectionArray);
                 data += "&korepetitoriaus_prieinamumas=" + URLEncoder.encode(selectionArrayString, "UTF-8");
 
-                // Add listViewData to data as a serialized object
                 String listViewDataString = gson.toJson(listViewData);
                 data += "&korepetitoriaus_dalykai=" + URLEncoder.encode(listViewDataString, "UTF-8");
 
@@ -214,7 +211,6 @@ public class KorKurtiProfili extends Fragment {
                 writer.write(data);
                 writer.flush();
 
-                // Read the response from the PHP script
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -232,6 +228,7 @@ public class KorKurtiProfili extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+            Log.d("result", result);
         }
     }
 }
