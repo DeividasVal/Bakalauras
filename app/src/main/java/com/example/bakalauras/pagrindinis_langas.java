@@ -82,7 +82,6 @@ public class pagrindinis_langas extends AppCompatActivity {
             nav_Menu.findItem(R.id.nav_uzklausosKorepetitoriai).setVisible(false);
         }
 
-        //when item R.id.nav_atsijungti is clicked, open a new activity and close all other opened fragments?
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -94,12 +93,12 @@ public class pagrindinis_langas extends AppCompatActivity {
                         prisijungti.currentMokinys = null;
                         Intent intent = new Intent(pagrindinis_langas.this, prisijungti.class);
                         startActivity(intent);
-                        finishAffinity(); // Close all previously opened activities along with the current one
+                        finishAffinity();
                         return true;
                     default:
                         NavController navController = Navigation.findNavController(pagrindinis_langas.this, R.id.nav_host_fragment_content_pagrindinis_langas);
                         NavigationUI.onNavDestinationSelected(item, navController);
-                        binding.drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
                 }
             }
