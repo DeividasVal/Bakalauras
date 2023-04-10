@@ -82,7 +82,6 @@ public class pagrindinis_langas extends AppCompatActivity {
             nav_Menu.findItem(R.id.nav_uzklausosKorepetitoriai).setVisible(false);
         }
 
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
