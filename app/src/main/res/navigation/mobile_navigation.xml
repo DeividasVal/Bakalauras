@@ -33,6 +33,16 @@
     <fragment
         android:id="@+id/nav_ziureti"
         android:label="Korepetitoriai"
-        android:name="com.example.bakalauras.korepetitoriu_sarasas"
+        android:name="com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriu_sarasas"
         tools:layout="@layout/fragment_korepetitoriu_sarasas" />
+    <fragment
+        android:id="@+id/nav_uzklausosMokiniai"
+        android:label="Mano užklausos"
+        android:name="com.example.bakalauras.ui.uzklausos.mokinio.MokinioUzklausos"
+        tools:layout="@layout/fragment_mokinio_uzklausos" />
+    <fragment
+        android:id="@+id/nav_uzklausosKorepetitoriai"
+        android:label="Mano užklausos"
+        android:name="com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausos"
+        tools:layout="@layout/fragment_korepetitoriaus_uzklausos" />
 </navigation>

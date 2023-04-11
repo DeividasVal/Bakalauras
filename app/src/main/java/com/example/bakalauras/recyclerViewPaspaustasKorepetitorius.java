@@ -13,19 +13,17 @@ import android.widget.CheckBox;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import com.example.bakalauras.ui.korepetitorius.Korepetitorius_profilis;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
-import Model.Mokinys;
 
 public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
@@ -52,7 +50,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         susisiekti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                new UzklausaTask().execute(prisijungti.currentMokinys.getId(), korepetitorius_id, 0);
             }
         });
 
@@ -69,6 +67,47 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
         UzpildytiProfili task = new UzpildytiProfili(korepetitorius_id, vardas);
         task.execute();
+    }
+
+    private class UzklausaTask extends AsyncTask<Integer, Void, String> {
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            int mokinys_id = params[0];
+            int korepetitorius_id = params[1];
+            int busena = params[2];
+
+            try {
+                URL url = new URL("http://192.168.1.150/PHPscriptai/uzklausaMokytis.php");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                String data;
+                data = "mokinio_id=" + mokinys_id + "&korepetitoriaus_id=" + korepetitorius_id + "&būsena=" + busena;
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(data);
+                writer.flush();
+
+                // Read the response from the PHP script
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                return response.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(recyclerViewPaspaustasKorepetitorius.this, result, Toast.LENGTH_SHORT).show();
+            Log.d("uzklausa", result);
+        }
     }
 
     private class UzpildytiProfili extends AsyncTask<Void, Void, Void> {

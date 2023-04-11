@@ -1,20 +1,18 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.korepetitorius.sarasas;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bakalauras.ui.korepetitorius.Korepetitorius_profilis;
+import com.example.bakalauras.R;
+import com.example.bakalauras.prisijungti;
+import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
+import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardHolder;
 
 import java.util.ArrayList;
 
