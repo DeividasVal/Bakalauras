@@ -137,7 +137,7 @@ public class korepetitoriu_sarasas extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.1.150/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
+                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

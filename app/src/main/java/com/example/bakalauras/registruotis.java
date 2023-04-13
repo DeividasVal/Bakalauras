@@ -104,9 +104,9 @@ public class registruotis extends AppCompatActivity {
             URL url;
             try {
                 if (filename == "registracijaMokinys") {
-                    url = new URL("http://192.168.1.150/PHPscriptai/registracijaMokinys.php");
+                    url = new URL("http://192.168.0.102/PHPscriptai/registracijaMokinys.php");
                 } else {
-                    url = new URL("http://192.168.1.150/PHPscriptai/registracijaKorepetitorius.php");
+                    url = new URL("http://192.168.0.102/PHPscriptai/registracijaKorepetitorius.php");
                 }
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

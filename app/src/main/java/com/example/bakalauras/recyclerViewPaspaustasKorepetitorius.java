@@ -78,7 +78,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             int busena = params[2];
 
             try {
-                URL url = new URL("http://192.168.1.150/PHPscriptai/uzklausaMokytis.php");
+                URL url = new URL("http://192.168.0.102/PHPscriptai/uzklausaMokytis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -123,7 +123,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.1.150/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

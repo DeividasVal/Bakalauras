@@ -94,7 +94,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.1.150/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

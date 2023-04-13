@@ -45,4 +45,14 @@
         android:label="Mano užklausos"
         android:name="com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausos"
         tools:layout="@layout/fragment_korepetitoriaus_uzklausos" />
+    <fragment
+        android:id="@+id/nav_manokor"
+        android:label="Mano korepetitoriai"
+        android:name="com.example.bakalauras.ui.uzklausos.mokinioKorepetitoriai.MokiniuiPatvirtintiKorepetitoriai"
+        tools:layout="@layout/fragment_mokiniui_patvirtinti_korepetitoriai" />
+    <fragment
+        android:id="@+id/nav_manomok"
+        android:label="Mano mokiniai"
+        android:name="com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniai"
+        tools:layout="@layout/fragment_korepetitoriui_patvirtinti_mokiniai" />
 </navigation>

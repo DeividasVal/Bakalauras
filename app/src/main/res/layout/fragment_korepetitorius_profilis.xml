@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.23"
+            app:layout_constraintGuide_percent="0.25"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -190,8 +190,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16">
@@ -551,23 +551,32 @@
                                 <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false"/>
+                                    android:enabled="false" />
 
                                 <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false"/>
+                                    android:enabled="false" />
 
                                 <com.google.android.material.checkbox.MaterialCheckBox
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
-                                    android:enabled="false"/>
+                                    android:enabled="false" />
                             </TableRow>
 
                         </TableLayout>
 
                     </ScrollView>
                 </HorizontalScrollView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

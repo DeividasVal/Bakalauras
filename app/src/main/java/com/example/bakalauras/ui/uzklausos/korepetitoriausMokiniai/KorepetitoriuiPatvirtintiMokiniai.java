@@ -1,4 +1,4 @@
-package com.example.bakalauras.ui.uzklausos.korepetitoriaus;
+package com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.mokinio.MokinioCardAdapter;
-import com.example.bakalauras.ui.uzklausos.mokinio.MokinioUzklausos;
+import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausos;
+import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,25 +26,25 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import Model.KorepetitoriausUzklausaKortele;
-import Model.MokinioUzklausaKortele;
+import Model.KorepetitoriuiPatvirtintasMokinysKortele;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link KorepetitoriausUzklausos#newInstance} factory method to
+ * Use the {@link KorepetitoriuiPatvirtintiMokiniai#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class KorepetitoriausUzklausos extends Fragment {
+public class KorepetitoriuiPatvirtintiMokiniai extends Fragment {
 
     private RecyclerView recyclerView;
-    private ArrayList<KorepetitoriausUzklausaKortele> arrayList;
-    private KorepetitoriausUzklausosCardAdapter adapter;
+    private ArrayList<KorepetitoriuiPatvirtintasMokinysKortele> arrayList;
+    private KorepetitoriuiPatvirtintiMokiniaiCardAdapter adapter;
 
-    public KorepetitoriausUzklausos() {
+    public KorepetitoriuiPatvirtintiMokiniai() {
         // Required empty public constructor
     }
 
-    public static KorepetitoriausUzklausos newInstance() {
-        KorepetitoriausUzklausos fragment = new KorepetitoriausUzklausos();
+    public static KorepetitoriuiPatvirtintiMokiniai newInstance() {
+        KorepetitoriuiPatvirtintiMokiniai fragment = new KorepetitoriuiPatvirtintiMokiniai();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -53,37 +53,36 @@ public class KorepetitoriausUzklausos extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_korepetitoriaus_uzklausos, container, false);
+        View view = inflater.inflate(R.layout.fragment_korepetitoriui_patvirtinti_mokiniai, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerKorepetitoriausUzklausos);
+        recyclerView = view.findViewById(R.id.recyclerKorepetitoriuiPatvirtintiMokiniai);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        arrayList = new ArrayList<KorepetitoriausUzklausaKortele>();
+        arrayList = new ArrayList<KorepetitoriuiPatvirtintasMokinysKortele>();
 
-        GautiUzklausosKorepetitoriuiDuomenis task = new GautiUzklausosKorepetitoriuiDuomenis(prisijungti.currentKorepetitorius.getId());
+        GautiPatvirtintusMokiniusTask task = new GautiPatvirtintusMokiniusTask(prisijungti.currentKorepetitorius.getId());
         task.execute();
 
         return view;
     }
 
-    public class GautiUzklausosKorepetitoriuiDuomenis extends AsyncTask<Void, Void, Void> {
+    public class GautiPatvirtintusMokiniusTask extends AsyncTask<Void, Void, Void> {
         private int korepetitoriausId;
 
-        public GautiUzklausosKorepetitoriuiDuomenis(int korepetitoriausId) {
+        public GautiPatvirtintusMokiniusTask(int korepetitoriausId) {
             this.korepetitoriausId = korepetitoriausId;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiUzklausosDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriausId);
+                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiKorepetitoriuiPatvirtintusMokinius.php?korepetitoriaus_id=" + korepetitoriausId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -101,9 +100,8 @@ public class KorepetitoriausUzklausos extends Fragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String vardasMokinio = obj.getString("pilnas_mokinio_vardas");
-                    int busena = obj.getInt("būsena");
 
-                    arrayList.add(new KorepetitoriausUzklausaKortele(vardasMokinio, busena));
+                    arrayList.add(new KorepetitoriuiPatvirtintasMokinysKortele(vardasMokinio));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -113,7 +111,7 @@ public class KorepetitoriausUzklausos extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            adapter = new KorepetitoriausUzklausosCardAdapter(arrayList, getContext());
+            adapter = new KorepetitoriuiPatvirtintiMokiniaiCardAdapter(arrayList, getContext());
             recyclerView.setAdapter(adapter);
         }
     }

@@ -1,8 +1,7 @@
-package com.example.bakalauras.ui.uzklausos.mokinio;
+package com.example.bakalauras.ui.uzklausos.mokinioKorepetitoriai;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardHolder;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardAdapter;
+import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardHolder;
+import com.example.bakalauras.ui.uzklausos.mokinio.MokinioCardAdapter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -26,55 +24,52 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausKortele;
-import Model.MokinioUzklausaKortele;
+import Model.KorepetitoriuiPatvirtintasMokinysKortele;
+import Model.MokiniuiPatvirtintasKorepetitoriusKortele;
 
-public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCardHolder>{
+public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.Adapter<MokiniuiPatvirtintiKorepetitoriaiCardHolder>{
 
-    private ArrayList<MokinioUzklausaKortele> list;
+    private ArrayList<MokiniuiPatvirtintasKorepetitoriusKortele> list;
     private Context context;
 
-    public MokinioCardAdapter(ArrayList<MokinioUzklausaKortele> list, Context context) {
+    public MokiniuiPatvirtintiKorepetitoriaiCardAdapter(ArrayList<MokiniuiPatvirtintasKorepetitoriusKortele> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public MokinioUzklausosCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_mokiniui_rodoma_uzklausa_item, parent, false);
+    public MokiniuiPatvirtintiKorepetitoriaiCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new MokinioUzklausosCardHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mokinio_korepetitorius_item, parent, false);
+
+        return new MokiniuiPatvirtintiKorepetitoriaiCardHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MokinioUzklausosCardHolder holder, @SuppressLint("RecyclerView") int position) {
-        MokinioUzklausaKortele sarasas = list.get(position);
+    public void onBindViewHolder(@NonNull MokiniuiPatvirtintiKorepetitoriaiCardHolder holder, @SuppressLint("RecyclerView") int position) {
+        MokiniuiPatvirtintasKorepetitoriusKortele sarasas = list.get(position);
 
-        MokinioUzklausosCardHolder.korepetitoriausVardas.setText("Korepetitorius: "+ sarasas.getVardasKorepetitoriaus());
-        if (sarasas.getStausas() == 0)
-        {
-            MokinioUzklausosCardHolder.statusas.setText("Laukiama patvirtinimo.");
-        }
-        else if (sarasas.getStausas() == 1)
-        {
-            MokinioUzklausosCardHolder.statusas.setText("Užklausa patvirtinta.");
-            MokinioUzklausosCardHolder.atsaukti.setVisibility(View.GONE);
-        }
-        else
-        {
-            MokinioUzklausosCardHolder.statusas.setText("Užklausa atšaukta");
-            MokinioUzklausosCardHolder.atsaukti.setVisibility(View.GONE);
-        }
+        MokiniuiPatvirtintiKorepetitoriaiCardHolder.korepetitoriausVardas.setText(sarasas.getVardasKorepetitoriaus());
+        MokiniuiPatvirtintiKorepetitoriaiCardHolder.adresas.setText(sarasas.getAdresas());
+        MokiniuiPatvirtintiKorepetitoriaiCardHolder.kaina.setText(sarasas.getKaina() + "€/val.");
+        MokiniuiPatvirtintiKorepetitoriaiCardHolder.dalykai.setText("Dalykai: " + sarasas.getDalykai());
 
-        MokinioUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
+        MokiniuiPatvirtintiKorepetitoriaiCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiUzklausaTask task = new PasalintiUzklausaTask(prisijungti.currentMokinys.getId());
+                PasalintiKorepetitoriuTask task = new PasalintiKorepetitoriuTask(prisijungti.currentMokinys.getId());
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, list.size());
+            }
+        });
+
+        MokiniuiPatvirtintiKorepetitoriaiCardHolder.parasyti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -89,12 +84,13 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
             return 0;
         }
     }
-    private class PasalintiUzklausaTask extends AsyncTask<String, Void, String> {
 
-        private int mokinysId;
+    private class PasalintiKorepetitoriuTask extends AsyncTask<String, Void, String> {
 
-        public PasalintiUzklausaTask(int mokinysId) {
-            this.mokinysId = mokinysId;
+        private int mokinioId;
+
+        public PasalintiKorepetitoriuTask(int mokinioId) {
+            this.mokinioId = mokinioId;
         }
 
         @Override
@@ -105,12 +101,11 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
-                String data = "mokinio_id=" + mokinysId;
+                String data = "mokinio_id=" + mokinioId;
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(data);
                 writer.flush();
 
-                // Read the response from the PHP script
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder sb = new StringBuilder();
                 String line;
