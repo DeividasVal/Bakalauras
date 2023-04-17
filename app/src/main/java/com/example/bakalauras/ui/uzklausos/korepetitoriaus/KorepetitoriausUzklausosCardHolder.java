@@ -17,7 +17,7 @@ public class KorepetitoriausUzklausosCardHolder extends RecyclerView.ViewHolder{
     public KorepetitoriausUzklausosCardHolder(@NonNull View itemView){
         super(itemView);
 
-        mokinioVardas = itemView.findViewById(R.id.vardasKorteleMokinio);
+        mokinioVardas = itemView.findViewById(R.id.vardasKorteleAtsiliepimo);
         atsaukti = itemView.findViewById(R.id.buttonAtšaukti);
         patvirtinti = itemView.findViewById(R.id.buttonPatvirtinti);
     }

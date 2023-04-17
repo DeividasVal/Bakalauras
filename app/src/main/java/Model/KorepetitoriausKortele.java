@@ -6,6 +6,16 @@ public class KorepetitoriausKortele {
     private String kaina;
     private String dalykai;
     private int id;
+    private Double ivertinimas;
+
+    public Double getIvertinimas() {
+        return ivertinimas;
+    }
+
+    public void setIvertinimas(Double ivertinimas) {
+        this.ivertinimas = ivertinimas;
+    }
+
     private String mokymoBudas;
 
     public String getMokymoBudas() {
@@ -53,6 +63,15 @@ public class KorepetitoriausKortele {
         this.kaina = kaina;
         this.dalykai = dalykai;
         this.id = id;
+        this.mokymoBudas = mokymoBudas;
+    }
+
+    public KorepetitoriausKortele(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas) {
+        this.vardas = vardas;
+        this.kaina = kaina;
+        this.dalykai = dalykai;
+        this.id = id;
+        this.ivertinimas = ivertinimas;
         this.mokymoBudas = mokymoBudas;
     }
 }

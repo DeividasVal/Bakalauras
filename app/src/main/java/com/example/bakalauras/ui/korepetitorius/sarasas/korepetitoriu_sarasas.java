@@ -21,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bakalauras.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -50,7 +51,7 @@ public class korepetitoriu_sarasas extends Fragment {
     private ArrayList<KorepetitoriausKortele> originalList;
     private TextView ieskoti;
     private String radioButtonValue = "";
-    private Float minValue, maxValue;
+    private Float minValue, maxValue, minValue2, maxValue2;
 
     public korepetitoriu_sarasas() {
     }
@@ -113,6 +114,7 @@ public class korepetitoriu_sarasas extends Fragment {
         });
         originalList = new ArrayList<>();
         arrayList = new ArrayList<KorepetitoriausKortele>();
+        adapter = new korepetitoriusCardAdapter(arrayList, getContext());
 
         GautiProfilioDuomenis task = new GautiProfilioDuomenis();
         task.execute();
@@ -120,16 +122,18 @@ public class korepetitoriu_sarasas extends Fragment {
         return v;
     }
 
-    private void filterData(String text){
+    private void filterData(String text) {
         ArrayList<KorepetitoriausKortele> filteredList = new ArrayList<>();
-        if(originalList.size()>0){
-            for (KorepetitoriausKortele newList : originalList){
-                if(newList.getDalykai().toLowerCase().contains(text.toLowerCase()) || newList.getVardas().toLowerCase().contains(text.toLowerCase()) || newList.getMokymoBudas().toLowerCase().contains(text.toLowerCase()) ||  newList.getKaina().toLowerCase().contains(text.toLowerCase())){
-                    filteredList.add(newList);
-                }
+        for (KorepetitoriausKortele item : originalList) {
+            if (item.getDalykai().toLowerCase().contains(text.toLowerCase())
+                    || item.getVardas().toLowerCase().contains(text.toLowerCase())
+                    || item.getMokymoBudas().toLowerCase().contains(text.toLowerCase())
+                    || item.getKaina().toLowerCase().contains(text.toLowerCase())
+                    || String.valueOf(item.getIvertinimas()).toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
             }
-            adapter.filterList(filteredList);
         }
+        adapter.filterList(filteredList);
     }
 
     private class GautiProfilioDuomenis extends AsyncTask<String, String, String> {
@@ -137,7 +141,7 @@ public class korepetitoriu_sarasas extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
+                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -167,17 +171,51 @@ public class korepetitoriu_sarasas extends Fragment {
                     int id = obj.getInt("korepetitoriaus_id");
                     int mokymoBudas = obj.getInt("korepetitoriaus_mokymo_tipas");
 
+                    Double average = 0.0;
+                    try {
+                        URL url2 = new URL("http://192.168.0.104/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
+                        HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
+                        conn2.setRequestMethod("GET");
+                        conn2.setRequestProperty("Accept", "application/json");
+
+                        BufferedReader br2 = new BufferedReader(new InputStreamReader((conn2.getInputStream())));
+                        StringBuilder sb2 = new StringBuilder();
+                        String output2;
+                        while ((output2 = br2.readLine()) != null) {
+                            sb2.append(output2);
+                        }
+                        conn2.disconnect();
+
+                        String jsonString2 = sb2.toString();
+                        JSONArray jsonArray2 = new JSONArray(jsonString2);
+
+                        for (int j = 0; j < jsonArray2.length(); j++) {
+                            JSONObject obj2 = jsonArray2.getJSONObject(j);
+
+                            if (!obj2.isNull("average_ivertinimas")) {
+                                average = obj2.getDouble("average_ivertinimas");
+                            } else {
+                                average = 0.0;
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     if (mokymoBudas == 1)
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, "Gyvai"));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai"));
+                        average = 0.0;
                     }
                     else if (mokymoBudas == 2)
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, "Nuotolinis"));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis"));
+                        average = 0.0;
                     }
                     else
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, "Gyvai ir nuotoliniu"));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu"));
+                        average = 0.0;
                     }
                 }
             } catch (Exception e) {
@@ -203,29 +241,38 @@ public class korepetitoriu_sarasas extends Fragment {
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RangeSlider rangeSlider = bottomSheetView.findViewById(R.id.rangas);
                 RadioGroup radioGroup = bottomSheetView.findViewById(R.id.MokymoBūdasRadioGroup);
-                Spinner spinner = bottomSheetDialog.findViewById(R.id.spinnerDalykaiFiltras);
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(getContext(), "Pasirinkite mokymosi tipą!", Toast.LENGTH_SHORT).show();
+                    bottomSheetDialog.dismiss();
+                } else {
+                    RangeSlider rangeSlider = bottomSheetView.findViewById(R.id.rangas);
+                    RangeSlider rangeSlider2 = bottomSheetView.findViewById(R.id.rangasIvertinimas);
+                    Spinner spinner = bottomSheetDialog.findViewById(R.id.spinnerDalykaiFiltras);
 
-                minValue = rangeSlider.getValues().get(0);
-                maxValue = rangeSlider.getValues().get(1);
-                String dalykasPasirinktas = spinner.getSelectedItem().toString();
+                    minValue = rangeSlider.getValues().get(0);
+                    maxValue = rangeSlider.getValues().get(1);
 
-                int radioButtonId = radioGroup.getCheckedRadioButtonId();
-                if (radioButtonId != -1) {
-                    RadioButton radioButton = bottomSheetView.findViewById(radioButtonId);
-                    radioButtonValue = radioButton.getText().toString();
-                }
+                    minValue2 = rangeSlider2.getValues().get(0);
+                    maxValue2 = rangeSlider2.getValues().get(1);
+                    String dalykasPasirinktas = spinner.getSelectedItem().toString();
 
-                ArrayList<KorepetitoriausKortele> filteredList = new ArrayList<>();
-                for (KorepetitoriausKortele item : arrayList) {
-                    if (Integer.parseInt(item.getKaina()) >= Math.round(minValue) && Integer.parseInt(item.getKaina()) <= Math.round(maxValue) && item.getMokymoBudas().equals(radioButtonValue) && item.getDalykai().contains(dalykasPasirinktas)) {
-                        filteredList.add(item);
+                    int radioButtonId = radioGroup.getCheckedRadioButtonId();
+                    if (radioButtonId != -1) {
+                        RadioButton radioButton = bottomSheetView.findViewById(radioButtonId);
+                        radioButtonValue = radioButton.getText().toString();
                     }
-                }
 
-                adapter.filterList(filteredList);
-                bottomSheetDialog.dismiss();
+                    ArrayList<KorepetitoriausKortele> filteredList = new ArrayList<>();
+                    for (KorepetitoriausKortele item : arrayList) {
+                        if (Integer.parseInt(item.getKaina()) >= Math.round(minValue) && Integer.parseInt(item.getKaina()) <= Math.round(maxValue) && item.getMokymoBudas().equals(radioButtonValue) && item.getDalykai().contains(dalykasPasirinktas) && item.getIvertinimas() >= minValue2 && item.getIvertinimas() <= maxValue2) {
+                            filteredList.add(item);
+                        }
+                    }
+
+                    adapter.filterList(filteredList);
+                    bottomSheetDialog.dismiss();
+                }
             }
         });
 

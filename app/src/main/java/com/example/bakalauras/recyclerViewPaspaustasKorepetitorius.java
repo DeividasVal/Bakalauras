@@ -1,6 +1,8 @@
 package com.example.bakalauras;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,10 +12,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,13 +31,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import Model.Atsiliepimas;
+
 public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
-    private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText;
+    private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText, count, vidurkis, emptyRecycler, atsiliepimuTextView;
     private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined;
     private TableLayout uzpildyti;
     private boolean[][] prieinamumas;
     private Button susisiekti;
+    private RecyclerView recyclerView;
+    private ArrayList<Atsiliepimas> arrayList;
+    private AtsiliepimasCardAdapter adapter;
+    private Double ivertinimasVidurkis;
+    private int invertinimasCount;
+    private RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +77,83 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         dalykaiText = findViewById(R.id.dalykaiIsDBActivity);
         kainaText = findViewById(R.id.kainaIsDBActivity);
         uzpildyti = findViewById(R.id.lentelePasirinkimuActivity);
+        count = findViewById(R.id.atsiliepimuKiekisIsDBActivity);
+        vidurkis = findViewById(R.id.vidurkisIsDBActivity);
+        ratingBar = findViewById(R.id.ratingBarActivity);
+        emptyRecycler = findViewById(R.id.neraAtsiliepimuActivity);
+        atsiliepimuTextView = findViewById(R.id.textView21);
 
+        recyclerView = findViewById(R.id.recyclerViewProfilisReviewsPaspaustas);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        arrayList = new ArrayList<Atsiliepimas>();
+
+        UzkrautiAtsiliepimus task2 = new UzkrautiAtsiliepimus(korepetitorius_id);
+        task2.execute();
 
         UzpildytiProfili task = new UzpildytiProfili(korepetitorius_id, vardas);
         task.execute();
+    }
+
+    private class UzkrautiAtsiliepimus extends AsyncTask<Void, Void, Void> {
+
+        private int korepetitoriaus_id;
+
+        public UzkrautiAtsiliepimus(int korepetitoriaus_id) {
+            this.korepetitoriaus_id = korepetitoriaus_id;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Accept", "application/json");
+
+                BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+                StringBuilder sb = new StringBuilder();
+                String output;
+                while ((output = br.readLine()) != null) {
+                    sb.append(output);
+                }
+                conn.disconnect();
+
+                String jsonString = sb.toString();
+                JSONArray jsonArray = new JSONArray(jsonString);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    int korId = obj.getInt("korepetitoriaus_id");
+                    int profilioId = obj.getInt("profilio_id");
+                    int mokinioId = obj.getInt("mokinio_id");
+                    String atsiliepimoTekstas = obj.getString("atsiliepimo_tekstas");
+                    double ivertinimas = obj.getDouble("ivertinimas");
+                    String laikas = obj.getString("laikas");
+                    String vardasMokinio = obj.getString("pilnas_mokinio_vardas");
+
+                    arrayList.add(new Atsiliepimas(vardasMokinio, mokinioId, profilioId, korId, atsiliepimoTekstas, ivertinimas, laikas));
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (arrayList.isEmpty()) {
+                emptyRecycler.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+                emptyRecycler.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                adapter = new AtsiliepimasCardAdapter(arrayList, getApplicationContext());
+                recyclerView.setAdapter(adapter);
+            }
+        }
     }
 
     private class UzklausaTask extends AsyncTask<Integer, Void, String> {
@@ -78,7 +165,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             int busena = params[2];
 
             try {
-                URL url = new URL("http://192.168.0.102/PHPscriptai/uzklausaMokytis.php");
+                URL url = new URL("http://192.168.0.104/PHPscriptai/uzklausaMokytis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -123,7 +210,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -140,6 +227,18 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
                     bio = obj.getString("korepetitoriaus_aprasymas");
                     istaiga = obj.getString("korepetitoriaus_istaiga");
                     dalykaiIst = obj.getString("korepetitoriaus_dalykai_istaigoj");
+
+                    if (!obj.isNull("average_ivertinimas")) {
+                        ivertinimasVidurkis = obj.getDouble("average_ivertinimas");
+                    } else {
+                        ivertinimasVidurkis = 0.0;
+                    }
+
+                    if (!obj.isNull("count_korepetitoriaus_id")) {
+                        invertinimasCount = obj.getInt("count_korepetitoriaus_id");
+                    } else {
+                        invertinimasCount = 0;
+                    }
 
                     JSONArray dalykaiJson = obj.getJSONArray("korepetitoriaus_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
@@ -181,7 +280,12 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
-            kainaText.setText("Kaina: " + val + "€/val.");
+            count.setText("("+ invertinimasCount + " atsiliepimų)");
+            vidurkis.setText(ivertinimasVidurkis.toString());
+            ratingBar.setNumStars(5);
+            ratingBar.setIsIndicator(true);
+            ratingBar.setRating(ivertinimasVidurkis.floatValue());
+            kainaText.setText("Kaina: " + val + " Eur/val.");
             bioText.setText(bio);
             istaigaText.setText(istaiga);
             dalykasText.setText(dalykaiIst);

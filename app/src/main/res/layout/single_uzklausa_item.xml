@@ -28,7 +28,7 @@
             app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
         <TextView
-            android:id="@+id/vardasKorteleMokinio"
+            android:id="@+id/vardasKorteleAtsiliepimo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView"
@@ -48,7 +48,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_alignBottom="@+id/vardasKorteleMokinio"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
@@ -58,11 +57,11 @@
             android:text="Mokymosi užklausa"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/vardasKorteleMokinio" />
+            app:layout_constraintTop_toBottomOf="@+id/vardasKorteleAtsiliepimo" />
 
         <Button
             android:id="@+id/buttonAtšaukti"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="90dp"
@@ -76,7 +75,7 @@
 
         <Button
             android:id="@+id/buttonPatvirtinti"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
             android:layout_marginEnd="16dp"

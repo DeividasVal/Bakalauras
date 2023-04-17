@@ -12,7 +12,7 @@ import com.example.bakalauras.R;
 public class MokiniuiPatvirtintiKorepetitoriaiCardHolder extends RecyclerView.ViewHolder{
 
     public static TextView korepetitoriausVardas, dalykai, adresas, kaina;
-    public static Button parasyti, atsaukti;
+    public static Button parasyti, atsaukti, ivertinti;
 
     public MokiniuiPatvirtintiKorepetitoriaiCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -23,5 +23,6 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardHolder extends RecyclerView.Vi
         kaina = itemView.findViewById(R.id.kainaPatvirtintasKorepetitorius);
         parasyti = itemView.findViewById(R.id.mokinysParasyti);
         atsaukti = itemView.findViewById(R.id.buttonAtšauktiPatvirtintasKorepetitorius);
+        ivertinti = itemView.findViewById(R.id.ĮvertintiButton);
     }
 }

@@ -2,9 +2,7 @@ package com.example.bakalauras.ui.uzklausos.mokinio;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardHolder;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardAdapter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -101,7 +96,7 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.102/PHPscriptai/pasalintiUzklausaMokinys.php");
+                URL url = new URL("http://192.168.0.104/PHPscriptai/pasalintiUzklausaMokinys.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

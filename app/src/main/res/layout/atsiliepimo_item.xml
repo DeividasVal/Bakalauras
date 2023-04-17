@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="74dp"
-            android:layout_height="76dp"
+            android:layout_width="51dp"
+            android:layout_height="44dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,16 +28,17 @@
             app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
         <TextView
-            android:id="@+id/vardasKorteleLaukiamoKorepetitoriaus"
-            android:layout_width="269dp"
-            android:layout_height="50dp"
+            android:id="@+id/vardasKorteleAtsiliepimo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_toRightOf="@+id/imageView"
             android:gravity="center|left"
-            android:text="Korepetitorius: Vardas Pavardė"
+            android:text="Vardas Pavardė"
             android:textSize="20sp"
             app:fontFamily="sans-serif-black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,38 +46,42 @@
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/uzklausosStatusasMokiniui"
-            android:layout_width="193dp"
-            android:layout_height="25dp"
-            android:layout_alignBottom="@+id/vardasKorteleLaukiamoKorepetitoriaus"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@+id/imageView"
-            android:gravity="top|left"
-            android:text="Laukiama patvirtinimo."
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/vardasKorteleLaukiamoKorepetitoriaus" />
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/atsiliepimoTekstas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Atsiliepimas"
+            android:textSize="14sp"
+            app:autoSizeMaxTextSize="80sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ratingBarCard" />
 
-        <Button
-            android:id="@+id/buttonAtšauktiMokiniui"
-            android:layout_width="300dp"
+        <TextView
+            android:id="@+id/atsiliepimoLaikas"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="90dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/button_shape_uzklausa_atsaukti"
-            android:text="Atšaukti užklausą"
-            app:backgroundTint="#F44336"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:text="laikas"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" /> /
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/vardasKorteleAtsiliepimo" />
 
+        <RatingBar
+            android:id="@+id/ratingBarCard"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:stepSize="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/atsiliepimoLaikas" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

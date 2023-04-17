@@ -1,23 +1,22 @@
 package com.example.bakalauras.ui.korepetitorius;
 
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
@@ -30,7 +29,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+
+import Model.Atsiliepimas;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,16 +39,20 @@ import java.util.List;
  */
 public class Korepetitorius_profilis extends Fragment {
 
-    private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText;
+    private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText, vidurkisIsDB, countisDB, emptyRecycler;
     private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined;
     private TableLayout uzpildyti;
     private boolean[][] prieinamumas;
+    private RecyclerView recyclerView;
+    private ArrayList<Atsiliepimas> arrayList;
+    private AtsiliepimasCardAdapter adapter;
+    private Double ivertinimasVidurkis;
+    private int invertinimasCount;
+    private RatingBar ratingBar;
 
     public Korepetitorius_profilis() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static Korepetitorius_profilis newInstance() {
         Korepetitorius_profilis fragment = new Korepetitorius_profilis();
         Bundle args = new Bundle();
@@ -76,11 +80,84 @@ public class Korepetitorius_profilis extends Fragment {
         dalykaiText = v.findViewById(R.id.dalykaiIsDB);
         kainaText = v.findViewById(R.id.kainaIsDB);
         uzpildyti = v.findViewById(R.id.lentelePasirinkimu);
+        vidurkisIsDB = v.findViewById(R.id.vidurkisIsDB);
+        countisDB = v.findViewById(R.id.atsiliepimuKiekisIsDB);
+        ratingBar = v.findViewById(R.id.ratingBarProfilis);
+        emptyRecycler = v.findViewById(R.id.neraAtsiliepimu);
+
+        recyclerView = v.findViewById(R.id.recyclerViewProfilisReviews);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        arrayList = new ArrayList<Atsiliepimas>();
 
         UzpildytiProfili task = new UzpildytiProfili(prisijungti.currentKorepetitorius.getId());
         task.execute();
 
+        UzkrautiAtsiliepimus task2 = new UzkrautiAtsiliepimus(prisijungti.currentKorepetitorius.getId());
+        task2.execute();
+
         return v;
+    }
+
+    private class UzkrautiAtsiliepimus extends AsyncTask<Void, Void, Void> {
+
+        private int korepetitoriaus_id;
+
+        public UzkrautiAtsiliepimus(int korepetitoriaus_id) {
+            this.korepetitoriaus_id = korepetitoriaus_id;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Accept", "application/json");
+
+                BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+                StringBuilder sb = new StringBuilder();
+                String output;
+                while ((output = br.readLine()) != null) {
+                    sb.append(output);
+                }
+                conn.disconnect();
+
+                String jsonString = sb.toString();
+                JSONArray jsonArray = new JSONArray(jsonString);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    int korId = obj.getInt("korepetitoriaus_id");
+                    int profilioId = obj.getInt("profilio_id");
+                    int mokinioId = obj.getInt("mokinio_id");
+                    String atsiliepimoTekstas = obj.getString("atsiliepimo_tekstas");
+                    double ivertinimas = obj.getDouble("ivertinimas");
+                    String laikas = obj.getString("laikas");
+                    String vardasMokinio = obj.getString("pilnas_mokinio_vardas");
+
+                    arrayList.add(new Atsiliepimas(vardasMokinio, mokinioId, profilioId, korId, atsiliepimoTekstas, ivertinimas, laikas));
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (arrayList.isEmpty()) {
+                emptyRecycler.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+                emptyRecycler.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                adapter = new AtsiliepimasCardAdapter(arrayList, getContext());
+                recyclerView.setAdapter(adapter);
+            }
+        }
     }
 
     private class UzpildytiProfili extends AsyncTask<Void, Void, Void> {
@@ -94,7 +171,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.102/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -111,6 +188,17 @@ public class Korepetitorius_profilis extends Fragment {
                     bio = obj.getString("korepetitoriaus_aprasymas");
                     istaiga = obj.getString("korepetitoriaus_istaiga");
                     dalykaiIst = obj.getString("korepetitoriaus_dalykai_istaigoj");
+                    if (!obj.isNull("average_ivertinimas")) {
+                        ivertinimasVidurkis = obj.getDouble("average_ivertinimas");
+                    } else {
+                        ivertinimasVidurkis = 0.0;
+                    }
+
+                    if (!obj.isNull("count_korepetitoriaus_id")) {
+                        invertinimasCount = obj.getInt("count_korepetitoriaus_id");
+                    } else {
+                        invertinimasCount = 0;
+                    }
 
                     JSONArray dalykaiJson = obj.getJSONArray("korepetitoriaus_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
@@ -152,7 +240,12 @@ public class Korepetitorius_profilis extends Fragment {
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
-            kainaText.setText("Kaina: " + val + "€/val.");
+            countisDB.setText("("+ invertinimasCount + " atsiliepimų)");
+            vidurkisIsDB.setText(ivertinimasVidurkis.toString());
+            ratingBar.setNumStars(5);
+            ratingBar.setIsIndicator(true);
+            ratingBar.setRating(ivertinimasVidurkis.floatValue());
+            kainaText.setText("Kaina: " + val + " Eur/val.");
             bioText.setText(bio);
             istaigaText.setText(istaiga);
             dalykasText.setText(dalykaiIst);

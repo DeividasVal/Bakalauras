@@ -80,9 +80,11 @@
             android:id="@+id/kainaPatvirtintasKorepetitorius"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="2dp"
+            app:fontFamily="sans-serif-black"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/imageView"
             android:gravity="top|left"
@@ -93,30 +95,41 @@
 
         <Button
             android:id="@+id/buttonAtšauktiPatvirtintasKorepetitorius"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"
             android:background="@drawable/button_shape_uzklausa_atsaukti"
             android:text="Atšaukti"
             app:backgroundTint="#F44336"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kainaPatvirtintasKorepetitorius" />
 
         <Button
             android:id="@+id/mokinysParasyti"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
             android:background="@drawable/button_shape_uzklausa_atsaukti"
             android:text="Parašyti"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kainaPatvirtintasKorepetitorius" />
+
+        <Button
+            android:id="@+id/ĮvertintiButton"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/button_shape"
+            android:text="Įvertinti"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAtšauktiPatvirtintasKorepetitorius" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
