@@ -43,7 +43,7 @@ public class pagrindinis_langas extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_sukurti_profili, R.id.nav_pagrindinis, R.id.nav_zinutes, R.id.nav_ziureti, R.id.nav_kategorija ,R.id.nav_ziureti,R.id.nav_issaugotikop,R.id.nav_manokor,R.id.nav_manomok,
-                R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti, R.id.nav_profilisKorepetitorius, R.id.nav_uzklausosMokiniai)
+                R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti, R.id.nav_profilisKorepetitorius, R.id.nav_uzklausosMokiniai, R.id.nav_profilisMokinys, R.id.nav_kategorija)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pagrindinis_langas);
@@ -56,7 +56,6 @@ public class pagrindinis_langas extends AppCompatActivity {
         View header = navigationView.getHeaderView(0);
         if (korepetitorius != null)
         {
-
             prisijungesVardas = header.findViewById(R.id.prisijungesVardas);
             prisijungesPastas = header.findViewById(R.id.prisijungesPastas);
             prisijungesVardas.setText(korepetitorius.getName());
@@ -64,6 +63,7 @@ public class pagrindinis_langas extends AppCompatActivity {
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_manokor).setVisible(false);
+            nav_Menu.findItem(R.id.nav_profilisMokinys).setVisible(false);
             nav_Menu.findItem(R.id.nav_redaguotiMokinys).setVisible(false);
             nav_Menu.findItem(R.id.nav_issaugotikop).setVisible(false);
             nav_Menu.findItem(R.id.nav_uzklausosMokiniai).setVisible(false);
@@ -76,6 +76,7 @@ public class pagrindinis_langas extends AppCompatActivity {
             prisijungesPastas.setText(mokinys.getEmail());
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_profilisKorepetitorius).setVisible(false);
             nav_Menu.findItem(R.id.nav_manomok).setVisible(false);
             nav_Menu.findItem(R.id.nav_redaguotiKor).setVisible(false);
             nav_Menu.findItem(R.id.nav_sukurti_profili).setVisible(false);

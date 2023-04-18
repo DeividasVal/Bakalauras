@@ -55,4 +55,14 @@
         android:label="Mano mokiniai"
         android:name="com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniai"
         tools:layout="@layout/fragment_korepetitoriui_patvirtinti_mokiniai" />
+    <fragment
+        android:id="@+id/nav_profilisMokinys"
+        android:label="Mano profilis"
+        android:name="com.example.bakalauras.mokinio_profilis"
+        tools:layout="@layout/fragment_mokinio_profilis" />
+    <fragment
+        android:id="@+id/nav_kategorija"
+        android:label="Kategorijos"
+        android:name="com.example.bakalauras.kategorijos"
+        tools:layout="@layout/fragment_kategorijos" />
 </navigation>

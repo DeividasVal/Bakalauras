@@ -28,7 +28,7 @@
             android:src="@drawable/ic_baseline_account_circle_24"/>
 
         <TextView
-            android:id="@+id/vardasKortele"
+            android:id="@+id/vardasKortelePagrindinis"
             android:layout_width="177dp"
             android:layout_height="23dp"
             android:layout_alignBottom="@+id/imageView"
@@ -46,10 +46,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/budasKortele"
+            android:id="@+id/budasKortelePagrindinis"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/vardasKortele"
+            android:layout_alignBottom="@+id/vardasKortelePagrindinis"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
@@ -63,13 +63,13 @@
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/vardasKortele" />
+            app:layout_constraintTop_toBottomOf="@+id/vardasKortelePagrindinis" />
 
         <TextView
-            android:id="@+id/kainaKortele"
+            android:id="@+id/kainaKortelePagrindinis"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
-            android:layout_alignBottom="@+id/vardasKortele"
+            android:layout_alignBottom="@+id/vardasKortelePagrindinis"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
@@ -81,13 +81,13 @@
             android:text="Kaina                 "
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/atsiliepimaiVidurkisKortele" />
+            app:layout_constraintTop_toBottomOf="@+id/atsiliepimaiVidurkisKortelePagrindinis" />
 
         <me.grantland.widget.AutofitTextView
-            android:id="@+id/dalykaiKortele"
+            android:id="@+id/dalykaiKortelePagrindinis"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/kainaKortele"
+            android:layout_alignBottom="@+id/kainaKortelePagrindinis"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
@@ -101,10 +101,10 @@
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/budasKortele" />
+            app:layout_constraintTop_toBottomOf="@+id/budasKortelePagrindinis" />
 
         <Button
-            android:id="@+id/favoriteButton"
+            android:id="@+id/favoriteButtonPagrindinis"
             android:layout_width="26dp"
             android:layout_height="27dp"
             android:layout_marginTop="16dp"
@@ -116,7 +116,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/atsiliepimaiVidurkisKortele"
+            android:id="@+id/atsiliepimaiVidurkisKortelePagrindinis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -124,18 +124,17 @@
             android:text="4.5"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/dalykaiKortele" />
+            app:layout_constraintTop_toBottomOf="@+id/dalykaiKortelePagrindinis" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView2Pagrindinis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
-            app:layout_constraintStart_toEndOf="@+id/atsiliepimaiVidurkisKortele"
-            app:layout_constraintTop_toBottomOf="@+id/dalykaiKortele"
+            app:layout_constraintStart_toEndOf="@+id/atsiliepimaiVidurkisKortelePagrindinis"
+            app:layout_constraintTop_toBottomOf="@+id/dalykaiKortelePagrindinis"
             app:srcCompat="@drawable/ic_baseline_star_rate_24" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

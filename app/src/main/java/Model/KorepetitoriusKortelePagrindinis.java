@@ -1,6 +1,6 @@
 package Model;
 
-public class KorepetitoriausKortele {
+public class KorepetitoriusKortelePagrindinis {
 
     private String vardas;
     private String kaina;
@@ -8,30 +8,6 @@ public class KorepetitoriausKortele {
     private int id;
     private Double ivertinimas;
     private String mokymoBudas;
-
-    public Double getIvertinimas() {
-        return ivertinimas;
-    }
-
-    public void setIvertinimas(Double ivertinimas) {
-        this.ivertinimas = ivertinimas;
-    }
-
-    public String getMokymoBudas() {
-        return mokymoBudas;
-    }
-
-    public void setMokymoBudas(String mokymoBudas) {
-        this.mokymoBudas = mokymoBudas;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getVardas() {
         return vardas;
@@ -57,15 +33,31 @@ public class KorepetitoriausKortele {
         this.dalykai = dalykai;
     }
 
-    public KorepetitoriausKortele(String vardas, String kaina, String dalykai, int id, String mokymoBudas) {
-        this.vardas = vardas;
-        this.kaina = kaina;
-        this.dalykai = dalykai;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public Double getIvertinimas() {
+        return ivertinimas;
+    }
+
+    public void setIvertinimas(Double ivertinimas) {
+        this.ivertinimas = ivertinimas;
+    }
+
+    public String getMokymoBudas() {
+        return mokymoBudas;
+    }
+
+    public void setMokymoBudas(String mokymoBudas) {
         this.mokymoBudas = mokymoBudas;
     }
 
-    public KorepetitoriausKortele(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas) {
+    public KorepetitoriusKortelePagrindinis(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas) {
         this.vardas = vardas;
         this.kaina = kaina;
         this.dalykai = dalykai;

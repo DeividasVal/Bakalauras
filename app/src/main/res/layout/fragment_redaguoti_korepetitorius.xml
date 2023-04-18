@@ -1,14 +1,726 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.redaguoti_korepetitorius.RedaguotiKorepetitorius">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="korepetitorius redaguoti" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/dalykasRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Dalykas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/istaigosPavRedaguoti" />
+
+    <EditText
+        android:id="@+id/istaigosPavRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Įstaigos pavadinimas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <EditText
+        android:id="@+id/kainaPerValProfilisRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Kaina per val."
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pasirinktiDalykaiRedaguoti" />
+
+    <CheckBox
+        android:id="@+id/checkBoxGyvaiRedaguoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:text="Gyvai"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilisMiestasRedaguoti" />
+
+    <EditText
+        android:id="@+id/profilisMiestasRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Miestas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilisAdresasRedaguoti" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="228dp"
+        android:text="Profilio redagavimas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/profilisAdresasRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="Adresas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Mokymo tipas *"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilisMiestasRedaguoti" />
+
+    <CheckBox
+        android:id="@+id/checkBoxOnlineRedaguoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="27dp"
+        android:text="Nuotoliniu"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxGyvaiRedaguoti"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/profilisMiestasRedaguoti" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="47dp"
+        android:text="Ką galite mokyti? *"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxOnlineRedaguoti"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Spinner
+        android:id="@+id/spinnerDalykaiRedaguoti"
+        android:layout_width="333dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:entries="@array/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/buttonPridėtiRedaguoti"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_shape"
+        android:text="Pridėti"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDalykaiRedaguoti" />
+
+    <ListView
+        android:id="@+id/pasirinktiDalykaiRedaguoti"
+        android:layout_width="360dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:nestedScrollingEnabled="true"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/container_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPridėtiRedaguoti" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="230dp"
+        android:text="Aprašymas apie save *"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kainaPerValProfilisRedaguoti" />
+
+    <EditText
+        android:id="@+id/bioProfilisRedaguoti"
+        android:layout_width="360dp"
+        android:layout_height="185dp"
+        android:inputType="textMultiLine"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="Aprašymas"
+        android:background="@drawable/container_border"
+        android:isScrollContainer="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Kvalifikacija *"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bioProfilisRedaguoti" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="272dp"
+        android:text="Prieinamumas *"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dalykasRedaguoti" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/lentelePasirinkimuRedaguoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Laikas" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Pirmadienis" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Antradienis" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Trečiadienis" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Ketvirtadienis" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Penktadienis" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Šeštadienis" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Sekmadienis" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="9:00 - 10:30" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="10:30 - 12:00" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="12:00 - 13:30" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="13:30 - 15:00" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="15:00 - 16:30" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="16:30 - 18:00" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="18:00 - 19:30" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+
+                    <CheckBox
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textViewvardas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Vardas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+    <EditText
+        android:id="@+id/vardasKorepetitoriusRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Vardas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewvardas" />
+
+    <TextView
+        android:id="@+id/textView1vart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Vartotojo vardas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vardasKorepetitoriusRedaguoti"/>
+
+    <EditText
+        android:id="@+id/vartotojoKorepetitoriusRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Vartotojo vardas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1vart" />
+
+    <TextView
+        android:id="@+id/textView145"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="El. paštas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vartotojoKorepetitoriusRedaguoti"/>
+
+    <EditText
+        android:id="@+id/emailKorepetitoriusRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="El. paštas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView145"/>
+
+    <TextView
+        android:id="@+id/textView1slaptazodis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="48dp"
+        android:text="Slaptažodis"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailKorepetitoriusRedaguoti"/>
+
+    <EditText
+        android:id="@+id/slaptazodisRedaguotiKorepetitorius"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Slaptažodis"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1slaptazodis"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Patvirtinti slaptažodį"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slaptazodisRedaguotiKorepetitorius"/>
+
+    <EditText
+        android:id="@+id/slaptazodisPatvirtintiRedaguotiKorepetitorius"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Patvirtinti slaptažodį"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"/>
+
+    <Button
+        android:id="@+id/buttonRedaguotiKoreptitorius"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_shape"
+        android:text="Pakeisti"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slaptazodisPatvirtintiRedaguotiKorepetitorius" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

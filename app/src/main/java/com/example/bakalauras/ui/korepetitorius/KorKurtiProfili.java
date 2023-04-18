@@ -1,15 +1,12 @@
 package com.example.bakalauras.ui.korepetitorius;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,7 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -26,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.registruotis;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -36,8 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-
-import Model.Korepetitorius;
 
 /**
  * A simple {@link Fragment} subclass.

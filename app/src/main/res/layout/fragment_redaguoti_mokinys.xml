@@ -1,14 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.redaguoti_mokinys.RedaguotiMokinys">
+    tools:context=".ui.redaguoti_mokinys.RedaguotiMokinys"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="redaguoti mokinys" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="126dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_account_circle_24"/>
+
+    </LinearLayout>
+
+    <TextView
+    android:id="@+id/textViewvardas"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:text="Vardas" />
+
+    <EditText
+        android:id="@+id/vardasMokinys"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Vardas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance" />
+
+    <TextView
+        android:id="@+id/textView1vart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Vartotojo vardas" />
+
+    <EditText
+        android:id="@+id/vartotojoMokinys"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Vartotojo vardas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance" />
+
+    <TextView
+        android:id="@+id/textView145"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="El. paštas" />
+
+    <EditText
+        android:id="@+id/emailMokinysRedaguoti"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="El. paštas"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance" />
+
+    <TextView
+        android:id="@+id/textView1slaptazodis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="48dp"
+        android:text="Slaptažodis" />
+
+    <EditText
+        android:id="@+id/slaptazodisRedaguotiMokinys"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Slaptažodis"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Patvirtinti slaptažodį" />
+
+    <EditText
+        android:id="@+id/slaptazodisPatvirtintiRedaguotiMokinys"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Patvirtinti slaptažodį"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:theme="@style/TextInputLayoutAppearance" />
+
+    <Button
+        android:id="@+id/redaguotiMokinysButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_shape"
+        android:text="Pakeisti" />
+
+</LinearLayout>
