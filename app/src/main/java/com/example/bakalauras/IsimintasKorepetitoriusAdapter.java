@@ -1,10 +1,8 @@
-package com.example.bakalauras.ui.korepetitorius.sarasas;
+package com.example.bakalauras;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardHolder;
-import com.example.bakalauras.ui.zinutes.susirasyti;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -29,15 +21,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausKortele;
+import Model.IsimintasKorepetitoriusKortele;
 
-class korepetitoriusCardHolder extends RecyclerView.ViewHolder {
+class IsimintasKorepetitoriusCardHolder extends RecyclerView.ViewHolder {
 
     public TextView vardas, kaina, dalykai, budasKortele, ivertinimas;
     public Button favorite;
     public ImageView zvaigzde;
 
-    public korepetitoriusCardHolder(@NonNull View itemView) {
+    public IsimintasKorepetitoriusCardHolder(@NonNull View itemView) {
         super(itemView);
 
         vardas = itemView.findViewById(R.id.vardasKortele);
@@ -50,46 +42,29 @@ class korepetitoriusCardHolder extends RecyclerView.ViewHolder {
     }
 }
 
-public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitoriusCardHolder> {
+public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<IsimintasKorepetitoriusCardHolder> {
 
-    private ArrayList<KorepetitoriausKortele> list;
+    private ArrayList<IsimintasKorepetitoriusKortele> list;
     private Context context;
 
-    public korepetitoriusCardAdapter(ArrayList<KorepetitoriausKortele> list, Context context) {
+    public IsimintasKorepetitoriusAdapter(ArrayList<IsimintasKorepetitoriusKortele> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public korepetitoriusCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IsimintasKorepetitoriusCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_korepetitorius_item, parent, false);
 
-        return new korepetitoriusCardHolder(view);
+        return new IsimintasKorepetitoriusCardHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull korepetitoriusCardHolder holder, int position) {
-        KorepetitoriausKortele sarasas = list.get(position);
-
-        if (prisijungti.currentMokinys != null)
-        {
-            new CheckFavoriteAsyncTask(holder, sarasas.getProfilioId()).execute();
-
-            holder.favorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new PaziuretiArIsimintaAsyncTask(holder, sarasas.getProfilioId()).execute();
-                }
-            });
-        }
-
-        if (prisijungti.currentKorepetitorius != null)
-        {
-            holder.favorite.setVisibility(View.GONE);
-        }
-
+    public void onBindViewHolder(@NonNull IsimintasKorepetitoriusCardHolder holder, int position) {
+        IsimintasKorepetitoriusKortele sarasas = list.get(position);
+        new CheckFavoriteAsyncTask(holder, sarasas.getProfilioId()).execute();
         holder.vardas.setText(sarasas.getVardas());
         holder.dalykai.setText("Moko: " + sarasas.getDalykai());
         holder.kaina.setText(sarasas.getKaina() + " Eur/val.");
@@ -114,6 +89,14 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
                 context.startActivity(intent);
             }
         });
+
+        holder.favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int adapterPosition = holder.getAdapterPosition();
+                new PaziuretiArIsimintaAsyncTask(holder, adapterPosition, sarasas.getProfilioId()).execute();
+            }
+        });
     }
 
     @Override
@@ -127,19 +110,16 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
         }
     }
 
-    public void filterList(ArrayList<KorepetitoriausKortele> filteredList) {
-        list = filteredList;
-        notifyDataSetChanged();
-    }
-
     class PaziuretiArIsimintaAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-        private korepetitoriusCardHolder holder;
+        private IsimintasKorepetitoriusCardHolder holder;
         private int profilioId;
+        private int position;
 
-        public PaziuretiArIsimintaAsyncTask(korepetitoriusCardHolder holder, int profilioId) {
+        public PaziuretiArIsimintaAsyncTask(IsimintasKorepetitoriusCardHolder holder, int position, int profilioId) {
             this.holder = holder;
             this.profilioId = profilioId;
+            this.position = position;
         }
 
         @Override
@@ -152,6 +132,9 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
             if (isFavorited) {
                 new PasalintiIssaugotaKorepetitoriu().execute(profilioId, prisijungti.currentMokinys.getId());
                 holder.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                list.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, list.size());
             } else {
                 new IssaugotiKorepetitoriu().execute(profilioId, prisijungti.currentMokinys.getId());
                 holder.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24_red);
@@ -262,10 +245,10 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
 
     private class CheckFavoriteAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-        private korepetitoriusCardHolder holder;
+        private IsimintasKorepetitoriusCardHolder holder;
         private int profileId;
 
-        public CheckFavoriteAsyncTask(korepetitoriusCardHolder holder, int profileId) {
+        public CheckFavoriteAsyncTask(IsimintasKorepetitoriusCardHolder holder, int profileId) {
             this.holder = holder;
             this.profileId = profileId;
         }
@@ -289,4 +272,3 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
         }
     }
 }
-

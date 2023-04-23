@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_korepetitoriu_sarasas"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.korepetitorius.sarasas.korepetitoriu_sarasas">
+    android:layout_height="match_parent">
 
-
-    <EditText
-        android:id="@+id/ieskoti"
-        android:layout_width="340dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/rounded_edittext"
-        android:hint="Ieškoti"
-        android:paddingLeft="10dp"
-        android:theme="@style/TextInputLayoutAppearance" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerKorepetitoriu"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/ieskoti"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Ieškoti"
+            android:paddingLeft="10dp"
+            android:theme="@style/TextInputLayoutAppearance" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerKorepetitoriu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/neraKorepetitoriuSarase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Nėra korepetitorių." />
+    </LinearLayout>
+</FrameLayout>

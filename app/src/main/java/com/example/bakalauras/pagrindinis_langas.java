@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.bakalauras.ui.pagrindinis.Pagrindinis;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,8 @@ public class pagrindinis_langas extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_sukurti_profili, R.id.nav_pagrindinis, R.id.nav_zinutes, R.id.nav_ziureti, R.id.nav_kategorija ,R.id.nav_ziureti,R.id.nav_issaugotikop,R.id.nav_manokor,R.id.nav_manomok,
-                R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti, R.id.nav_profilisKorepetitorius, R.id.nav_uzklausosMokiniai, R.id.nav_profilisMokinys, R.id.nav_kategorija)
+                R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti, R.id.nav_profilisKorepetitorius, R.id.nav_uzklausosMokiniai, R.id.nav_profilisMokinys, R.id.nav_kategorija, R.id.nav_issaugotikop,
+                R.id.nav_zinutes, R.id.nav_uzklausosKorepetitoriai)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pagrindinis_langas);
@@ -88,6 +90,42 @@ public class pagrindinis_langas extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
+                    case R.id.nav_pagrindinis:
+                        navController.navigate(R.id.nav_pagrindinis);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_ziureti:
+                        navController.navigate(R.id.nav_ziureti);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_kategorija:
+                        navController.navigate(R.id.nav_kategorija);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_issaugotikop:
+                        navController.navigate(R.id.nav_issaugotikop);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_manokor:
+                        navController.navigate(R.id.nav_manokor);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_manomok:
+                        navController.navigate(R.id.nav_manomok);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_uzklausosMokiniai:
+                        navController.navigate(R.id.nav_uzklausosMokiniai);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_uzklausosKorepetitoriai:
+                        navController.navigate(R.id.nav_uzklausosKorepetitoriai);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_zinutes:
+                        navController.navigate(R.id.nav_zinutes);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
                     case R.id.nav_atsijungti:
                         prisijungti.currentKorepetitorius = null;
                         prisijungti.currentMokinys = null;

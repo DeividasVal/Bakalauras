@@ -17,6 +17,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.zinutes.susirasyti"
+            android:exported="false"
+            android:label="@string/title_activity_susirasyti"
+            android:theme="@style/Theme.Bakalauras.NoActionBar" />
+        <activity
             android:name=".recyclerViewPaspaustasKorepetitorius"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -40,4 +45,5 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
+
 </manifest>

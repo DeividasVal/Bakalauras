@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
@@ -18,6 +19,7 @@ import com.example.bakalauras.ui.uzklausos.mokinio.MokinioUzklausos;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,6 +40,7 @@ public class KorepetitoriausUzklausos extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<KorepetitoriausUzklausaKortele> arrayList;
     private KorepetitoriausUzklausosCardAdapter adapter;
+    private TextView emptyRecycler;
 
     public KorepetitoriausUzklausos() {
         // Required empty public constructor
@@ -64,6 +67,7 @@ public class KorepetitoriausUzklausos extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerKorepetitoriausUzklausos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        emptyRecycler = view.findViewById(R.id.neraKorepetitoriausUzklausu);
 
         arrayList = new ArrayList<KorepetitoriausUzklausaKortele>();
 
@@ -113,8 +117,15 @@ public class KorepetitoriausUzklausos extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            adapter = new KorepetitoriausUzklausosCardAdapter(arrayList, getContext());
-            recyclerView.setAdapter(adapter);
+            if (arrayList.isEmpty()) {
+                emptyRecycler.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+                emptyRecycler.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                adapter = new KorepetitoriausUzklausosCardAdapter(arrayList, getContext());
+                recyclerView.setAdapter(adapter);
+            }
         }
     }
 }

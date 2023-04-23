@@ -234,15 +234,15 @@ public class RedaguotiKorepetitorius extends Fragment {
                 connection.setDoOutput(true);
                 String data;
 
-                data = "korepetitoriaus_id=" + korepetitoriausId + "&korepetitoriaus_adresas=" + adresas + "&korepetitoriaus_miestas=" + miestas + "&korepetitoriaus_mokymo_tipas=" + mokymoTipas + "&korepetitoriaus_val=" + kaina + "&korepetitoriaus_mokymo_tipas=" + mokymoTipas + "&korepetitoriaus_aprasymas=" + bio  + "&korepetitoriaus_istaiga=" + istaiga + "&korepetitoriaus_dalykai_istaigoj=" + dalykas
+                data = "korepetitoriaus_id=" + korepetitoriausId + "&profilio_adresas=" + adresas + "&profilio_miestas=" + miestas + "&profilio_mokymo_tipas=" + mokymoTipas + "&profilio_val=" + kaina + "&profilio_mokymo_tipas=" + mokymoTipas + "&profilio_aprasymas=" + bio  + "&profilio_istaiga=" + istaiga + "&profilio_dalykai_istaigoj=" + dalykas
                 + "&pilnas_korepetitoriaus_vardas=" + vardas + "&korepetitoriaus_vartotojo_vardas=" + vartotojas + "&korepetitoriaus_slaptazodis=" + slaptazodis + "&korepetitoriaus_el_pastas=" + email;
 
                 Gson gson = new Gson();
                 String selectionArrayString = gson.toJson(selectionArray);
-                data += "&korepetitoriaus_prieinamumas=" + URLEncoder.encode(selectionArrayString, "UTF-8");
+                data += "&profilio_prieinamumas=" + URLEncoder.encode(selectionArrayString, "UTF-8");
 
                 String listViewDataString = gson.toJson(listViewData);
-                data += "&korepetitoriaus_dalykai=" + URLEncoder.encode(listViewDataString, "UTF-8");
+                data += "&profilio_dalykai=" + URLEncoder.encode(listViewDataString, "UTF-8");
 
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(data);
@@ -291,20 +291,20 @@ public class RedaguotiKorepetitorius extends Fragment {
                     JSONObject obj = new JSONObject(output);
                     Log.d("response", output);
 
-                    adresas = obj.getString("korepetitoriaus_adresas");
-                    miestas = obj.getString("korepetitoriaus_miestas");
-                    mokymo_tipas = obj.getInt("korepetitoriaus_mokymo_tipas");
-                    valString = obj.getString("korepetitoriaus_val");
-                    aprasymas = obj.getString("korepetitoriaus_aprasymas");
-                    istaigaString = obj.getString("korepetitoriaus_istaiga");
-                    dalykai_istaigoj = obj.getString("korepetitoriaus_dalykai_istaigoj");
+                    adresas = obj.getString("profilio_adresas");
+                    miestas = obj.getString("profilio_miestas");
+                    mokymo_tipas = obj.getInt("profilio_mokymo_tipas");
+                    valString = obj.getString("profilio_val");
+                    aprasymas = obj.getString("profilio_aprasymas");
+                    istaigaString = obj.getString("profilio_istaiga");
+                    dalykai_istaigoj = obj.getString("profilio_dalykai_istaigoj");
 
                     vartotojoVarads = obj.getString("korepetitoriaus_vartotojo_vardas");
                     email = obj.getString("korepetitoriaus_el_pastas");
                     vardas = obj.getString("pilnas_korepetitoriaus_vardas");
                     slaptazodis = obj.getString("korepetitoriaus_slaptazodis");
 
-                    JSONArray prieinamumasJson = obj.getJSONArray("korepetitoriaus_prieinamumas");
+                    JSONArray prieinamumasJson = obj.getJSONArray("profilio_prieinamumas");
                     prieinamumas = new boolean[prieinamumasJson.length()][prieinamumasJson.getJSONArray(0).length()];
                     for (int i = 0; i < prieinamumasJson.length(); i++) {
                         JSONArray rowJson = prieinamumasJson.getJSONArray(i);

@@ -81,6 +81,16 @@ public class PagrindinisCardAdapter extends RecyclerView.Adapter<korepetitoriusP
         {
             holder.ivertinimas.setText(sarasas.getIvertinimas().toString());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, recyclerViewPaspaustasKorepetitorius.class);
+                intent.putExtra("korepetitorius_id", sarasas.getId());
+                intent.putExtra("korepetitorius_vardas", sarasas.getVardas());
+                context.startActivity(intent);
+            }
+        });
     }
 
     private int getRandomPosition() {
@@ -91,7 +101,7 @@ public class PagrindinisCardAdapter extends RecyclerView.Adapter<korepetitoriusP
     @Override
     public int getItemCount() {
         if (list != null) {
-            return 2;
+            return 1;
         }
         else
         {

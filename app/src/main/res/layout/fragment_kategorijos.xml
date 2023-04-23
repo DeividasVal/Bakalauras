@@ -34,6 +34,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/matematikaKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -70,6 +71,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/fizikaKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -106,6 +108,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/chemijaKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -142,6 +145,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/angluKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -178,6 +182,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/lietuviuKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -214,6 +219,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/vokieciuKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -250,6 +256,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/geografijaKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -286,6 +293,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/informatikaKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -322,6 +330,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/muzikaKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -358,12 +367,12 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/istorijaKategorijaFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
 
                     <ImageView
                         android:layout_width="80dp"

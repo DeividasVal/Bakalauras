@@ -1,15 +1,9 @@
-package com.example.bakalauras.ui.pagrindinis;
+package com.example.bakalauras;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,18 +11,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.bakalauras.R;
-import com.example.bakalauras.kategorijos;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriu_sarasas;
 import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardAdapter;
-import com.google.android.material.navigation.NavigationView;
+import com.example.bakalauras.ui.zinutes.susirasyti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -36,29 +26,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import Model.IsimintasKorepetitoriusKortele;
 import Model.KorepetitoriausKortele;
-import Model.KorepetitoriusKortelePagrindinis;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Pagrindinis#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Pagrindinis extends Fragment {
+public class isiminti_korepetitoriai extends Fragment {
 
-    private TextView vardasText;
     private RecyclerView recyclerView;
-    private ArrayList<KorepetitoriusKortelePagrindinis> arrayList;
-    private PagrindinisCardAdapter adapter;
-    private TextView ziuretiKategorijas, ziuretiKorepetitorius, emptyRecycler;
-    private LinearLayout matematika, anglu, informatika, lietuviu;
+    private ArrayList<IsimintasKorepetitoriusKortele> arrayList;
+    private IsimintasKorepetitoriusAdapter adapter;
+    private TextView emptyRecycler;
 
-    public Pagrindinis() {
+    public isiminti_korepetitoriai() {
         // Required empty public constructor
     }
-
-    public static Pagrindinis newInstance() {
-        Pagrindinis fragment = new Pagrindinis();
+    public static isiminti_korepetitoriai newInstance() {
+        isiminti_korepetitoriai fragment = new isiminti_korepetitoriai();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -73,105 +55,32 @@ public class Pagrindinis extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_pagrindinis, container, false);
+       View v = inflater.inflate(R.layout.fragment_isiminti_korepetitoriai, container, false);
 
-        vardasText = v.findViewById(R.id.pagrindinisLangasVartVardas);
-        ziuretiKategorijas = v.findViewById(R.id.ziuretiKategorijas);
-        ziuretiKorepetitorius = v.findViewById(R.id.ziuretiKorepetitorius);
-        matematika = v.findViewById(R.id.matematikaPagrindinisFilter);
-        anglu = v.findViewById(R.id.angluagrindinisFilter);
-        informatika = v.findViewById(R.id.informatikaPagrindinisFilter);
-        lietuviu = v.findViewById(R.id.lietuviuPagrindinisFilter);
-        emptyRecycler = v.findViewById(R.id.neraKorepetitoriuPagrindinis);
-
-        matematika.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("dalykas","matematika");
-
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.nav_ziureti, bundle);
-            }
-        });
-
-        anglu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("dalykas","anglu kalba");
-
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.nav_ziureti, bundle);
-            }
-        });
-
-        informatika.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("dalykas","informatika");
-
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.nav_ziureti, bundle);
-            }
-        });
-
-        lietuviu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("dalykas","lietuviu kalba");
-
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.nav_ziureti, bundle);
-            }
-        });
-
-        ziuretiKategorijas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(Pagrindinis.this)
-                        .navigate(R.id.nav_kategorija);
-            }
-        });
-
-        ziuretiKorepetitorius.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(Pagrindinis.this)
-                        .navigate(R.id.nav_ziureti);
-            }
-        });
-
-        if (prisijungti.currentMokinys != null)
-        {
-            vardasText.setText(prisijungti.currentMokinys.getName());
-        }
-        else
-        {
-            vardasText.setText(prisijungti.currentKorepetitorius.getName());
-        }
-
-        recyclerView = v.findViewById(R.id.recyclerViewPagrindinis);
+        recyclerView = v.findViewById(R.id.recyclerIsimintiKor);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        emptyRecycler = v.findViewById(R.id.neraIsimintuKorepetitoriu);
 
-        arrayList = new ArrayList<KorepetitoriusKortelePagrindinis>();
-        adapter = new PagrindinisCardAdapter(arrayList, getContext());
+        arrayList = new ArrayList<IsimintasKorepetitoriusKortele>();
 
-        GautiProfilioDuomenis task = new GautiProfilioDuomenis();
+        GautiIsimintusKorepetitorius task = new GautiIsimintusKorepetitorius(prisijungti.currentMokinys.getId());
         task.execute();
-
-        return v;
+       return v;
     }
 
-    private class GautiProfilioDuomenis extends AsyncTask<String, String, String> {
+    private class GautiIsimintusKorepetitorius extends AsyncTask<String, String, String> {
+
+        private int mokinioId;
+
+        public GautiIsimintusKorepetitorius(int mokinioId) {
+            this.mokinioId = mokinioId;
+        }
 
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
+                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiIsimintusKorepetitorius.php?mokinio_id=" + mokinioId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -200,6 +109,7 @@ public class Pagrindinis extends Fragment {
                     String dalykaiJoined = TextUtils.join(", ", dalykai);
                     int id = obj.getInt("korepetitoriaus_id");
                     int mokymoBudas = obj.getInt("profilio_mokymo_tipas");
+                    int profilioId = obj.getInt("profilio_id");
 
                     Double average = 0.0;
                     try {
@@ -234,17 +144,17 @@ public class Pagrindinis extends Fragment {
 
                     if (mokymoBudas == 1)
                     {
-                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Gyvai"));
+                        arrayList.add(new IsimintasKorepetitoriusKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai", profilioId));
                         average = 0.0;
                     }
                     else if (mokymoBudas == 2)
                     {
-                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis"));
+                        arrayList.add(new IsimintasKorepetitoriusKortele(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis", profilioId));
                         average = 0.0;
                     }
                     else
                     {
-                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu"));
+                        arrayList.add(new IsimintasKorepetitoriusKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu", profilioId));
                         average = 0.0;
                     }
                 }
@@ -262,7 +172,7 @@ public class Pagrindinis extends Fragment {
             } else {
                 emptyRecycler.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                adapter = new PagrindinisCardAdapter(arrayList, getContext());
+                adapter = new IsimintasKorepetitoriusAdapter(arrayList, getContext());
                 recyclerView.setAdapter(adapter);
             }
         }

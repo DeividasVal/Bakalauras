@@ -12,14 +12,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
 import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniai;
 import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
+import com.example.bakalauras.ui.uzklausos.mokinio.MokinioCardAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -42,6 +45,7 @@ public class MokiniuiPatvirtintiKorepetitoriai extends Fragment {
     private ArrayList<MokiniuiPatvirtintasKorepetitoriusKortele> arrayList;
     private MokiniuiPatvirtintiKorepetitoriaiCardAdapter adapter;
     private String dalykaiJoined;
+    private TextView emptyRecycler;
 
     public MokiniuiPatvirtintiKorepetitoriai() {
     }
@@ -66,6 +70,7 @@ public class MokiniuiPatvirtintiKorepetitoriai extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerMokiniuiPatvirtintiKorepetitoriai);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        emptyRecycler = view.findViewById(R.id.neraKorepetitoriuSarasePatvirtintu);
 
         arrayList = new ArrayList<MokiniuiPatvirtintasKorepetitoriusKortele>();
 
@@ -104,15 +109,15 @@ public class MokiniuiPatvirtintiKorepetitoriai extends Fragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String vardas = obj.getString("pilnas_korepetitoriaus_vardas");
-                    int kaina = obj.getInt("korepetitoriaus_val");
+                    int kaina = obj.getInt("profilio_val");
 
-                    JSONArray dalykaiJson = obj.getJSONArray("korepetitoriaus_dalykai");
+                    JSONArray dalykaiJson = obj.getJSONArray("profilio_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
                     for (int j = 0; j < dalykaiJson.length(); j++) {
                         dalykai.add(dalykaiJson.getString(j));
                     }
                     dalykaiJoined = TextUtils.join(", ", dalykai);
-                    String adresas = obj.getString("korepetitoriaus_adresas");
+                    String adresas = obj.getString("profilio_adresas");
                     int id = obj.getInt("korepetitoriaus_id");
                     int idProfiliaus = obj.getInt("profilio_id");
 
@@ -126,8 +131,15 @@ public class MokiniuiPatvirtintiKorepetitoriai extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            adapter = new MokiniuiPatvirtintiKorepetitoriaiCardAdapter(arrayList, getContext());
-            recyclerView.setAdapter(adapter);
+            if (arrayList.isEmpty()) {
+                emptyRecycler.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+                emptyRecycler.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                adapter = new MokiniuiPatvirtintiKorepetitoriaiCardAdapter(arrayList, getContext());
+                recyclerView.setAdapter(adapter);
+            }
         }
     }
 }

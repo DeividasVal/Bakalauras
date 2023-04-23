@@ -58,7 +58,7 @@
     <LinearLayout
         android:id="@+id/gridas"
         android:layout_width="match_parent"
-        android:layout_height="345dp"
+        android:layout_height="360dp"
         android:orientation="vertical">
 
         <GridLayout
@@ -83,12 +83,12 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/matematikaPagrindinisFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
 
                     <ImageView
                         android:layout_width="80dp"
@@ -119,6 +119,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/lietuviuPagrindinisFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -155,6 +156,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/angluagrindinisFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -191,6 +193,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/informatikaPagrindinisFilter"
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center"
@@ -261,6 +264,14 @@
             android:layout_below="@+id/textView21"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/neraKorepetitoriuPagrindinis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Nėra korepetitorių." />
 
     </LinearLayout>
 

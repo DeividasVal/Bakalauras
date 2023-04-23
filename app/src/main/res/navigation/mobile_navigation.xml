@@ -65,4 +65,14 @@
         android:label="Kategorijos"
         android:name="com.example.bakalauras.kategorijos"
         tools:layout="@layout/fragment_kategorijos" />
+    <fragment
+        android:id="@+id/nav_issaugotikop"
+        android:label="Įsiminti korepetitoriai"
+        android:name="com.example.bakalauras.isiminti_korepetitoriai"
+        tools:layout="@layout/fragment_isiminti_korepetitoriai" />
+    <fragment
+        android:id="@+id/nav_zinutes"
+        android:label="Jūsų žinutės"
+        android:name="com.example.bakalauras.ui.zinutes.zinutes"
+        tools:layout="@layout/fragment_zinutes" />
 </navigation>

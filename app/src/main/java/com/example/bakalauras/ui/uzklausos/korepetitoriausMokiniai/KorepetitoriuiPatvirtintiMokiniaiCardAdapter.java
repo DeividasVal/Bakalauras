@@ -1,6 +1,7 @@
 package com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
+import com.example.bakalauras.prisijungti;
 import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardHolder;
+import com.example.bakalauras.ui.zinutes.susirasyti;
 
 import java.util.ArrayList;
 
@@ -43,7 +46,10 @@ public class KorepetitoriuiPatvirtintiMokiniaiCardAdapter extends RecyclerView.A
         KorepetitoriuiPatvirtintiMokiniaiCardHolder.parasyti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, susirasyti.class);
+                intent.putExtra("dabartinis_id", prisijungti.currentKorepetitorius.getId());
+                intent.putExtra("gavejas_id", sarasas.getMokinioId());
+                context.startActivity(intent);
             }
         });
     }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -49,10 +51,10 @@ public class korepetitoriu_sarasas extends Fragment {
     private ArrayList<KorepetitoriausKortele> arrayList;
     private korepetitoriusCardAdapter adapter;
     private ArrayList<KorepetitoriausKortele> originalList;
-    private TextView ieskoti;
+    private TextView ieskoti, nera;
     private String radioButtonValue = "";
     private Float minValue, maxValue, minValue2, maxValue2;
-
+    private String selectedItem = "";
     public korepetitoriu_sarasas() {
     }
 
@@ -95,6 +97,14 @@ public class korepetitoriu_sarasas extends Fragment {
         ieskoti = v.findViewById(R.id.ieskoti);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        nera = v.findViewById(R.id.neraKorepetitoriuSarase);
+
+        originalList = new ArrayList<>();
+        arrayList = new ArrayList<KorepetitoriausKortele>();
+        adapter = new korepetitoriusCardAdapter(arrayList, getContext());
+
+        GautiProfilioDuomenis task = new GautiProfilioDuomenis();
+        task.execute();
 
         ieskoti.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,12 +122,13 @@ public class korepetitoriu_sarasas extends Fragment {
                 filterData(editable.toString());
             }
         });
-        originalList = new ArrayList<>();
-        arrayList = new ArrayList<KorepetitoriausKortele>();
-        adapter = new korepetitoriusCardAdapter(arrayList, getContext());
 
-        GautiProfilioDuomenis task = new GautiProfilioDuomenis();
-        task.execute();
+        Bundle bundle = getArguments();
+        if (bundle != null)
+        {
+            selectedItem = bundle.getString("dalykas");
+            ieskoti.setText(selectedItem);
+        }
 
         return v;
     }
@@ -160,16 +171,17 @@ public class korepetitoriu_sarasas extends Fragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String vardas = obj.getString("pilnas_korepetitoriaus_vardas");
-                    String kaina = obj.getString("korepetitoriaus_val");
+                    String kaina = obj.getString("profilio_val");
 
-                    JSONArray dalykaiJson = obj.getJSONArray("korepetitoriaus_dalykai");
+                    JSONArray dalykaiJson = obj.getJSONArray("profilio_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
                     for (int j = 0; j < dalykaiJson.length(); j++) {
                         dalykai.add(dalykaiJson.getString(j));
                     }
                     String dalykaiJoined = TextUtils.join(", ", dalykai);
                     int id = obj.getInt("korepetitoriaus_id");
-                    int mokymoBudas = obj.getInt("korepetitoriaus_mokymo_tipas");
+                    int mokymoBudas = obj.getInt("profilio_mokymo_tipas");
+                    int profilioId = obj.getInt("profilio_id");
 
                     Double average = 0.0;
                     try {
@@ -204,17 +216,17 @@ public class korepetitoriu_sarasas extends Fragment {
 
                     if (mokymoBudas == 1)
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai"));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai", profilioId));
                         average = 0.0;
                     }
                     else if (mokymoBudas == 2)
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis"));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis", profilioId));
                         average = 0.0;
                     }
                     else
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu"));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu", profilioId));
                         average = 0.0;
                     }
                 }
@@ -227,8 +239,19 @@ public class korepetitoriu_sarasas extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            adapter = new korepetitoriusCardAdapter(arrayList, getContext());
-            recyclerView.setAdapter(adapter);
+            if (arrayList.isEmpty()) {
+                nera.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+                nera.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                adapter = new korepetitoriusCardAdapter(arrayList, getContext());
+                recyclerView.setAdapter(adapter);
+            }
+            if (selectedItem != null && !selectedItem.isEmpty()) {
+                ieskoti.setText(selectedItem);
+                filterData(selectedItem);
+            }
         }
     }
 

@@ -84,8 +84,10 @@
 
                 <RatingBar
                     android:id="@+id/ratingBarActivity"
+                    android:buttonTint="@android:color/darker_gray"
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
+                    android:progressTint="@color/blue_for_buttons"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="11dp"
@@ -255,11 +257,41 @@
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
                                 android:layout_height="50dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:enabled="false"
                                 android:gravity="center" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:gravity="center" />
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:gravity="center" />
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:gravity="center" />
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
+                                android:layout_height="wrap_content"
+                                android:enabled="false"
+                                android:gravity="center" />
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false"
                                 android:gravity="center" />
@@ -267,30 +299,7 @@
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:gravity="center" />
-
-                            <com.google.android.material.checkbox.MaterialCheckBox
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:gravity="center" />
-
-                            <com.google.android.material.checkbox.MaterialCheckBox
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:gravity="center" />
-
-                            <com.google.android.material.checkbox.MaterialCheckBox
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:gravity="center" />
-
-                            <com.google.android.material.checkbox.MaterialCheckBox
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:enabled="false"
                                 android:gravity="center" />
                         </TableRow>
@@ -304,36 +313,43 @@
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
                                 android:layout_height="50dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
                         </TableRow>
@@ -347,36 +363,43 @@
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="50dp"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
                         </TableRow>
@@ -390,36 +413,43 @@
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="50dp"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
                         </TableRow>
@@ -433,36 +463,43 @@
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="50dp"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
                         </TableRow>
@@ -476,36 +513,43 @@
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="50dp"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
                         </TableRow>
@@ -519,36 +563,43 @@
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="50dp"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
 
                             <com.google.android.material.checkbox.MaterialCheckBox
                                 android:layout_width="100dp"
+                                android:buttonTint="@android:color/darker_gray"
                                 android:layout_height="wrap_content"
                                 android:enabled="false" />
                         </TableRow>

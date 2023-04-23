@@ -181,13 +181,13 @@ public class Korepetitorius_profilis extends Fragment {
                 while ((output = br.readLine()) != null) {
                     JSONObject obj = new JSONObject(output);
                     Log.d("response", output);
-                    adresas = obj.getString("korepetitoriaus_adresas");
-                    miestas = obj.getString("korepetitoriaus_miestas");
-                    tipas = obj.getString("korepetitoriaus_mokymo_tipas");
-                    val = obj.getString("korepetitoriaus_val");
-                    bio = obj.getString("korepetitoriaus_aprasymas");
-                    istaiga = obj.getString("korepetitoriaus_istaiga");
-                    dalykaiIst = obj.getString("korepetitoriaus_dalykai_istaigoj");
+                    adresas = obj.getString("profilio_adresas");
+                    miestas = obj.getString("profilio_miestas");
+                    tipas = obj.getString("profilio_mokymo_tipas");
+                    val = obj.getString("profilio_val");
+                    bio = obj.getString("profilio_aprasymas");
+                    istaiga = obj.getString("profilio_istaiga");
+                    dalykaiIst = obj.getString("profilio_dalykai_istaigoj");
                     if (!obj.isNull("average_ivertinimas")) {
                         ivertinimasVidurkis = obj.getDouble("average_ivertinimas");
                     } else {
@@ -200,14 +200,14 @@ public class Korepetitorius_profilis extends Fragment {
                         invertinimasCount = 0;
                     }
 
-                    JSONArray dalykaiJson = obj.getJSONArray("korepetitoriaus_dalykai");
+                    JSONArray dalykaiJson = obj.getJSONArray("profilio_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
                     for (int i = 0; i < dalykaiJson.length(); i++) {
                         dalykai.add(dalykaiJson.getString(i));
                     }
                     dalykaiJoined = TextUtils.join(", ", dalykai);
 
-                    JSONArray prieinamumasJson = obj.getJSONArray("korepetitoriaus_prieinamumas");
+                    JSONArray prieinamumasJson = obj.getJSONArray("profilio_prieinamumas");
                     prieinamumas = new boolean[prieinamumasJson.length()][prieinamumasJson.getJSONArray(0).length()];
                     for (int i = 0; i < prieinamumasJson.length(); i++) {
                         JSONArray rowJson = prieinamumasJson.getJSONArray(i);
