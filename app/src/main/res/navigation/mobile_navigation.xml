@@ -75,4 +75,14 @@
         android:label="Jūsų žinutės"
         android:name="com.example.bakalauras.ui.zinutes.zinutes"
         tools:layout="@layout/fragment_zinutes" />
+    <fragment
+        android:id="@+id/nav_pammedziagaKorepetitorius"
+        android:label="Mano įkelta pamokų medžiaga"
+        android:name="com.example.bakalauras.ui.failai.korepetitoriaus.korepetitoriaus_failai"
+        tools:layout="@layout/fragment_korepetitoriaus_failai" />
+    <fragment
+        android:id="@+id/nav_pammedziagaMokinys"
+        android:label="Pamokų medžiaga"
+        android:name="com.example.bakalauras.ui.failai.mokinio.mokinio_failai"
+        tools:layout="@layout/fragment_mokinio_failai" />
 </navigation>

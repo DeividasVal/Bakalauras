@@ -11,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardHolder;
+import com.example.bakalauras.ikeltiFailaPopup;
 import com.example.bakalauras.ui.zinutes.susirasyti;
 
 import java.util.ArrayList;
 
-import Model.KorepetitoriausUzklausaKortele;
 import Model.KorepetitoriuiPatvirtintasMokinysKortele;
 
-public class KorepetitoriuiPatvirtintiMokiniaiCardAdapter extends RecyclerView.Adapter<KorepetitoriuiPatvirtintiMokiniaiCardHolder>{
+public class KorepetitoriuiPatvirtintiMokiniaiCardAdapter extends RecyclerView.Adapter<KorepetitoriuiPatvirtintiMokiniaiCardHolder> {
 
     private ArrayList<KorepetitoriuiPatvirtintasMokinysKortele> list;
     private Context context;
@@ -49,6 +48,16 @@ public class KorepetitoriuiPatvirtintiMokiniaiCardAdapter extends RecyclerView.A
                 Intent intent = new Intent(context, susirasyti.class);
                 intent.putExtra("dabartinis_id", prisijungti.currentKorepetitorius.getId());
                 intent.putExtra("gavejas_id", sarasas.getMokinioId());
+                context.startActivity(intent);
+            }
+        });
+
+        KorepetitoriuiPatvirtintiMokiniaiCardHolder.pridetiMedziaga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ikeltiFailaPopup.class);
+                intent.putExtra("korepetitorius_id", prisijungti.currentKorepetitorius.getId());
+                intent.putExtra("mokinio_id", sarasas.getMokinioId());
                 context.startActivity(intent);
             }
         });

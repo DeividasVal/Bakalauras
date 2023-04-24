@@ -27,7 +27,7 @@
             android:title="Kategorijos" />
     </group>
 
-    <item android:title="Placeholder" >
+    <item android:title="Mano mokymasis" >
         <menu android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_issaugotikop"
@@ -36,10 +36,12 @@
 
             <item
                 android:id="@+id/nav_uzklausosMokiniai"
+                android:icon="@drawable/ic_baseline_person_add_alt_1_24"
                 android:title="Užklausos" />
 
             <item
                 android:id="@+id/nav_uzklausosKorepetitoriai"
+                android:icon="@drawable/ic_baseline_person_add_alt_1_24"
                 android:title="Mokinių užklausos" />
 
             <item
@@ -51,7 +53,11 @@
                 android:icon="@drawable/ic_baseline_person_24"
                 android:title="Mano mokiniai" />
             <item
-                android:id="@+id/nav_pammedziaga"
+                android:id="@+id/nav_pammedziagaKorepetitorius"
+                android:icon="@drawable/ic_baseline_topic_24"
+                android:title="Mano įkelta medžiaga" />
+            <item
+                android:id="@+id/nav_pammedziagaMokinys"
                 android:icon="@drawable/ic_baseline_topic_24"
                 android:title="Pamokų medžiaga" />
         </menu>

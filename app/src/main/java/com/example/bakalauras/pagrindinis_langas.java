@@ -1,16 +1,26 @@
 package com.example.bakalauras;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bakalauras.ui.pagrindinis.Pagrindinis;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
@@ -21,6 +31,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bakalauras.databinding.ActivityPagrindinisLangasBinding;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import Model.Korepetitorius;
 import Model.Mokinys;
@@ -44,8 +57,8 @@ public class pagrindinis_langas extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_sukurti_profili, R.id.nav_pagrindinis, R.id.nav_zinutes, R.id.nav_ziureti, R.id.nav_kategorija ,R.id.nav_ziureti,R.id.nav_issaugotikop,R.id.nav_manokor,R.id.nav_manomok,
-                R.id.nav_pammedziaga, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti, R.id.nav_profilisKorepetitorius, R.id.nav_uzklausosMokiniai, R.id.nav_profilisMokinys, R.id.nav_kategorija, R.id.nav_issaugotikop,
-                R.id.nav_zinutes, R.id.nav_uzklausosKorepetitoriai)
+                R.id.nav_pammedziagaMokinys, R.id.nav_redaguotiKor, R.id.nav_redaguotiMokinys, R.id.nav_atsijungti, R.id.nav_profilisKorepetitorius, R.id.nav_uzklausosMokiniai, R.id.nav_profilisMokinys, R.id.nav_kategorija, R.id.nav_issaugotikop,
+                R.id.nav_zinutes, R.id.nav_uzklausosKorepetitoriai, R.id.nav_pammedziagaKorepetitorius)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pagrindinis_langas);
@@ -67,6 +80,7 @@ public class pagrindinis_langas extends AppCompatActivity {
             nav_Menu.findItem(R.id.nav_manokor).setVisible(false);
             nav_Menu.findItem(R.id.nav_profilisMokinys).setVisible(false);
             nav_Menu.findItem(R.id.nav_redaguotiMokinys).setVisible(false);
+            nav_Menu.findItem(R.id.nav_pammedziagaMokinys).setVisible(false);
             nav_Menu.findItem(R.id.nav_issaugotikop).setVisible(false);
             nav_Menu.findItem(R.id.nav_uzklausosMokiniai).setVisible(false);
         }
@@ -80,6 +94,7 @@ public class pagrindinis_langas extends AppCompatActivity {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_profilisKorepetitorius).setVisible(false);
             nav_Menu.findItem(R.id.nav_manomok).setVisible(false);
+            nav_Menu.findItem(R.id.nav_pammedziagaKorepetitorius).setVisible(false);
             nav_Menu.findItem(R.id.nav_redaguotiKor).setVisible(false);
             nav_Menu.findItem(R.id.nav_sukurti_profili).setVisible(false);
             nav_Menu.findItem(R.id.nav_uzklausosKorepetitoriai).setVisible(false);

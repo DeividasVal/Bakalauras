@@ -93,7 +93,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        tools:src="@tools:sample/avatars"/>
+                        android:src="@drawable/matematika"/>
 
                     <TextView
                         android:layout_marginTop="12dp"
@@ -130,7 +130,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        tools:src="@tools:sample/avatars"/>
+                        android:src="@drawable/lietuviu"/>
 
                     <TextView
                         android:layout_marginTop="12dp"
@@ -165,9 +165,9 @@
 
 
                     <ImageView
-                        android:layout_width="80dp"
+                        android:layout_width="100dp"
                         android:layout_height="80dp"
-                        tools:src="@tools:sample/avatars"/>
+                        android:src="@drawable/anglu"/>
 
                     <TextView
                         android:layout_marginTop="12dp"
@@ -204,7 +204,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        tools:src="@tools:sample/avatars"/>
+                        android:src="@drawable/informatika"/>
 
                     <TextView
                         android:layout_marginTop="12dp"

@@ -6,4 +6,19 @@
         <item name="colorControlHighlight">@color/blue_for_primary</item>
         <item name="android:textColorHint">#828A8E</item>
     </style>
+
+    <!-- Define a custom dialog theme -->
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize the dialog window background -->
+        <!-- Customize the dialog title text appearance -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item> <!-- Add this line -->
+        <item name="android:windowTitleStyle">@style/MyDialogTitleStyle</item>
+    </style>
+
+    <!-- Customize the dialog title text appearance -->
+    <style name="MyDialogTitleStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">#D30D0D</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
