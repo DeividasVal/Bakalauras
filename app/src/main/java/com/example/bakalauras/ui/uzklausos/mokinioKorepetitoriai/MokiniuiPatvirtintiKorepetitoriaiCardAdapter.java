@@ -161,7 +161,7 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
                 long currentTimeMillis = System.currentTimeMillis();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 String formattedTime = sdf.format(new Date(currentTimeMillis));
-                URL url = new URL("http://192.168.0.104/PHPscriptai/skelbtiAtsiliepima.php");
+                URL url = new URL("http://192.168.0.105/PHPscriptai/skelbtiAtsiliepima.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -203,7 +203,7 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.104/PHPscriptai/pasalintiUzklausaMokinys.php");
+                URL url = new URL("http://192.168.0.105/PHPscriptai/pasalintiUzklausaMokinys.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

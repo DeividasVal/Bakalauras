@@ -95,7 +95,7 @@ public class mokinio_failai extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiSarasaFailuMokiniui.php?mokinio_id=" + mokinioId);
+                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiSarasaFailuMokiniui.php?mokinio_id=" + mokinioId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

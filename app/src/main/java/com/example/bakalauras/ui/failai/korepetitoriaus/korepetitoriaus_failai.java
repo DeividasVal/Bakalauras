@@ -29,11 +29,6 @@ import java.util.ArrayList;
 import Model.KorepetitoriausFailai;
 import Model.MokinioFailai;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link korepetitoriaus_failai#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class korepetitoriaus_failai extends Fragment {
 
     private RecyclerView recyclerView;
@@ -86,7 +81,7 @@ public class korepetitoriaus_failai extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiSarasaFailuKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriausId);
+                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiSarasaFailuKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriausId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

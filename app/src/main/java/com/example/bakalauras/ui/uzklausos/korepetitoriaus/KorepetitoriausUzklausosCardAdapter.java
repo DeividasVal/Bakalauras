@@ -99,7 +99,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.104/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
+                URL url = new URL("http://192.168.0.105/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

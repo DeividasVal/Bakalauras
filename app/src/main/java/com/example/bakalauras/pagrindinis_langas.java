@@ -141,6 +141,14 @@ public class pagrindinis_langas extends AppCompatActivity {
                         navController.navigate(R.id.nav_zinutes);
                         binding.drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
+                    case R.id.nav_pammedziagaKorepetitorius:
+                        navController.navigate(R.id.nav_pammedziagaKorepetitorius);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_pammedziagaMokinys:
+                        navController.navigate(R.id.nav_pammedziagaMokinys);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
                     case R.id.nav_atsijungti:
                         prisijungti.currentKorepetitorius = null;
                         prisijungti.currentMokinys = null;

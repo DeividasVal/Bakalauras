@@ -184,7 +184,7 @@ public class KorKurtiProfili extends Fragment {
             int korepetitoriausId = (int) params[9];
             URL url;
             try {
-                url = new URL("http://192.168.0.104/PHPscriptai/korepetitoriusKurtiProfili.php");
+                url = new URL("http://192.168.0.105/PHPscriptai/korepetitoriusKurtiProfili.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");

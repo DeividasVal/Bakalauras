@@ -75,10 +75,11 @@ public class susirasyti extends AppCompatActivity {
         dabartinis_id = (int) intent.getSerializableExtra("dabartinis_id");
         gavejo_id = (int) intent.getSerializableExtra("gavejas_id");
 
-        susirasytiCardAdapter adapter = new susirasytiCardAdapter(arrayList, dabartinis_id, this);
-        RecyclerView zinuciuRecyclerView = findViewById(R.id.zinuciuRecyclerView);
-        zinuciuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        zinuciuRecyclerView.setAdapter(adapter);
+        adapter = new susirasytiCardAdapter(arrayList, dabartinis_id, this);
+        recyclerView.setAdapter(adapter);
+
+        GautiZinuciuDuomenis task = new GautiZinuciuDuomenis(dabartinis_id, gavejo_id);
+        task.execute();
 
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,16 +94,34 @@ public class susirasyti extends AppCompatActivity {
                     adapter.notifyItemInserted(arrayList.size() - 1);
                     recyclerView.smoothScrollToPosition(arrayList.size() - 1);
                     editTextChatbox.setText("");
-                    new IssaugotiZinute().execute(Integer.toString(dabartinis_id), Integer.toString(gavejo_id), message, formattedTime);
+                    new IssaugotiZinute(adapter).execute(Integer.toString(dabartinis_id), Integer.toString(gavejo_id), message, formattedTime);
+                    updateEmptyRecycler();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Įveskite žinutę!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
 
-        GautiZinuciuDuomenis task = new GautiZinuciuDuomenis(dabartinis_id, gavejo_id);
-        task.execute();
+    private void updateEmptyRecycler() {
+        if (arrayList.isEmpty()) {
+            emptyRecycler.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            emptyRecycler.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     private class IssaugotiZinute extends AsyncTask<String, Void, String> {
+
+        private susirasytiCardAdapter adapter;
+
+        public IssaugotiZinute(susirasytiCardAdapter adapter) {
+            this.adapter = adapter;
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -112,7 +131,7 @@ public class susirasyti extends AppCompatActivity {
             String laikas = params[3];
             URL url;
             try {
-                url = new URL("http://192.168.0.104/PHPscriptai/iterptiZinute.php");
+                url = new URL("http://192.168.0.105/PHPscriptai/iterptiZinute.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -155,7 +174,7 @@ public class susirasyti extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiZinutes.php?" +
+                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiZinutes.php?" +
                         "gavejo_id=" + gavejoId + "&dabartinis_id=" + prisijungesVartotojas);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

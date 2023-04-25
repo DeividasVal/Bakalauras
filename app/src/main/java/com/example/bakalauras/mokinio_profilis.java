@@ -78,7 +78,7 @@ public class mokinio_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.104/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
+                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
