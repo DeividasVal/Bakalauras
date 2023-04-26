@@ -90,7 +90,7 @@ public class MokiniuiPatvirtintiKorepetitoriai extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiMokiniuiPatvirtintusKorepetitorius.php?mokinio_id=" + mokinioId);
+                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiMokiniuiPatvirtintusKorepetitorius.php?mokinio_id=" + mokinioId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

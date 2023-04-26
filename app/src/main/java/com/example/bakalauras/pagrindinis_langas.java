@@ -1,11 +1,14 @@
 package com.example.bakalauras;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -32,8 +35,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bakalauras.databinding.ActivityPagrindinisLangasBinding;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import Model.Korepetitorius;
 import Model.Mokinys;
@@ -149,11 +159,39 @@ public class pagrindinis_langas extends AppCompatActivity {
                         navController.navigate(R.id.nav_pammedziagaMokinys);
                         binding.drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
+                    case R.id.nav_pasalinti:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(pagrindinis_langas.this);
+                        builder.setTitle("Pašalinti profilį");
+                        builder.setMessage("Ar jūs tikrai norite pašalinti savo profilį?");
+                        builder.setPositiveButton("TAIP", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (prisijungti.currentKorepetitorius != null) {
+                                    PasalintiProfiliKorepetitorius task = new PasalintiProfiliKorepetitorius(prisijungti.currentKorepetitorius.getId());
+                                    task.execute();
+                                } else {
+                                    PasalintiProfiliMokinys task = new PasalintiProfiliMokinys(prisijungti.currentMokinys.getId());
+                                    task.execute();
+                                }
+                                prisijungti.currentKorepetitorius = null;
+                                prisijungti.currentMokinys = null;
+                                Intent intent = new Intent(pagrindinis_langas.this, prisijungti.class);
+                                startActivity(intent);
+                                finishAffinity();
+                            }
+                        });
+                        builder.setNegativeButton("NE", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        return true;
                     case R.id.nav_atsijungti:
                         prisijungti.currentKorepetitorius = null;
                         prisijungti.currentMokinys = null;
-                        Intent intent = new Intent(pagrindinis_langas.this, prisijungti.class);
-                        startActivity(intent);
+                        Intent intent2 = new Intent(pagrindinis_langas.this, prisijungti.class);
+                        startActivity(intent2);
                         finishAffinity();
                         return true;
                     default:
@@ -171,5 +209,89 @@ public class pagrindinis_langas extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_pagrindinis_langas);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private class PasalintiProfiliKorepetitorius extends AsyncTask<String, Void, String> {
+
+        private int korepetitoriausId;
+
+        public PasalintiProfiliKorepetitorius(int korepetitoriausId) {
+            this.korepetitoriausId = korepetitoriausId;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String response = "";
+            try {
+                URL url = new URL("http://192.168.0.103/PHPscriptai/pasalintiProfiliKorepetitorius.php");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                String data = "korepetitoriaus_id=" + korepetitoriausId;
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(data);
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                reader.close();
+                response = sb.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = "Error!";
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private class PasalintiProfiliMokinys extends AsyncTask<String, Void, String> {
+
+        private int mokinioId;
+
+        public PasalintiProfiliMokinys(int mokinioId) {
+            this.mokinioId = mokinioId;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String response = "";
+            try {
+                URL url = new URL("http://192.168.0.103/PHPscriptai/pasalintiProfiliMokinys.php");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                String data = "mokinio_id=" + mokinioId;
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(data);
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                reader.close();
+                response = sb.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = "Error!";
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+        }
     }
 }

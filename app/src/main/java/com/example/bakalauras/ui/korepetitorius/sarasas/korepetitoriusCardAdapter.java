@@ -167,7 +167,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/isimenaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.103/PHPscriptai/isimenaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -205,7 +205,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.103/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -237,7 +237,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
 
     public static boolean paziuretiArIsiminta(int profilioId, int mokinioId) {
         try {
-            URL url = new URL("http://192.168.0.105/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
+            URL url = new URL("http://192.168.0.103/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
             String requestBody = "profilio_id=" + profilioId + "&mokinio_id=" + mokinioId;
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

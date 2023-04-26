@@ -3,7 +3,7 @@
     android:layout_width="370dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_height="430dp"
+    android:layout_height="450dp"
     android:padding="10dp"
     android:layout_gravity="center">
 
@@ -45,18 +45,18 @@
 
             <RatingBar
                 android:id="@+id/ratingBarPopup"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="16dp"
-                android:layout_toEndOf="@+id/textView9"
-                android:isIndicator="false"
-                android:numStars="5"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:transformPivotX="0dp"
+                android:transformPivotY="40dp"
+                android:stepSize="0.5"
+                android:progressTint="@color/blue_for_buttons"
                 android:rating="0"
-                android:scaleX="2"
-                android:scaleY="2"
-                android:stepSize="0.5" />
+                android:numStars="5"
+                android:isIndicator="false"
+                android:layout_toEndOf="@+id/textView9"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
 
         </LinearLayout>
 
@@ -83,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
             android:layout_below="@+id/aprasymasPopup"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_shape"

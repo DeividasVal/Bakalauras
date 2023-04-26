@@ -108,7 +108,7 @@ public class RedaguotiMokinys extends Fragment {
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/mokinysAtnaujintiDuomenis.php");
+                URL url = new URL("http://192.168.0.103/PHPscriptai/mokinysAtnaujintiDuomenis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

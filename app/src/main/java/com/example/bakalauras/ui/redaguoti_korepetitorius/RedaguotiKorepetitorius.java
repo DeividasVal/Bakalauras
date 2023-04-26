@@ -227,7 +227,7 @@ public class RedaguotiKorepetitorius extends Fragment {
 
             URL url;
             try {
-                url = new URL("http://192.168.0.105/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
+                url = new URL("http://192.168.0.103/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -280,7 +280,7 @@ public class RedaguotiKorepetitorius extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiRedagavimuiDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiRedagavimuiDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

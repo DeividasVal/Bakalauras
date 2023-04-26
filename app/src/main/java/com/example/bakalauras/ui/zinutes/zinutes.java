@@ -92,7 +92,7 @@ public class zinutes extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiZinuciuSarasaMokiniui.php?gavejo_id=" + dabartinisId);
+                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiZinuciuSarasaMokiniui.php?gavejo_id=" + dabartinisId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -147,7 +147,7 @@ public class zinutes extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/gautiZinuciuSarasaKorepetitoriui.php?gavejo_id=" + dabartinisId);
+                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiZinuciuSarasaKorepetitoriui.php?gavejo_id=" + dabartinisId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

@@ -140,7 +140,7 @@ public class ikeltiFailaPopup extends AppCompatActivity {
             Uri filepath = (Uri) params[2];
             String pavadinimas = (String) params[3];
             try {
-                URL url = new URL("http://192.168.0.105/PHPscriptai/ikeltiFaila.php");
+                URL url = new URL("http://192.168.0.103/PHPscriptai/ikeltiFaila.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
