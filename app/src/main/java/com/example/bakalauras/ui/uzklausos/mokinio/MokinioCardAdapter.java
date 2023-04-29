@@ -16,9 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardHolder;
+import com.example.bakalauras.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -29,7 +27,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausKortele;
 import Model.MokinioUzklausaKortele;
 
 public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCardHolder>{
@@ -78,7 +75,7 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
         MokinioUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiUzklausaTask task = new PasalintiUzklausaTask(prisijungti.currentMokinys.getId());
+                PasalintiUzklausaTask task = new PasalintiUzklausaTask(Prisijungti.currentMokinys.getId());
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);

@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -41,7 +39,7 @@ import java.util.ArrayList;
 
 import Model.Atsiliepimas;
 
-public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
+public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
     private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText, count, vidurkis, emptyRecycler, atsiliepimuTextView;
     private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined, nuotraukaURL;
@@ -65,7 +63,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         int korepetitorius_id = (int) intent.getSerializableExtra("korepetitorius_id");
         String vardas = (String) intent.getSerializableExtra("korepetitorius_vardas");
         susisiekti = findViewById(R.id.susisiektiButton);
-        if (prisijungti.currentKorepetitorius != null)
+        if (Prisijungti.currentKorepetitorius != null)
         {
             susisiekti.setVisibility(View.GONE);
         }
@@ -73,7 +71,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         susisiekti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new UzklausaTask().execute(prisijungti.currentMokinys.getId(), korepetitorius_id, 0);
+                new UzklausaTask().execute(Prisijungti.currentMokinys.getId(), korepetitorius_id, 0);
             }
         });
 
@@ -203,7 +201,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(recyclerViewPaspaustasKorepetitorius.this, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RecyclerViewPaspaustasKorepetitorius.this, result, Toast.LENGTH_SHORT).show();
             Log.d("uzklausa", result);
         }
     }

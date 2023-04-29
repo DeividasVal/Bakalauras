@@ -21,7 +21,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
+import com.example.bakalauras.Prisijungti;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -117,16 +117,16 @@ public class KorKurtiProfili extends Fragment {
                 {
                     if (gyvai.isChecked() && !nuotoliniu.isChecked())
                     {
-                            new SukurtiProfili().execute(miestas, adresas, 1, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId());
+                            new SukurtiProfili().execute(miestas, adresas, 1, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, Prisijungti.currentKorepetitorius.getId());
 
                     }
                     else if (!gyvai.isChecked() && nuotoliniu.isChecked())
                     {
-                            new SukurtiProfili().execute(miestas, adresas, 2, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId());
+                            new SukurtiProfili().execute(miestas, adresas, 2, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, Prisijungti.currentKorepetitorius.getId());
                     }
                     else
                     {
-                            new SukurtiProfili().execute(miestas, adresas, 3, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId());
+                            new SukurtiProfili().execute(miestas, adresas, 3, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, Prisijungti.currentKorepetitorius.getId());
                    }
                 }
                 else

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -42,20 +40,20 @@ import Model.KorepetitoriausKortele;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link korepetitoriu_sarasas#newInstance} factory method to
+ * Use the {@link KorepetitoriuSarasas#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class korepetitoriu_sarasas extends Fragment {
+public class KorepetitoriuSarasas extends Fragment {
 
     private RecyclerView recyclerView;
     private ArrayList<KorepetitoriausKortele> arrayList;
-    private korepetitoriusCardAdapter adapter;
+    private KorepetitoriusCardAdapter adapter;
     private ArrayList<KorepetitoriausKortele> originalList;
     private TextView ieskoti, nera;
     private String radioButtonValue = "";
     private Float minValue, maxValue, minValue2, maxValue2;
     private String selectedItem = "";
-    public korepetitoriu_sarasas() {
+    public KorepetitoriuSarasas() {
     }
 
     @Override
@@ -75,8 +73,8 @@ public class korepetitoriu_sarasas extends Fragment {
         }
     }
 
-    public static korepetitoriu_sarasas newInstance() {
-        korepetitoriu_sarasas fragment = new korepetitoriu_sarasas();
+    public static KorepetitoriuSarasas newInstance() {
+        KorepetitoriuSarasas fragment = new KorepetitoriuSarasas();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -101,7 +99,7 @@ public class korepetitoriu_sarasas extends Fragment {
 
         originalList = new ArrayList<>();
         arrayList = new ArrayList<KorepetitoriausKortele>();
-        adapter = new korepetitoriusCardAdapter(arrayList, getContext());
+        adapter = new KorepetitoriusCardAdapter(arrayList, getContext());
 
         GautiProfilioDuomenis task = new GautiProfilioDuomenis();
         task.execute();
@@ -246,7 +244,7 @@ public class korepetitoriu_sarasas extends Fragment {
             } else {
                 nera.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                adapter = new korepetitoriusCardAdapter(arrayList, getContext());
+                adapter = new KorepetitoriusCardAdapter(arrayList, getContext());
                 recyclerView.setAdapter(adapter);
             }
             if (selectedItem != null && !selectedItem.isEmpty()) {

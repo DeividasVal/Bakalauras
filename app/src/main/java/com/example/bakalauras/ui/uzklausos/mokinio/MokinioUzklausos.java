@@ -1,6 +1,5 @@
 package com.example.bakalauras.ui.uzklausos.mokinio;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -8,22 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.pagrindinis_langas;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriu_sarasas;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardAdapter;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
+import com.example.bakalauras.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -31,9 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausKortele;
 import Model.MokinioUzklausaKortele;
-import Model.Mokinys;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,7 +67,7 @@ public class MokinioUzklausos extends Fragment {
 
         arrayList = new ArrayList<MokinioUzklausaKortele>();
 
-        GautiUzklausosDuomenis task = new GautiUzklausosDuomenis(prisijungti.currentMokinys.getId());
+        GautiUzklausosDuomenis task = new GautiUzklausosDuomenis(Prisijungti.currentMokinys.getId());
         task.execute();
 
         return view;

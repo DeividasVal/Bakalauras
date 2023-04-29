@@ -1,13 +1,8 @@
 package com.example.bakalauras.ui.failai.mokinio;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,13 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausos;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardAdapter;
-import com.example.bakalauras.ui.zinutes.zinutesCardAdapter;
+import com.example.bakalauras.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,25 +22,21 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Blob;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausUzklausaKortele;
-import Model.MokinioFailai;
-import Model.ZinutesKortele;
-public class mokinio_failai extends Fragment {
+public class MokinioFailai extends Fragment {
 
     private RecyclerView recyclerView;
-    private ArrayList<MokinioFailai> arrayList;
+    private ArrayList<Model.MokinioFailai> arrayList;
     private MokinioFailaiAdapter adapter;
     private TextView emptyRecycler;
 
-    public mokinio_failai() {
+    public MokinioFailai() {
         // Required empty public constructor
     }
 
-    public static mokinio_failai newInstance() {
-        mokinio_failai fragment = new mokinio_failai();
+    public static MokinioFailai newInstance() {
+        MokinioFailai fragment = new MokinioFailai();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -71,9 +58,9 @@ public class mokinio_failai extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         emptyRecycler = v.findViewById(R.id.neraFailuMokiniui);
 
-        arrayList = new ArrayList<MokinioFailai>();
+        arrayList = new ArrayList<Model.MokinioFailai>();
 
-        GautiFailusMokiniui task = new GautiFailusMokiniui(prisijungti.currentMokinys.getId());
+        GautiFailusMokiniui task = new GautiFailusMokiniui(Prisijungti.currentMokinys.getId());
         task.execute();
 
         return v;
@@ -111,7 +98,7 @@ public class mokinio_failai extends Fragment {
                     String laikas_issiusta = obj.getString("laikas_issiusta");
                     String korepetitoriausVardas = obj.getString("pilnas_korepetitoriaus_vardas");
 
-                    arrayList.add(new MokinioFailai(pavadinimas, laikas_issiusta, failas, korepetitoriausVardas));
+                    arrayList.add(new Model.MokinioFailai(pavadinimas, laikas_issiusta, failas, korepetitoriausVardas));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

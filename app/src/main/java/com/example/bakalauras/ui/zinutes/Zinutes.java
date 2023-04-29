@@ -7,17 +7,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
-import com.example.bakalauras.ui.uzklausos.mokinioKorepetitoriai.MokiniuiPatvirtintiKorepetitoriai;
-import com.example.bakalauras.ui.uzklausos.mokinioKorepetitoriai.MokiniuiPatvirtintiKorepetitoriaiCardAdapter;
+import com.example.bakalauras.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,23 +24,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriuiPatvirtintasMokinysKortele;
-import Model.MokiniuiPatvirtintasKorepetitoriusKortele;
 import Model.ZinutesKortele;
 
-public class zinutes extends Fragment {
+public class Zinutes extends Fragment {
 
     private RecyclerView recyclerView;
     private ArrayList<ZinutesKortele> arrayList;
-    private zinutesCardAdapter adapter;
+    private ZinutesCardAdapter adapter;
     private TextView emptyRecycler;
 
-    public zinutes() {
+    public Zinutes() {
         // Required empty public constructor
     }
 
-    public static zinutes newInstance() {
-        zinutes fragment = new zinutes();
+    public static Zinutes newInstance() {
+        Zinutes fragment = new Zinutes();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -68,14 +62,14 @@ public class zinutes extends Fragment {
 
         arrayList = new ArrayList<ZinutesKortele>();
 
-        if (prisijungti.currentMokinys != null)
+        if (Prisijungti.currentMokinys != null)
         {
-            GautiZinuciuSarasaMokinys task = new GautiZinuciuSarasaMokinys(prisijungti.currentMokinys.getId());
+            GautiZinuciuSarasaMokinys task = new GautiZinuciuSarasaMokinys(Prisijungti.currentMokinys.getId());
             task.execute();
         }
         else
         {
-            GautiZinuciuSarasaKorepetitorius task = new GautiZinuciuSarasaKorepetitorius(prisijungti.currentKorepetitorius.getId());
+            GautiZinuciuSarasaKorepetitorius task = new GautiZinuciuSarasaKorepetitorius(Prisijungti.currentKorepetitorius.getId());
             task.execute();
         }
 
@@ -132,7 +126,7 @@ public class zinutes extends Fragment {
             } else {
                 emptyRecycler.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                adapter = new zinutesCardAdapter(arrayList, getContext());
+                adapter = new ZinutesCardAdapter(arrayList, getContext());
                 recyclerView.setAdapter(adapter);
             }
         }
@@ -188,7 +182,7 @@ public class zinutes extends Fragment {
             } else {
                 emptyRecycler.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                adapter = new zinutesCardAdapter(arrayList, getContext());
+                adapter = new ZinutesCardAdapter(arrayList, getContext());
                 recyclerView.setAdapter(adapter);
             }
         }

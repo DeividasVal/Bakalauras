@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardAdapter;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -97,7 +96,7 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, recyclerViewPaspaustasKorepetitorius.class);
+                Intent intent = new Intent(context, RecyclerViewPaspaustasKorepetitorius.class);
                 intent.putExtra("korepetitorius_id", sarasas.getId());
                 intent.putExtra("korepetitorius_vardas", sarasas.getVardas());
                 context.startActivity(intent);
@@ -138,19 +137,19 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            return paziuretiArIsiminta(profilioId, prisijungti.currentMokinys.getId());
+            return paziuretiArIsiminta(profilioId, Prisijungti.currentMokinys.getId());
         }
 
         @Override
         protected void onPostExecute(Boolean isFavorited) {
             if (isFavorited) {
-                new PasalintiIssaugotaKorepetitoriu().execute(profilioId, prisijungti.currentMokinys.getId());
+                new PasalintiIssaugotaKorepetitoriu().execute(profilioId, Prisijungti.currentMokinys.getId());
                 holder.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                 list.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, list.size());
             } else {
-                new IssaugotiKorepetitoriu().execute(profilioId, prisijungti.currentMokinys.getId());
+                new IssaugotiKorepetitoriu().execute(profilioId, Prisijungti.currentMokinys.getId());
                 holder.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24_red);
             }
         }
@@ -269,12 +268,12 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            return paziuretiArIsiminta(profileId, prisijungti.currentMokinys.getId());
+            return paziuretiArIsiminta(profileId, Prisijungti.currentMokinys.getId());
         }
 
         @Override
         protected void onPostExecute(Boolean isFavorited) {
-            if (prisijungti.currentKorepetitorius != null) {
+            if (Prisijungti.currentKorepetitorius != null) {
                 holder.favorite.setVisibility(View.GONE);
             } else {
                 if (isFavorited) {

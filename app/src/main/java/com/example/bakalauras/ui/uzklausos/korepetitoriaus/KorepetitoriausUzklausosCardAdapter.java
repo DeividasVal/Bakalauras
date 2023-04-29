@@ -17,12 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
-import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
-import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardHolder;
-import com.example.bakalauras.ui.uzklausos.mokinio.MokinioCardAdapter;
-import com.example.bakalauras.ui.uzklausos.mokinio.MokinioUzklausosCardHolder;
+import com.example.bakalauras.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -34,7 +29,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import Model.KorepetitoriausUzklausaKortele;
-import Model.MokinioUzklausaKortele;
 
 public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<KorepetitoriausUzklausosCardHolder>{
 
@@ -75,7 +69,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         KorepetitoriausUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(prisijungti.currentKorepetitorius.getId(), 2);
+                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(Prisijungti.currentKorepetitorius.getId(), 2);
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);
@@ -85,7 +79,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         KorepetitoriausUzklausosCardHolder.patvirtinti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(prisijungti.currentKorepetitorius.getId(), 1);
+                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(Prisijungti.currentKorepetitorius.getId(), 1);
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);

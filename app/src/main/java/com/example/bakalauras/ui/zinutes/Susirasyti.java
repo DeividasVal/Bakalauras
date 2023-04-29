@@ -5,33 +5,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.registruotis;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausos;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardAdapter;
-import com.example.bakalauras.ui.uzklausos.mokinioKorepetitoriai.MokiniuiPatvirtintiKorepetitoriaiCardAdapter;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -43,15 +30,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import Model.KorepetitoriausUzklausaKortele;
-import Model.MokiniuiPatvirtintasKorepetitoriusKortele;
 import Model.Zinutes;
 
-public class susirasyti extends AppCompatActivity {
+public class Susirasyti extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<Zinutes> arrayList;
-    private susirasytiCardAdapter adapter;
+    private SusirasytiCardAdapter adapter;
     private int dabartinis_id, gavejo_id;
     private EditText editTextChatbox;
     private Button buttonSend;
@@ -75,7 +60,7 @@ public class susirasyti extends AppCompatActivity {
         dabartinis_id = (int) intent.getSerializableExtra("dabartinis_id");
         gavejo_id = (int) intent.getSerializableExtra("gavejas_id");
 
-        adapter = new susirasytiCardAdapter(arrayList, dabartinis_id, this);
+        adapter = new SusirasytiCardAdapter(arrayList, dabartinis_id, this);
         recyclerView.setAdapter(adapter);
 
         GautiZinuciuDuomenis task = new GautiZinuciuDuomenis(dabartinis_id, gavejo_id);
@@ -117,9 +102,9 @@ public class susirasyti extends AppCompatActivity {
 
     private class IssaugotiZinute extends AsyncTask<String, Void, String> {
 
-        private susirasytiCardAdapter adapter;
+        private SusirasytiCardAdapter adapter;
 
-        public IssaugotiZinute(susirasytiCardAdapter adapter) {
+        public IssaugotiZinute(SusirasytiCardAdapter adapter) {
             this.adapter = adapter;
         }
 
@@ -213,7 +198,7 @@ public class susirasyti extends AppCompatActivity {
             } else {
                 emptyRecycler.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                adapter = new susirasytiCardAdapter(arrayList, dabartinis_id, getApplicationContext());
+                adapter = new SusirasytiCardAdapter(arrayList, dabartinis_id, getApplicationContext());
                 recyclerView.setAdapter(adapter);
             }
         }

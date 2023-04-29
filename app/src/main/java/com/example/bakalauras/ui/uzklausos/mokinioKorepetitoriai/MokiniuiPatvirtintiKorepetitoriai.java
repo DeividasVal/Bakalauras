@@ -8,21 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniai;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
-import com.example.bakalauras.ui.uzklausos.mokinio.MokinioCardAdapter;
+import com.example.bakalauras.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -30,8 +25,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausKortele;
-import Model.KorepetitoriuiPatvirtintasMokinysKortele;
 import Model.MokiniuiPatvirtintasKorepetitoriusKortele;
 
 /**
@@ -74,7 +67,7 @@ public class MokiniuiPatvirtintiKorepetitoriai extends Fragment {
 
         arrayList = new ArrayList<MokiniuiPatvirtintasKorepetitoriusKortele>();
 
-        GautiPatvirtintusKorepetitoriusTask task = new GautiPatvirtintusKorepetitoriusTask(prisijungti.currentMokinys.getId());
+        GautiPatvirtintusKorepetitoriusTask task = new GautiPatvirtintusKorepetitoriusTask(Prisijungti.currentMokinys.getId());
         task.execute();
 
         return view;

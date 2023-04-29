@@ -14,11 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ikeltiFailaPopup;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardAdapter;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardHolder;
-import com.example.bakalauras.ui.zinutes.susirasyti;
+import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.IkeltiFailaPopup;
+import com.example.bakalauras.ui.zinutes.Susirasyti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -65,8 +63,8 @@ public class KorepetitoriuiPatvirtintiMokiniaiCardAdapter extends RecyclerView.A
         KorepetitoriuiPatvirtintiMokiniaiCardHolder.parasyti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, susirasyti.class);
-                intent.putExtra("dabartinis_id", prisijungti.currentKorepetitorius.getId());
+                Intent intent = new Intent(context, Susirasyti.class);
+                intent.putExtra("dabartinis_id", Prisijungti.currentKorepetitorius.getId());
                 intent.putExtra("gavejas_id", sarasas.getMokinioId());
                 context.startActivity(intent);
             }
@@ -75,8 +73,8 @@ public class KorepetitoriuiPatvirtintiMokiniaiCardAdapter extends RecyclerView.A
         KorepetitoriuiPatvirtintiMokiniaiCardHolder.pridetiMedziaga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ikeltiFailaPopup.class);
-                intent.putExtra("korepetitorius_id", prisijungti.currentKorepetitorius.getId());
+                Intent intent = new Intent(context, IkeltiFailaPopup.class);
+                intent.putExtra("korepetitorius_id", Prisijungti.currentKorepetitorius.getId());
                 intent.putExtra("mokinio_id", sarasas.getMokinioId());
                 context.startActivity(intent);
             }

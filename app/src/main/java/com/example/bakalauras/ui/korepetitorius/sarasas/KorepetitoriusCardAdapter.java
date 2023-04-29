@@ -19,8 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
+import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.RecyclerViewPaspaustasKorepetitorius;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -33,14 +33,14 @@ import java.util.ArrayList;
 
 import Model.KorepetitoriausKortele;
 
-class korepetitoriusCardHolder extends RecyclerView.ViewHolder {
+class KorepetitoriusCardHolder extends RecyclerView.ViewHolder {
 
     public TextView vardas, kaina, dalykai, budasKortele, ivertinimas;
     public Button favorite;
     public ImageView zvaigzde, pfp;
 
 
-    public korepetitoriusCardHolder(@NonNull View itemView) {
+    public KorepetitoriusCardHolder(@NonNull View itemView) {
         super(itemView);
 
         vardas = itemView.findViewById(R.id.vardasKortele);
@@ -54,30 +54,30 @@ class korepetitoriusCardHolder extends RecyclerView.ViewHolder {
     }
 }
 
-public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitoriusCardHolder> {
+public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<KorepetitoriusCardHolder> {
 
     private ArrayList<KorepetitoriausKortele> list;
     private Context context;
 
-    public korepetitoriusCardAdapter(ArrayList<KorepetitoriausKortele> list, Context context) {
+    public KorepetitoriusCardAdapter(ArrayList<KorepetitoriausKortele> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public korepetitoriusCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public KorepetitoriusCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_korepetitorius_item, parent, false);
 
-        return new korepetitoriusCardHolder(view);
+        return new KorepetitoriusCardHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull korepetitoriusCardHolder holder, int position) {
+    public void onBindViewHolder(@NonNull KorepetitoriusCardHolder holder, int position) {
         KorepetitoriausKortele sarasas = list.get(position);
 
-        if (prisijungti.currentMokinys != null)
+        if (Prisijungti.currentMokinys != null)
         {
             new CheckFavoriteAsyncTask(holder, sarasas.getProfilioId()).execute();
 
@@ -89,7 +89,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
             });
         }
 
-        if (prisijungti.currentKorepetitorius != null)
+        if (Prisijungti.currentKorepetitorius != null)
         {
             holder.favorite.setVisibility(View.GONE);
         }
@@ -117,7 +117,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, recyclerViewPaspaustasKorepetitorius.class);
+                Intent intent = new Intent(context, RecyclerViewPaspaustasKorepetitorius.class);
                 intent.putExtra("korepetitorius_id", sarasas.getId());
                 intent.putExtra("korepetitorius_vardas", sarasas.getVardas());
                 context.startActivity(intent);
@@ -143,26 +143,26 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
 
     class PaziuretiArIsimintaAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-        private korepetitoriusCardHolder holder;
+        private KorepetitoriusCardHolder holder;
         private int profilioId;
 
-        public PaziuretiArIsimintaAsyncTask(korepetitoriusCardHolder holder, int profilioId) {
+        public PaziuretiArIsimintaAsyncTask(KorepetitoriusCardHolder holder, int profilioId) {
             this.holder = holder;
             this.profilioId = profilioId;
         }
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            return paziuretiArIsiminta(profilioId, prisijungti.currentMokinys.getId());
+            return paziuretiArIsiminta(profilioId, Prisijungti.currentMokinys.getId());
         }
 
         @Override
         protected void onPostExecute(Boolean isFavorited) {
             if (isFavorited) {
-                new PasalintiIssaugotaKorepetitoriu().execute(profilioId, prisijungti.currentMokinys.getId());
+                new PasalintiIssaugotaKorepetitoriu().execute(profilioId, Prisijungti.currentMokinys.getId());
                 holder.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
             } else {
-                new IssaugotiKorepetitoriu().execute(profilioId, prisijungti.currentMokinys.getId());
+                new IssaugotiKorepetitoriu().execute(profilioId, Prisijungti.currentMokinys.getId());
                 holder.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_24_red);
             }
         }
@@ -271,22 +271,22 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
 
     private class CheckFavoriteAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
-        private korepetitoriusCardHolder holder;
+        private KorepetitoriusCardHolder holder;
         private int profileId;
 
-        public CheckFavoriteAsyncTask(korepetitoriusCardHolder holder, int profileId) {
+        public CheckFavoriteAsyncTask(KorepetitoriusCardHolder holder, int profileId) {
             this.holder = holder;
             this.profileId = profileId;
         }
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            return paziuretiArIsiminta(profileId, prisijungti.currentMokinys.getId());
+            return paziuretiArIsiminta(profileId, Prisijungti.currentMokinys.getId());
         }
 
         @Override
         protected void onPostExecute(Boolean isFavorited) {
-            if (prisijungti.currentKorepetitorius != null) {
+            if (Prisijungti.currentKorepetitorius != null) {
                 holder.favorite.setVisibility(View.GONE);
             } else {
                 if (isFavorited) {

@@ -18,9 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.popup_atsiliepimas;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.zinutes.susirasyti;
+import com.example.bakalauras.PopupAtsiliepimas;
+import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.zinutes.Susirasyti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -72,7 +72,7 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         MokiniuiPatvirtintiKorepetitoriaiCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiKorepetitoriuTask task = new PasalintiKorepetitoriuTask(prisijungti.currentMokinys.getId());
+                PasalintiKorepetitoriuTask task = new PasalintiKorepetitoriuTask(Prisijungti.currentMokinys.getId());
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);
@@ -83,8 +83,8 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         MokiniuiPatvirtintiKorepetitoriaiCardHolder.parasyti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, susirasyti.class);
-                intent.putExtra("dabartinis_id", prisijungti.currentMokinys.getId());
+                Intent intent = new Intent(context, Susirasyti.class);
+                intent.putExtra("dabartinis_id", Prisijungti.currentMokinys.getId());
                 intent.putExtra("gavejas_id", sarasas.getKorepetitoriausId());
                 context.startActivity(intent);
             }
@@ -93,8 +93,8 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         MokiniuiPatvirtintiKorepetitoriaiCardHolder.ivertinti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, popup_atsiliepimas.class);
-                intent.putExtra("mokinio_id", prisijungti.currentMokinys.getId());
+                Intent intent = new Intent(context, PopupAtsiliepimas.class);
+                intent.putExtra("mokinio_id", Prisijungti.currentMokinys.getId());
                 intent.putExtra("profilio_id", sarasas.getProfiliausId());
                 intent.putExtra("korepetitoriaus_id", sarasas.getKorepetitoriausId());
                 context.startActivity(intent);

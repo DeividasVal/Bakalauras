@@ -13,8 +13,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bakalauras.ui.korepetitorius.KorKurtiProfili;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -26,7 +24,7 @@ import java.net.URL;
 import Model.Korepetitorius;
 import Model.Mokinys;
 
-public class prisijungti extends AppCompatActivity {
+public class Prisijungti extends AppCompatActivity {
 
     private TextView registerText;
     private Button login;
@@ -77,7 +75,7 @@ public class prisijungti extends AppCompatActivity {
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), registruotis.class);
+                Intent intent = new Intent(getApplicationContext(), Registruotis.class);
                 startActivity(intent);
                 finish();
             }
@@ -182,7 +180,7 @@ public class prisijungti extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Mokinys result) {
-            Intent intent = new Intent(getApplicationContext(), pagrindinis_langas.class);
+            Intent intent = new Intent(getApplicationContext(), PagrindinisLangas.class);
             intent.putExtra("mokinys", result);
             startActivity(intent);
         }
@@ -221,7 +219,7 @@ public class prisijungti extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Korepetitorius result) {
-            Intent intent = new Intent(getApplicationContext(), pagrindinis_langas.class);
+            Intent intent = new Intent(getApplicationContext(), PagrindinisLangas.class);
             intent.putExtra("korepetitorius", result);
             startActivity(intent);
         }

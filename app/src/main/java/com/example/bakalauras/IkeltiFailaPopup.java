@@ -1,24 +1,18 @@
 package com.example.bakalauras;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.bakalauras.ui.zinutes.susirasyti;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class ikeltiFailaPopup extends AppCompatActivity {
+public class IkeltiFailaPopup extends AppCompatActivity {
 
     private Button select, uzdaryti, ikelti;
     private Uri filepath;

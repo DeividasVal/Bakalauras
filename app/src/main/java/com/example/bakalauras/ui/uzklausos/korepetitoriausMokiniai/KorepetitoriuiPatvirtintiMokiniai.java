@@ -1,40 +1,22 @@
 package com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.FileUtils;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausos;
-import com.example.bakalauras.ui.uzklausos.korepetitoriaus.KorepetitoriausUzklausosCardAdapter;
+import com.example.bakalauras.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -42,7 +24,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausUzklausaKortele;
 import Model.KorepetitoriuiPatvirtintasMokinysKortele;
 
 public class KorepetitoriuiPatvirtintiMokiniai extends Fragment {
@@ -80,7 +61,7 @@ public class KorepetitoriuiPatvirtintiMokiniai extends Fragment {
 
         arrayList = new ArrayList<KorepetitoriuiPatvirtintasMokinysKortele>();
 
-        GautiPatvirtintusMokiniusTask task = new GautiPatvirtintusMokiniusTask(prisijungti.currentKorepetitorius.getId());
+        GautiPatvirtintusMokiniusTask task = new GautiPatvirtintusMokiniusTask(Prisijungti.currentKorepetitorius.getId());
         task.execute();
 
         return view;

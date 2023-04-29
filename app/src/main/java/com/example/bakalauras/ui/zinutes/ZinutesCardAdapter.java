@@ -15,9 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
-import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardHolder;
+import com.example.bakalauras.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -25,111 +23,111 @@ import java.util.ArrayList;
 
 import Model.ZinutesKortele;
 
-public class zinutesCardAdapter extends RecyclerView.Adapter<zinutesCardHolder>{
+public class ZinutesCardAdapter extends RecyclerView.Adapter<ZinutesCardHolder>{
     private ArrayList<ZinutesKortele> list;
     private Context context;
 
-    public zinutesCardAdapter(ArrayList<ZinutesKortele> list, Context context) {
+    public ZinutesCardAdapter(ArrayList<ZinutesKortele> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public zinutesCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ZinutesCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_zinutes, parent, false);
 
-        return new zinutesCardHolder(view);
+        return new ZinutesCardHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull zinutesCardHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ZinutesCardHolder holder, @SuppressLint("RecyclerView") int position) {
         ZinutesKortele sarasas = list.get(position);
 
-        if (prisijungti.currentKorepetitorius != null)
+        if (Prisijungti.currentKorepetitorius != null)
         {
-            zinutesCardHolder.vardas.setText("Mokinys: " + sarasas.getVardas());
+            ZinutesCardHolder.vardas.setText("Mokinys: " + sarasas.getVardas());
             if (sarasas.getNuotrauka().isEmpty())
             {
-                zinutesCardHolder.pfp.setImageResource(R.drawable.ic_baseline_account_circle_24);
+                ZinutesCardHolder.pfp.setImageResource(R.drawable.ic_baseline_account_circle_24);
             }
             else
             {
                 Picasso.get()
                         .load("http://192.168.0.101/PHPscriptai/" + sarasas.getNuotrauka())
                         .transform(new CircleTransform())
-                        .into(zinutesCardHolder.pfp);
+                        .into(ZinutesCardHolder.pfp);
             }
         }
         else
         {
-            zinutesCardHolder.vardas.setText("Korepetitorius: " + sarasas.getVardas());
+            ZinutesCardHolder.vardas.setText("Korepetitorius: " + sarasas.getVardas());
             Picasso.get()
                     .load("http://192.168.0.101/PHPscriptai/" + sarasas.getNuotrauka())
                     .transform(new CircleTransform())
-                    .into(zinutesCardHolder.pfp);
+                    .into(ZinutesCardHolder.pfp);
         }
 
-        if (prisijungti.currentKorepetitorius != null)
+        if (Prisijungti.currentKorepetitorius != null)
         {
-            if (prisijungti.currentKorepetitorius.getId() == sarasas.getSiuntejoId())
+            if (Prisijungti.currentKorepetitorius.getId() == sarasas.getSiuntejoId())
             {
-                zinutesCardHolder.zinutesTekstas.setText(sarasas.getZinutes());
+                ZinutesCardHolder.zinutesTekstas.setText(sarasas.getZinutes());
             }
             else
             {
-                zinutesCardHolder.zinutesTekstas.setText("Jūs: " + sarasas.getZinutes());
+                ZinutesCardHolder.zinutesTekstas.setText("Jūs: " + sarasas.getZinutes());
             }
         }
         else
         {
-            if (prisijungti.currentMokinys.getId() == sarasas.getSiuntejoId())
+            if (Prisijungti.currentMokinys.getId() == sarasas.getSiuntejoId())
             {
-                zinutesCardHolder.zinutesTekstas.setText(sarasas.getZinutes());
+                ZinutesCardHolder.zinutesTekstas.setText(sarasas.getZinutes());
 
             }
             else
             {
-                zinutesCardHolder.zinutesTekstas.setText("Jūs: " + sarasas.getZinutes());
+                ZinutesCardHolder.zinutesTekstas.setText("Jūs: " + sarasas.getZinutes());
             }
         }
 
-        zinutesCardHolder.laikas.setText(sarasas.getLaikas());
+        ZinutesCardHolder.laikas.setText(sarasas.getLaikas());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (prisijungti.currentKorepetitorius != null)
+                if (Prisijungti.currentKorepetitorius != null)
                 {
-                    if (prisijungti.currentKorepetitorius.getId() == sarasas.getSiuntejoId())
+                    if (Prisijungti.currentKorepetitorius.getId() == sarasas.getSiuntejoId())
                     {
-                        Intent intent = new Intent(context, susirasyti.class);
-                        intent.putExtra("dabartinis_id", prisijungti.currentKorepetitorius.getId());
+                        Intent intent = new Intent(context, Susirasyti.class);
+                        intent.putExtra("dabartinis_id", Prisijungti.currentKorepetitorius.getId());
                         intent.putExtra("gavejas_id", sarasas.getGavejoId());
                         context.startActivity(intent);
                     }
                     else
                     {
-                        Intent intent = new Intent(context, susirasyti.class);
-                        intent.putExtra("dabartinis_id", prisijungti.currentKorepetitorius.getId());
+                        Intent intent = new Intent(context, Susirasyti.class);
+                        intent.putExtra("dabartinis_id", Prisijungti.currentKorepetitorius.getId());
                         intent.putExtra("gavejas_id", sarasas.getSiuntejoId());
                         context.startActivity(intent);
                     }
                 }
                 else
                 {
-                    if (prisijungti.currentMokinys.getId() == sarasas.getSiuntejoId())
+                    if (Prisijungti.currentMokinys.getId() == sarasas.getSiuntejoId())
                     {
-                        Intent intent = new Intent(context, susirasyti.class);
-                        intent.putExtra("dabartinis_id", prisijungti.currentMokinys.getId());
+                        Intent intent = new Intent(context, Susirasyti.class);
+                        intent.putExtra("dabartinis_id", Prisijungti.currentMokinys.getId());
                         intent.putExtra("gavejas_id", sarasas.getGavejoId());
                         context.startActivity(intent);
                     }
                     else
                     {
-                        Intent intent = new Intent(context, susirasyti.class);
-                        intent.putExtra("dabartinis_id", prisijungti.currentMokinys.getId());
+                        Intent intent = new Intent(context, Susirasyti.class);
+                        intent.putExtra("dabartinis_id", Prisijungti.currentMokinys.getId());
                         intent.putExtra("gavejas_id", sarasas.getSiuntejoId());
                         context.startActivity(intent);
                     }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import Model.Zinutes;
 
-public class susirasytiCardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SusirasytiCardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final static int MESSAGE_SENT = 0;
     private final static int MESSAGE_RECEIVED = 1;
@@ -23,7 +23,7 @@ public class susirasytiCardAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private int dabartinisId;
     private Context context;
 
-    public susirasytiCardAdapter(ArrayList<Zinutes> zinuciuList, int dabartinisId, Context context) {
+    public SusirasytiCardAdapter(ArrayList<Zinutes> zinuciuList, int dabartinisId, Context context) {
         this.zinuciuList = zinuciuList;
         this.dabartinisId = dabartinisId;
         this.context = context;

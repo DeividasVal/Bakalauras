@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.redaguoti_mokinys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.bakalauras.R;
+import com.example.bakalauras.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -33,7 +35,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class activity_redaguoti_mokinys extends AppCompatActivity {
+public class RedaguotiMokinys extends AppCompatActivity {
 
     private EditText vardasText, emailText, vartotojoVardasText, slaptazodisText, patvirtintiPassText;
     private Button pakeisti;
@@ -56,14 +58,14 @@ public class activity_redaguoti_mokinys extends AppCompatActivity {
         pakeisti = findViewById(R.id.redaguotiMokinysButton);
         pfp = findViewById(R.id.redaguotiMokinysPFP);
 
-        if (prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
+        if (Prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
         {
             pfp.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
         }
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + prisijungti.currentMokinys.getMokinioNuotrauka())
+                    .load("http://192.168.0.101/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
         }
@@ -92,11 +94,11 @@ public class activity_redaguoti_mokinys extends AppCompatActivity {
                 } else if (!slaptazodis.isEmpty() && !patvirtinti.isEmpty() && !slaptazodis.equals(patvirtinti)) {
                     Toast.makeText(getApplicationContext(), "Slaptazodziai nesutampa", Toast.LENGTH_SHORT).show();
                 } else {
-                    PakeistiMokinioDuomenis task = new PakeistiMokinioDuomenis(prisijungti.currentMokinys.getId(), vardas, email, vartotojoVardas, slaptazodis, filepath);
+                    PakeistiMokinioDuomenis task = new PakeistiMokinioDuomenis(Prisijungti.currentMokinys.getId(), vardas, email, vartotojoVardas, slaptazodis, filepath);
                     task.execute();
-                    prisijungti.currentKorepetitorius = null;
-                    prisijungti.currentMokinys = null;
-                    Intent intent = new Intent(getApplicationContext(), prisijungti.class);
+                    Prisijungti.currentKorepetitorius = null;
+                    Prisijungti.currentMokinys = null;
+                    Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
                     startActivity(intent);
                 }
             }

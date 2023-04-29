@@ -17,16 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
-import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
+import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.RecyclerViewPaspaustasKorepetitorius;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import Model.KorepetitoriausKortele;
 import Model.KorepetitoriusKortelePagrindinis;
 
 class korepetitoriusPagrindinisCardHolder extends RecyclerView.ViewHolder {
@@ -71,7 +69,7 @@ public class PagrindinisCardAdapter extends RecyclerView.Adapter<korepetitoriusP
     @Override
     public void onBindViewHolder(@NonNull korepetitoriusPagrindinisCardHolder holder, int position) {
         KorepetitoriusKortelePagrindinis sarasas = list.get(getRandomPosition());
-        if (prisijungti.currentKorepetitorius != null)
+        if (Prisijungti.currentKorepetitorius != null)
         {
             holder.favorite.setVisibility(View.GONE);
         }
@@ -98,7 +96,7 @@ public class PagrindinisCardAdapter extends RecyclerView.Adapter<korepetitoriusP
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, recyclerViewPaspaustasKorepetitorius.class);
+                Intent intent = new Intent(context, RecyclerViewPaspaustasKorepetitorius.class);
                 intent.putExtra("korepetitorius_id", sarasas.getId());
                 intent.putExtra("korepetitorius_vardas", sarasas.getVardas());
                 context.startActivity(intent);

@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.failai.mokinio.MokinioFailaiAdapter;
-import com.example.bakalauras.ui.failai.mokinio.mokinio_failai;
+import com.example.bakalauras.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,22 +24,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausFailai;
-import Model.MokinioFailai;
-
-public class korepetitoriaus_failai extends Fragment {
+public class KorepetitoriausFailai extends Fragment {
 
     private RecyclerView recyclerView;
-    private ArrayList<KorepetitoriausFailai> arrayList;
+    private ArrayList<Model.KorepetitoriausFailai> arrayList;
     private KorepetitoriausFailaiAdapter adapter;
     private TextView emptyRecycler;
 
-    public korepetitoriaus_failai() {
+    public KorepetitoriausFailai() {
         // Required empty public constructor
     }
 
-    public static korepetitoriaus_failai newInstance() {
-        korepetitoriaus_failai fragment = new korepetitoriaus_failai();
+    public static KorepetitoriausFailai newInstance() {
+        KorepetitoriausFailai fragment = new KorepetitoriausFailai();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -63,9 +58,9 @@ public class korepetitoriaus_failai extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         emptyRecycler = v.findViewById(R.id.neraFailuKorepetitoriui);
 
-        arrayList = new ArrayList<KorepetitoriausFailai>();
+        arrayList = new ArrayList<Model.KorepetitoriausFailai>();
 
-        GautiFailusKorepetitoriui task = new GautiFailusKorepetitoriui(prisijungti.currentKorepetitorius.getId());
+        GautiFailusKorepetitoriui task = new GautiFailusKorepetitoriui(Prisijungti.currentKorepetitorius.getId());
         task.execute();
 
         return v;
@@ -104,7 +99,7 @@ public class korepetitoriaus_failai extends Fragment {
                     String mokinioVardas = obj.getString("pilnas_mokinio_vardas");
                     int failoId = obj.getInt("pam_mok_id");
 
-                    arrayList.add(new KorepetitoriausFailai(pavadinimas, laikas_issiusta, failas, mokinioVardas, failoId));
+                    arrayList.add(new Model.KorepetitoriausFailai(pavadinimas, laikas_issiusta, failas, mokinioVardas, failoId));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

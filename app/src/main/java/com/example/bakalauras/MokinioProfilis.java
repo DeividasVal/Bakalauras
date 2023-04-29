@@ -5,61 +5,48 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
-import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardHolder;
-import com.example.bakalauras.ui.korepetitorius.Korepetitorius_profilis;
-import com.squareup.picasso.Callback;
+import com.example.bakalauras.ui.redaguoti_mokinys.RedaguotiMokinys;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link mokinio_profilis#newInstance} factory method to
+ * Use the {@link MokinioProfilis#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class mokinio_profilis extends Fragment {
+public class MokinioProfilis extends Fragment {
 
     private TextView vardasText, pastasText, vartotojoVardasText;
     private String vardas, pastas, vartotojoVardas;
     private ImageView pfp;
     private Button redaguoti;
 
-    public mokinio_profilis() {
+    public MokinioProfilis() {
         // Required empty public constructor
     }
 
-    public static mokinio_profilis newInstance() {
-        mokinio_profilis fragment = new mokinio_profilis();
+    public static MokinioProfilis newInstance() {
+        MokinioProfilis fragment = new MokinioProfilis();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -81,17 +68,17 @@ public class mokinio_profilis extends Fragment {
         pfp = v.findViewById(R.id.mokinioPFPProfilis);
         redaguoti = v.findViewById(R.id.RedaguotiButton);
 
-        UzpildytiProfiliMokinio task = new UzpildytiProfiliMokinio(prisijungti.currentMokinys.getId());
+        UzpildytiProfiliMokinio task = new UzpildytiProfiliMokinio(Prisijungti.currentMokinys.getId());
         task.execute();
 
-        if (prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
+        if (Prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
         {
             pfp.setImageResource(R.drawable.ic_baseline_account_circle_24);
         }
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + prisijungti.currentMokinys.getMokinioNuotrauka())
+                    .load("http://192.168.0.101/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
         }
@@ -99,7 +86,7 @@ public class mokinio_profilis extends Fragment {
         redaguoti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), activity_redaguoti_mokinys.class);
+                Intent intent = new Intent(getContext(), RedaguotiMokinys.class);
                 startActivity(intent);
             }
         });

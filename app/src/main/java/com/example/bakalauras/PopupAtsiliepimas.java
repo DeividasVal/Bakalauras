@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class popup_atsiliepimas extends AppCompatActivity {
+public class PopupAtsiliepimas extends AppCompatActivity {
 
     private int mokinio_id, korepetitoriaus_id, profilio_id;
     private Button skelbti;
@@ -52,7 +52,7 @@ public class popup_atsiliepimas extends AppCompatActivity {
                     task.execute();
                     finish();
                 } else {
-                    Toast.makeText(popup_atsiliepimas.this, "Parašykite atsiliepimą!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PopupAtsiliepimas.this, "Parašykite atsiliepimą!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -114,7 +114,7 @@ public class popup_atsiliepimas extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String response) {
-            Toast.makeText(popup_atsiliepimas.this, response, Toast.LENGTH_SHORT).show();
+            Toast.makeText(PopupAtsiliepimas.this, response, Toast.LENGTH_SHORT).show();
         }
     }
 }

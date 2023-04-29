@@ -3,7 +3,6 @@ package com.example.bakalauras.ui.failai.korepetitoriaus;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.failai.mokinio.MokinioFailaiAdapter;
-import com.example.bakalauras.ui.failai.mokinio.MokinioFailaiCardHolder;
-import com.example.bakalauras.ui.uzklausos.mokinioKorepetitoriai.MokiniuiPatvirtintiKorepetitoriaiCardAdapter;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -30,7 +21,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import Model.KorepetitoriausFailai;
-import Model.MokinioFailai;
 
 public class KorepetitoriausFailaiAdapter extends RecyclerView.Adapter<KorepetitoriausFailaiCardHolder>{
 

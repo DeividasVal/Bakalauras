@@ -13,19 +13,19 @@ import android.widget.LinearLayout;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link kategorijos#newInstance} factory method to
+ * Use the {@link Kategorijos#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class kategorijos extends Fragment {
+public class Kategorijos extends Fragment {
 
     private LinearLayout matematika, anglu, informatika, lietuviu, vokieciu, istorija, chemija, fizika, geografija, muzika;
 
-    public kategorijos() {
+    public Kategorijos() {
         // Required empty public constructor
     }
 
-    public static kategorijos newInstance() {
-        kategorijos fragment = new kategorijos();
+    public static Kategorijos newInstance() {
+        Kategorijos fragment = new Kategorijos();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

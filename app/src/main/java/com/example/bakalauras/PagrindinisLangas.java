@@ -1,20 +1,14 @@
 package com.example.bakalauras;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.media.Image;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bakalauras.ui.pagrindinis.Pagrindinis;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -37,15 +28,10 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.bakalauras.databinding.ActivityPagrindinisLangasBinding;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -55,7 +41,7 @@ import java.util.concurrent.ExecutionException;
 import Model.Korepetitorius;
 import Model.Mokinys;
 
-public class pagrindinis_langas extends AppCompatActivity {
+public class PagrindinisLangas extends AppCompatActivity {
 
     private TextView prisijungesVardas, prisijungesPastas;
     private ImageView pfp;
@@ -96,7 +82,7 @@ public class pagrindinis_langas extends AppCompatActivity {
             prisijungesVardas.setText(korepetitorius.getName());
             prisijungesPastas.setText(korepetitorius.getEmail());
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
+                    .load("http://192.168.0.101/PHPscriptai/" + Prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
             navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -110,14 +96,14 @@ public class pagrindinis_langas extends AppCompatActivity {
         else
         {
             pfp = header.findViewById(R.id.headerPFP);
-            if (prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
+            if (Prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
             {
                 pfp.setImageResource(R.drawable.ic_baseline_account_circle_24);
             }
             else
             {
                 Picasso.get()
-                        .load("http://192.168.0.101/PHPscriptai/" + prisijungti.currentMokinys.getMokinioNuotrauka())
+                        .load("http://192.168.0.101/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                         .transform(new CircleTransform())
                         .into(pfp);
             }
@@ -180,7 +166,7 @@ public class pagrindinis_langas extends AppCompatActivity {
                         binding.drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
                     case R.id.nav_profilisKorepetitorius:
-                        PaziuretiArYraProfilis task = new PaziuretiArYraProfilis(prisijungti.currentKorepetitorius.getId());
+                        PaziuretiArYraProfilis task = new PaziuretiArYraProfilis(Prisijungti.currentKorepetitorius.getId());
                         task.execute();
                         boolean result = false;
                         try {
@@ -207,21 +193,21 @@ public class pagrindinis_langas extends AppCompatActivity {
                         binding.drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
                     case R.id.nav_pasalinti:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(pagrindinis_langas.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PagrindinisLangas.this);
                         builder.setTitle("Pašalinti profilį");
                         builder.setMessage("Ar jūs tikrai norite pašalinti savo profilį?");
                         builder.setPositiveButton("TAIP", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                if (prisijungti.currentKorepetitorius != null) {
-                                    PasalintiProfiliKorepetitorius task = new PasalintiProfiliKorepetitorius(prisijungti.currentKorepetitorius.getId());
+                                if (Prisijungti.currentKorepetitorius != null) {
+                                    PasalintiProfiliKorepetitorius task = new PasalintiProfiliKorepetitorius(Prisijungti.currentKorepetitorius.getId());
                                     task.execute();
                                 } else {
-                                    PasalintiProfiliMokinys task = new PasalintiProfiliMokinys(prisijungti.currentMokinys.getId());
+                                    PasalintiProfiliMokinys task = new PasalintiProfiliMokinys(Prisijungti.currentMokinys.getId());
                                     task.execute();
                                 }
-                                prisijungti.currentKorepetitorius = null;
-                                prisijungti.currentMokinys = null;
-                                Intent intent = new Intent(pagrindinis_langas.this, prisijungti.class);
+                                Prisijungti.currentKorepetitorius = null;
+                                Prisijungti.currentMokinys = null;
+                                Intent intent = new Intent(PagrindinisLangas.this, Prisijungti.class);
                                 startActivity(intent);
                                 finishAffinity();
                             }
@@ -235,14 +221,14 @@ public class pagrindinis_langas extends AppCompatActivity {
                         dialog.show();
                         return true;
                     case R.id.nav_atsijungti:
-                        prisijungti.currentKorepetitorius = null;
-                        prisijungti.currentMokinys = null;
-                        Intent intent2 = new Intent(pagrindinis_langas.this, prisijungti.class);
+                        Prisijungti.currentKorepetitorius = null;
+                        Prisijungti.currentMokinys = null;
+                        Intent intent2 = new Intent(PagrindinisLangas.this, Prisijungti.class);
                         startActivity(intent2);
                         finishAffinity();
                         return true;
                     default:
-                        NavController navController = Navigation.findNavController(pagrindinis_langas.this, R.id.nav_host_fragment_content_pagrindinis_langas);
+                        NavController navController = Navigation.findNavController(PagrindinisLangas.this, R.id.nav_host_fragment_content_pagrindinis_langas);
                         NavigationUI.onNavDestinationSelected(item, navController);
                         binding.drawerLayout.closeDrawer(GravityCompat.START);
                         return true;

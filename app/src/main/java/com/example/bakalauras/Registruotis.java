@@ -12,8 +12,6 @@ import android.graphics.Shader;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -21,14 +19,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -36,11 +29,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class registruotis extends AppCompatActivity {
+public class Registruotis extends AppCompatActivity {
 
     private EditText usernameField, passwordField, emailField, fullnameField;
     private TextView loginTextField;
@@ -67,7 +59,7 @@ public class registruotis extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setType("*/*");
+                intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Image"), 1);
             }
@@ -84,7 +76,7 @@ public class registruotis extends AppCompatActivity {
                     fullname = String.valueOf(fullnameField.getText());
                     if (!username.equals("") && !password.equals("") && !email.equals("") && !fullname.equals("")) {
                         new RegisterTask().execute(username, password, email, fullname, "registracijaMokinys", filepath);
-                        Intent intent = new Intent(getApplicationContext(), prisijungti.class);
+                        Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -99,7 +91,7 @@ public class registruotis extends AppCompatActivity {
                     if (!username.equals("") && !password.equals("") && !email.equals("") && !fullname.equals("")) {
                         if (filepath != null) {
                             new RegisterTask().execute(username, password, email, fullname, "registracijaKorepetitorius", filepath);
-                            Intent intent = new Intent(getApplicationContext(), prisijungti.class);
+                            Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
                             startActivity(intent);
                             finish();
                         } else {
@@ -116,7 +108,7 @@ public class registruotis extends AppCompatActivity {
         loginTextField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentLogin = new Intent(getApplicationContext(), prisijungti.class);
+                Intent intentLogin = new Intent(getApplicationContext(), Prisijungti.class);
                 startActivity(intentLogin);
                 finish();
             }
@@ -326,7 +318,7 @@ public class registruotis extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Log.d("asdasdasdasd", result);
-            Toast.makeText(registruotis.this, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Registruotis.this, result, Toast.LENGTH_SHORT).show();
         }
     }
 }

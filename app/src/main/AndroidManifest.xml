@@ -19,35 +19,35 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".activity_redaguoti_korepetitorius"
+            android:name=".ui.redaguoti_korepetitorius.RedaguotiKorepetitorius"
             android:exported="false" />
         <activity
-            android:name=".activity_redaguoti_mokinys"
+            android:name=".ui.redaguoti_mokinys.RedaguotiMokinys"
             android:exported="false" />
         <activity
-            android:name=".popup_atsiliepimas"
+            android:name=".PopupAtsiliepimas"
             android:exported="false"
             android:theme="@style/MyDialogTheme" />
         <activity
-            android:name=".ikeltiFailaPopup"
+            android:name=".IkeltiFailaPopup"
             android:exported="false"
             android:theme="@style/MyDialogTheme" />
         <activity
-            android:name=".ui.zinutes.susirasyti"
+            android:name=".ui.zinutes.Susirasyti"
             android:exported="false"
             android:label="@string/title_activity_susirasyti"
             android:theme="@style/Theme.Bakalauras.NoActionBar" />
         <activity
-            android:name=".recyclerViewPaspaustasKorepetitorius"
+            android:name=".RecyclerViewPaspaustasKorepetitorius"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".pagrindinis_langas"
+            android:name=".PagrindinisLangas"
             android:exported="false"
             android:label="@string/title_activity_pagrindinis_langas"
             android:theme="@style/Theme.Bakalauras.NoActionBar" />
         <activity
-            android:name=".prisijungti"
+            android:name=".Prisijungti"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
@@ -57,7 +57,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".registruotis"
+            android:name=".Registruotis"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>

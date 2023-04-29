@@ -13,12 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardAdapter;
-import com.example.bakalauras.ui.zinutes.susirasyti;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,20 +23,19 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import Model.IsimintasKorepetitoriusKortele;
-import Model.KorepetitoriausKortele;
 
-public class isiminti_korepetitoriai extends Fragment {
+public class IsimintiKorepetitoriai extends Fragment {
 
     private RecyclerView recyclerView;
     private ArrayList<IsimintasKorepetitoriusKortele> arrayList;
     private IsimintasKorepetitoriusAdapter adapter;
     private TextView emptyRecycler;
 
-    public isiminti_korepetitoriai() {
+    public IsimintiKorepetitoriai() {
         // Required empty public constructor
     }
-    public static isiminti_korepetitoriai newInstance() {
-        isiminti_korepetitoriai fragment = new isiminti_korepetitoriai();
+    public static IsimintiKorepetitoriai newInstance() {
+        IsimintiKorepetitoriai fragment = new IsimintiKorepetitoriai();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -64,7 +59,7 @@ public class isiminti_korepetitoriai extends Fragment {
 
         arrayList = new ArrayList<IsimintasKorepetitoriusKortele>();
 
-        GautiIsimintusKorepetitorius task = new GautiIsimintusKorepetitorius(prisijungti.currentMokinys.getId());
+        GautiIsimintusKorepetitorius task = new GautiIsimintusKorepetitorius(Prisijungti.currentMokinys.getId());
         task.execute();
        return v;
     }

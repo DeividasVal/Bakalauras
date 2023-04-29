@@ -26,9 +26,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.activity_redaguoti_korepetitorius;
-import com.example.bakalauras.activity_redaguoti_mokinys;
-import com.example.bakalauras.prisijungti;
+import com.example.bakalauras.ui.redaguoti_korepetitorius.RedaguotiKorepetitorius;
+import com.example.bakalauras.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -106,16 +105,16 @@ public class Korepetitorius_profilis extends Fragment {
 
         arrayList = new ArrayList<Atsiliepimas>();
 
-        UzpildytiProfili task = new UzpildytiProfili(prisijungti.currentKorepetitorius.getId());
+        UzpildytiProfili task = new UzpildytiProfili(Prisijungti.currentKorepetitorius.getId());
         task.execute();
 
-        UzkrautiAtsiliepimus task2 = new UzkrautiAtsiliepimus(prisijungti.currentKorepetitorius.getId());
+        UzkrautiAtsiliepimus task2 = new UzkrautiAtsiliepimus(Prisijungti.currentKorepetitorius.getId());
         task2.execute();
 
         redaguoti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), activity_redaguoti_korepetitorius.class);
+                Intent intent = new Intent(getContext(), RedaguotiKorepetitorius.class);
                 startActivity(intent);
             }
         });
@@ -249,7 +248,7 @@ public class Korepetitorius_profilis extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            vardasText.setText(prisijungti.currentKorepetitorius.getName());
+            vardasText.setText(Prisijungti.currentKorepetitorius.getName());
             dalykaiText.setText("Dalykai: " + dalykaiJoined);
             adresasText.setText(adresas + ", " + miestas);
             if (Integer.parseInt(tipas) == 1)

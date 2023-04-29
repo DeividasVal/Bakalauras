@@ -1,12 +1,9 @@
 package com.example.bakalauras.ui.pagrindinis;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -21,11 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.kategorijos;
-import com.example.bakalauras.prisijungti;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriu_sarasas;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardAdapter;
-import com.google.android.material.navigation.NavigationView;
+import com.example.bakalauras.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +29,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.KorepetitoriausKortele;
 import Model.KorepetitoriusKortelePagrindinis;
 
 /**
@@ -144,13 +136,13 @@ public class Pagrindinis extends Fragment {
             }
         });
 
-        if (prisijungti.currentMokinys != null)
+        if (Prisijungti.currentMokinys != null)
         {
-            vardasText.setText(prisijungti.currentMokinys.getName());
+            vardasText.setText(Prisijungti.currentMokinys.getName());
         }
         else
         {
-            vardasText.setText(prisijungti.currentKorepetitorius.getName());
+            vardasText.setText(Prisijungti.currentKorepetitorius.getName());
         }
 
         recyclerView = v.findViewById(R.id.recyclerViewPagrindinis);
