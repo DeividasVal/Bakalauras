@@ -34,9 +34,9 @@ import java.util.Locale;
 
 public class ikeltiFailaPopup extends AppCompatActivity {
 
-    Button select, uzdaryti, ikelti;
-    Uri filepath;
-    TextView failoPav, pavadinimas;
+    private Button select, uzdaryti, ikelti;
+    private Uri filepath;
+    private TextView failoPav, pavadinimas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +140,7 @@ public class ikeltiFailaPopup extends AppCompatActivity {
             Uri filepath = (Uri) params[2];
             String pavadinimas = (String) params[3];
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/ikeltiFaila.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/ikeltiFaila.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -223,4 +223,5 @@ public class ikeltiFailaPopup extends AppCompatActivity {
             Log.d("IkeltiFaila", result);
             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
         }
-}}
+    }
+}

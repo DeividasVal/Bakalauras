@@ -96,7 +96,7 @@ public class KorepetitoriuiPatvirtintiMokiniai extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiKorepetitoriuiPatvirtintusMokinius.php?korepetitoriaus_id=" + korepetitoriausId);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriuiPatvirtintusMokinius.php?korepetitoriaus_id=" + korepetitoriausId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -115,8 +115,9 @@ public class KorepetitoriuiPatvirtintiMokiniai extends Fragment {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String vardasMokinio = obj.getString("pilnas_mokinio_vardas");
                     int mokinioId = obj.getInt("mokinio_id");
+                    String mokinioNuotrauka = obj.getString("mokinio_nuotrauka");
 
-                    arrayList.add(new KorepetitoriuiPatvirtintasMokinysKortele(vardasMokinio, mokinioId));
+                    arrayList.add(new KorepetitoriuiPatvirtintasMokinysKortele(vardasMokinio, mokinioId, mokinioNuotrauka));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

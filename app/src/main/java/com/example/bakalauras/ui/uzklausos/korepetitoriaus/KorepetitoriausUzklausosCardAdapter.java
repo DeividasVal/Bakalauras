@@ -2,6 +2,10 @@ package com.example.bakalauras.ui.uzklausos.korepetitoriaus;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
 import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
+import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
+import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardHolder;
 import com.example.bakalauras.ui.uzklausos.mokinio.MokinioCardAdapter;
 import com.example.bakalauras.ui.uzklausos.mokinio.MokinioUzklausosCardHolder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -51,6 +59,18 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         KorepetitoriausUzklausaKortele sarasas = list.get(position);
 
         KorepetitoriausUzklausosCardHolder.mokinioVardas.setText("Mokinys: " + sarasas.getVardasMokinio());
+
+        if (sarasas.getMokinioNuotrauka().isEmpty())
+        {
+            KorepetitoriausUzklausosCardHolder.pfp.setImageResource(R.drawable.ic_baseline_account_circle_24);
+        }
+        else
+        {
+            Picasso.get()
+                    .load("http://192.168.0.101/PHPscriptai/" + sarasas.getMokinioNuotrauka())
+                    .transform(new CircleTransform())
+                    .into(KorepetitoriausUzklausosCardHolder.pfp);
+        }
 
         KorepetitoriausUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +119,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -128,6 +148,41 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
             Log.d("kor", response);
             notifyDataSetChanged();
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

@@ -1,8 +1,16 @@
 package com.example.bakalauras;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
@@ -10,11 +18,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
+import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardHolder;
 import com.example.bakalauras.ui.korepetitorius.Korepetitorius_profilis;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +38,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +51,8 @@ public class mokinio_profilis extends Fragment {
 
     private TextView vardasText, pastasText, vartotojoVardasText;
     private String vardas, pastas, vartotojoVardas;
-
+    private ImageView pfp;
+    private Button redaguoti;
 
     public mokinio_profilis() {
         // Required empty public constructor
@@ -60,9 +78,31 @@ public class mokinio_profilis extends Fragment {
         vardasText = v.findViewById(R.id.vardasMokinys);
         pastasText = v.findViewById(R.id.emailMokinys);
         vartotojoVardasText = v.findViewById(R.id.vartotojoMokinys);
+        pfp = v.findViewById(R.id.mokinioPFPProfilis);
+        redaguoti = v.findViewById(R.id.RedaguotiButton);
 
         UzpildytiProfiliMokinio task = new UzpildytiProfiliMokinio(prisijungti.currentMokinys.getId());
         task.execute();
+
+        if (prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
+        {
+            pfp.setImageResource(R.drawable.ic_baseline_account_circle_24);
+        }
+        else
+        {
+            Picasso.get()
+                    .load("http://192.168.0.101/PHPscriptai/" + prisijungti.currentMokinys.getMokinioNuotrauka())
+                    .transform(new CircleTransform())
+                    .into(pfp);
+        }
+
+        redaguoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), activity_redaguoti_mokinys.class);
+                startActivity(intent);
+            }
+        });
 
         return v;
     }
@@ -78,7 +118,7 @@ public class mokinio_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -104,6 +144,41 @@ public class mokinio_profilis extends Fragment {
             vardasText.setText(vardas);
             pastasText.setText(pastas);
             vartotojoVardasText.setText(vartotojoVardas);
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

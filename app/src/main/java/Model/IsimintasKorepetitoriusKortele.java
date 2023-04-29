@@ -9,6 +9,15 @@ public class IsimintasKorepetitoriusKortele {
     private Double ivertinimas;
     private String mokymoBudas;
     private int profilioId;
+    private String korepetitoriausNuotrauka;
+
+    public String getKorepetitoriausNuotrauka() {
+        return korepetitoriausNuotrauka;
+    }
+
+    public void setKorepetitoriausNuotrauka(String korepetitoriausNuotrauka) {
+        this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
+    }
 
     public int getProfilioId() {
         return profilioId;
@@ -74,5 +83,16 @@ public class IsimintasKorepetitoriusKortele {
         this.ivertinimas = ivertinimas;
         this.mokymoBudas = mokymoBudas;
         this.profilioId = profilioId;
+    }
+
+    public IsimintasKorepetitoriusKortele(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas, int profilioId, String korepetitoriausNuotrauka) {
+        this.vardas = vardas;
+        this.kaina = kaina;
+        this.dalykai = dalykai;
+        this.id = id;
+        this.ivertinimas = ivertinimas;
+        this.mokymoBudas = mokymoBudas;
+        this.profilioId = profilioId;
+        this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
     }
 }

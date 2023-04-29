@@ -81,7 +81,7 @@ public class korepetitoriaus_failai extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiSarasaFailuKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriausId);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiSarasaFailuKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriausId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

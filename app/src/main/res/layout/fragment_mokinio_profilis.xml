@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.redaguoti_mokinys.RedaguotiMokinys"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -13,9 +12,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/mokinioPFPProfilis"
             android:layout_width="wrap_content"
             android:layout_height="126dp"
+            android:background="@drawable/pfp_circle"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_account_circle_24"/>
 
@@ -79,5 +79,15 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="4dp"/>
+
+    <Button
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:background="@drawable/button_shape"
+        android:id="@+id/RedaguotiButton"
+        android:layout_marginTop="16dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Redaguoti" />
 
 </LinearLayout>

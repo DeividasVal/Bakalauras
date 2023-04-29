@@ -5,6 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -20,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +44,7 @@ import Model.Atsiliepimas;
 public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
     private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText, count, vidurkis, emptyRecycler, atsiliepimuTextView;
-    private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined;
+    private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined, nuotraukaURL;
     private TableLayout uzpildyti;
     private boolean[][] prieinamumas;
     private Button susisiekti;
@@ -46,6 +54,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
     private Double ivertinimasVidurkis;
     private int invertinimasCount;
     private RatingBar ratingBar;
+    private ImageView pfp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +91,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBarActivity);
         emptyRecycler = findViewById(R.id.neraAtsiliepimuActivity);
         atsiliepimuTextView = findViewById(R.id.textView21);
+        pfp = findViewById(R.id.imageView4);
 
         recyclerView = findViewById(R.id.recyclerViewProfilisReviewsPaspaustas);
         recyclerView.setHasFixedSize(true);
@@ -107,7 +117,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -132,8 +142,9 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
                     double ivertinimas = obj.getDouble("ivertinimas");
                     String laikas = obj.getString("laikas");
                     String vardasMokinio = obj.getString("pilnas_mokinio_vardas");
+                    String mokinioNuotrauka = obj.getString("mokinio_nuotrauka");
 
-                    arrayList.add(new Atsiliepimas(vardasMokinio, mokinioId, profilioId, korId, atsiliepimoTekstas, ivertinimas, laikas));
+                    arrayList.add(new Atsiliepimas(vardasMokinio, mokinioId, profilioId, korId, atsiliepimoTekstas, ivertinimas, laikas, mokinioNuotrauka));
 
                 }
             } catch (Exception e) {
@@ -165,7 +176,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             int busena = params[2];
 
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/uzklausaMokytis.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/uzklausaMokytis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -210,7 +221,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -227,6 +238,7 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
                     bio = obj.getString("profilio_aprasymas");
                     istaiga = obj.getString("profilio_istaiga");
                     dalykaiIst = obj.getString("profilio_dalykai_istaigoj");
+                    nuotraukaURL = obj.getString("korepetitoriaus_nuotrauka");
 
                     if (!obj.isNull("average_ivertinimas")) {
                         ivertinimasVidurkis = obj.getDouble("average_ivertinimas");
@@ -265,6 +277,10 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+            Picasso.get()
+                    .load("http://192.168.0.101/PHPscriptai/" + nuotraukaURL)
+                    .transform(new CircleTransform())
+                    .into(pfp);
             vardasText.setText(vardas);
             dalykaiText.setText("Dalykai: " + dalykaiJoined);
             adresasText.setText(adresas + ", " + miestas);
@@ -303,6 +319,41 @@ public class recyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
                     }
                 }
             }
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

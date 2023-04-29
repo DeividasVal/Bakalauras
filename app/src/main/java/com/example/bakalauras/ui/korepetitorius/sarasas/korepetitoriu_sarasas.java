@@ -152,7 +152,7 @@ public class korepetitoriu_sarasas extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -172,6 +172,7 @@ public class korepetitoriu_sarasas extends Fragment {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String vardas = obj.getString("pilnas_korepetitoriaus_vardas");
                     String kaina = obj.getString("profilio_val");
+                    String nuotraukosURL = obj.getString("korepetitoriaus_nuotrauka");
 
                     JSONArray dalykaiJson = obj.getJSONArray("profilio_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
@@ -185,7 +186,7 @@ public class korepetitoriu_sarasas extends Fragment {
 
                     Double average = 0.0;
                     try {
-                        URL url2 = new URL("http://192.168.0.103/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
+                        URL url2 = new URL("http://192.168.0.101/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
                         HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
                         conn2.setRequestMethod("GET");
                         conn2.setRequestProperty("Accept", "application/json");
@@ -216,17 +217,17 @@ public class korepetitoriu_sarasas extends Fragment {
 
                     if (mokymoBudas == 1)
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai", profilioId));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai", profilioId, nuotraukosURL));
                         average = 0.0;
                     }
                     else if (mokymoBudas == 2)
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis", profilioId));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis", profilioId, nuotraukosURL));
                         average = 0.0;
                     }
                     else
                     {
-                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu", profilioId));
+                        arrayList.add(new KorepetitoriausKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu", profilioId, nuotraukosURL));
                         average = 0.0;
                     }
                 }

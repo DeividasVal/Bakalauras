@@ -18,7 +18,7 @@
         android:padding="20dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentStart="true"
@@ -31,7 +31,7 @@
             android:id="@+id/vardasKortelePatvirtintoKorepetitoriaus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignBottom="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
@@ -40,13 +40,13 @@
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
             android:textStyle="bold"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             android:gravity="center|left"
             android:text="Vardas Pavardė"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -58,11 +58,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             android:gravity="top|left"
             android:text="Dalykai: "
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             app:layout_constraintTop_toBottomOf="@+id/vardasKortelePatvirtintoKorepetitoriaus" />
 
         <TextView
@@ -73,11 +73,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             android:gravity="top|left"
             android:text="Adresas"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             app:layout_constraintTop_toBottomOf="@+id/dalykaiPatvirtinti" />
 
         <TextView
@@ -88,52 +88,53 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             android:gravity="top|left"
             android:text="Kaina"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="18sp"
             app:fontFamily="sans-serif-black"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/mokiniuiPatvirtintasKorepetitoriusKortele"
             app:layout_constraintTop_toBottomOf="@+id/adresasPatvirtintasKorepetitorius" />
 
         <Button
             android:id="@+id/buttonAtšauktiPatvirtintasKorepetitorius"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_shape_uzklausa_atsaukti"
-            android:text="Atšaukti"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/ic_baseline_highlight_off_24"
             app:backgroundTint="#F44336"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kainaPatvirtintasKorepetitorius" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/mokinysParasyti"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/button_shape_uzklausa_atsaukti"
-            android:text="Parašyti"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/ic_baseline_message_24"
+            app:backgroundTint="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kainaPatvirtintasKorepetitorius" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/ĮvertintiButton" />
 
         <Button
             android:id="@+id/ĮvertintiButton"
-            android:layout_width="320dp"
+            android:layout_width="250dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
             android:background="@drawable/button_shape"
             android:text="Įvertinti"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/mokinysParasyti"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAtšauktiPatvirtintasKorepetitorius" />
+            app:layout_constraintTop_toBottomOf="@+id/kainaPatvirtintasKorepetitorius" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

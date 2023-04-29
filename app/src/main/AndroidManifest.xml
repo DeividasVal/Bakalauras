@@ -19,6 +19,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity_redaguoti_korepetitorius"
+            android:exported="false" />
+        <activity
+            android:name=".activity_redaguoti_mokinys"
+            android:exported="false" />
+        <activity
             android:name=".popup_atsiliepimas"
             android:exported="false"
             android:theme="@style/MyDialogTheme" />

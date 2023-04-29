@@ -9,6 +9,15 @@ public class Atsiliepimas {
     private String tekstas;
     private Double ivertinimas;
     private String laikas;
+    private String mokinioNuotrauka;
+
+    public String getMokinioNuotrauka() {
+        return mokinioNuotrauka;
+    }
+
+    public void setMokinioNuotrauka(String mokinioNuotrauka) {
+        this.mokinioNuotrauka = mokinioNuotrauka;
+    }
 
     public String getVardas() {
         return vardas;
@@ -70,6 +79,17 @@ public class Atsiliepimas {
         this.tekstas = tekstas;
         this.ivertinimas = ivertinimas;
         this.laikas = laikas;
+    }
+
+    public Atsiliepimas(String vardas, int skelbejoID, int profilioID, int korepetitoriausID, String tekstas, Double ivertinimas, String laikas, String mokinioNuotrauka) {
+        this.vardas = vardas;
+        this.skelbejoID = skelbejoID;
+        this.profilioID = profilioID;
+        this.korepetitoriausID = korepetitoriausID;
+        this.tekstas = tekstas;
+        this.ivertinimas = ivertinimas;
+        this.laikas = laikas;
+        this.mokinioNuotrauka = mokinioNuotrauka;
     }
 
     public void setLaikas(String laikas) {

@@ -54,7 +54,7 @@ public class MokinioFailaiAdapter extends RecyclerView.Adapter<MokinioFailaiCard
     public void onBindViewHolder(@NonNull MokinioFailaiCardHolder holder, int position) {
         MokinioFailai sarasas = list.get(position);
 
-        MokinioFailaiCardHolder.vardas.setText("Korepetitoriui: " + sarasas.getVardas());
+        MokinioFailaiCardHolder.vardas.setText("Korepetitorius: " + sarasas.getVardas());
         MokinioFailaiCardHolder.laikas.setText(sarasas.getLaikas());
         MokinioFailaiCardHolder.pavadinimas.setText(sarasas.getPavadinimas());
         MokinioFailaiCardHolder.failoPav.setText(sarasas.getFailas());
@@ -62,7 +62,7 @@ public class MokinioFailaiAdapter extends RecyclerView.Adapter<MokinioFailaiCard
         MokinioFailaiCardHolder.atsisiusti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DownloadFile().execute("http://192.168.0.104/PHPscriptai/" + sarasas.getFailas());
+                new DownloadFile().execute("http://192.168.0.101/PHPscriptai/" + sarasas.getFailas());
             }
         });
     }

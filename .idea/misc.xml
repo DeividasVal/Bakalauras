@@ -21,6 +21,7 @@
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_baseline_favorite_24_red.xml" value="0.2845" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.2845" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.1625" />
+        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.184" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.2325" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_baseline_star_rate_24.xml" value="0.273" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_baseline_star_rate_24_gray.xml" value="0.273" />
@@ -32,6 +33,7 @@
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_round_account_box_24.xml" value="0.2845" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/ic_round_add_circle_outline_24.xml" value="0.216" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/listview_border.xml" value="0.216" />
+        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/pfp_circle.xml" value="0.1815" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/radio_normal.xml" value="0.1115" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/radio_selected.xml" value="0.1" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/drawable/radio_selector.xml" value="0.1" />
@@ -44,6 +46,8 @@
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_popup_atsiliepimas.xml" value="0.33" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_prisijungti.xml" value="0.25" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_recycler_view_paspaustas_korepetitorius.xml" value="0.22" />
+        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_redaguoti_korepetitorius.xml" value="0.33" />
+        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_redaguoti_mokinys.xml" value="0.32019927536231885" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_registruotis.xml" value="0.3269927536231884" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_susirasyti.xml" value="0.36685773840541946" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/activity_test_image.xml" value="0.32019927536231885" />
@@ -68,7 +72,7 @@
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_korepetitorius_profilis.xml" value="0.22" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_korepetitorius_profilis_new.xml" value="0.29483695652173914" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_mokinio_failai.xml" value="0.32019927536231885" />
-        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_mokinio_profilis.xml" value="0.3129528985507246" />
+        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_mokinio_profilis.xml" value="0.25" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_mokinio_uzklausos.xml" value="0.302536231884058" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_mokiniui_patvirtinti_korepetitoriai.xml" value="0.302536231884058" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_pagrindinis.xml" value="0.36096014492753625" />
@@ -80,7 +84,7 @@
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_slideshow.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/fragment_zinutes.xml" value="0.32019927536231885" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/korepetitoriaus_mokinys_item.xml" value="0.302536231884058" />
-        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/mokinio_korepetitorius_item.xml" value="0.302536231884058" />
+        <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/mokinio_korepetitorius_item.xml" value="0.25" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/nav_header_pagrindinis_langas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/popup_atsiliepimas.xml" value="0.3129528985507246" />
         <entry key="..\:/Users/valac/AndroidStudioProjects/Bakalauras/app/src/main/res/layout/popup_pasirinkti_faila.xml" value="0.32019927536231885" />

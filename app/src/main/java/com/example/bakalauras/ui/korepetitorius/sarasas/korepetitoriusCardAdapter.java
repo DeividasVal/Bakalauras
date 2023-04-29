@@ -2,9 +2,11 @@ package com.example.bakalauras.ui.korepetitorius.sarasas;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
 import com.example.bakalauras.recyclerViewPaspaustasKorepetitorius;
-import com.example.bakalauras.ui.korepetitorius.sarasas.korepetitoriusCardHolder;
-import com.example.bakalauras.ui.zinutes.susirasyti;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -35,7 +37,8 @@ class korepetitoriusCardHolder extends RecyclerView.ViewHolder {
 
     public TextView vardas, kaina, dalykai, budasKortele, ivertinimas;
     public Button favorite;
-    public ImageView zvaigzde;
+    public ImageView zvaigzde, pfp;
+
 
     public korepetitoriusCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -47,6 +50,7 @@ class korepetitoriusCardHolder extends RecyclerView.ViewHolder {
         favorite = itemView.findViewById(R.id.favoriteButton);
         ivertinimas = itemView.findViewById(R.id.atsiliepimaiVidurkisKortele);
         zvaigzde = itemView.findViewById(R.id.imageView2);
+        pfp = itemView.findViewById(R.id.korKortelePFP);
     }
 }
 
@@ -94,6 +98,11 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
         holder.dalykai.setText("Moko: " + sarasas.getDalykai());
         holder.kaina.setText(sarasas.getKaina() + " Eur/val.");
         holder.budasKortele.setText("Mokymo tipas: " + sarasas.getMokymoBudas());
+
+        Picasso.get()
+                .load("http://192.168.0.101/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .transform(new CircleTransform())
+                .into(holder.pfp);
 
         if (sarasas.getIvertinimas() == 0.0)
         {
@@ -167,7 +176,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/isimenaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/isimenaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -205,7 +214,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -237,7 +246,7 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
 
     public static boolean paziuretiArIsiminta(int profilioId, int mokinioId) {
         try {
-            URL url = new URL("http://192.168.0.103/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
+            URL url = new URL("http://192.168.0.101/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
             String requestBody = "profilio_id=" + profilioId + "&mokinio_id=" + mokinioId;
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -286,6 +295,41 @@ public class korepetitoriusCardAdapter extends RecyclerView.Adapter<korepetitori
                     holder.favorite.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                 }
             }
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

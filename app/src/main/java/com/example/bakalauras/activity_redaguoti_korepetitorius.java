@@ -1,34 +1,47 @@
-package com.example.bakalauras.ui.redaguoti_korepetitorius;
+package com.example.bakalauras;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Shader;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
-import com.example.bakalauras.R;
-import com.example.bakalauras.prisijungti;
+import com.example.bakalauras.ui.redaguoti_korepetitorius.RedaguotiKorepetitorius;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -36,12 +49,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RedaguotiKorepetitorius#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class RedaguotiKorepetitorius extends Fragment {
+public class activity_redaguoti_korepetitorius extends AppCompatActivity {
 
     private Button pridetiDalyka, pakeisti;
     private ListView dalykuSarasas;
@@ -54,75 +62,63 @@ public class RedaguotiKorepetitorius extends Fragment {
     private TableLayout uzpildyti;
     private String adresas, miestas, valString, aprasymas, istaigaString, dalykai_istaigoj, vartotojoVarads, email, vardas, slaptazodis;
     private int mokymo_tipas;
-
-    public RedaguotiKorepetitorius() {
-        // Required empty public constructor
-    }
-
-    public static RedaguotiKorepetitorius newInstance() {
-        RedaguotiKorepetitorius fragment = new RedaguotiKorepetitorius();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    private boolean[][] getCheckboxState(View v){
-        TableLayout table = v.findViewById(R.id.lentelePasirinkimuRedaguoti);
-        int numRows = table.getChildCount();
-        int numCols = ((TableRow) table.getChildAt(0)).getChildCount() - 1; // Exclude first column
-        boolean[][] checkboxState = new boolean[numRows][numCols];
-        for (int i = 1; i < numRows; i++) { // Exclude first row
-            TableRow row = (TableRow) table.getChildAt(i);
-            for (int j = 1; j <= numCols; j++) {
-                CheckBox checkbox = (CheckBox) row.getChildAt(j);
-                checkboxState[i - 1][j - 1] = checkbox.isChecked();
-            }
-        }
-        return checkboxState;
-    }
+    private Uri filepath;
+    private ImageView pfp;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setTitle("");
+        setTitle("Redaguoti profilį");
+        setContentView(R.layout.activity_redaguoti_korepetitorius);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.single_mokiniui_rodoma_uzklausa_item, container, false);
-
-        pridetiDalyka = v.findViewById(R.id.buttonPridėtiRedaguoti);
-        dalykuSarasas = v.findViewById(R.id.pasirinktiDalykaiRedaguoti);
-        spinnerDalykai = v.findViewById(R.id.spinnerDalykaiRedaguoti);
-        profilisAdresas = v.findViewById(R.id.profilisAdresasRedaguoti);
-        profilisMiestas = v.findViewById(R.id.profilisMiestasRedaguoti);
-        kainaPerVal = v.findViewById(R.id.kainaPerValProfilisRedaguoti);
-        dalykas = v.findViewById(R.id.dalykasRedaguoti);
-        uzpildyti = v.findViewById(R.id.lentelePasirinkimuRedaguoti);
-        istaiga = v.findViewById(R.id.istaigosPavRedaguoti);
-        gyvai = v.findViewById(R.id.checkBoxGyvaiRedaguoti);
-        nuotoliniu = v.findViewById(R.id.checkBoxOnlineRedaguoti);
-        bio = v.findViewById(R.id.bioProfilisRedaguoti);
+        pridetiDalyka = findViewById(R.id.buttonPridėtiRedaguoti);
+        dalykuSarasas = findViewById(R.id.pasirinktiDalykaiRedaguoti);
+        spinnerDalykai = findViewById(R.id.spinnerDalykaiRedaguoti);
+        profilisAdresas = findViewById(R.id.profilisAdresasRedaguoti);
+        profilisMiestas = findViewById(R.id.profilisMiestasRedaguoti);
+        kainaPerVal = findViewById(R.id.kainaPerValProfilisRedaguoti);
+        dalykas = findViewById(R.id.dalykasRedaguoti);
+        uzpildyti = findViewById(R.id.lentelePasirinkimuRedaguoti);
+        istaiga = findViewById(R.id.istaigosPavRedaguoti);
+        gyvai = findViewById(R.id.checkBoxGyvaiRedaguoti);
+        nuotoliniu = findViewById(R.id.checkBoxOnlineRedaguoti);
+        bio = findViewById(R.id.bioProfilisRedaguoti);
+        pfp = findViewById(R.id.redaguotiKor);
         dalykuSarasas.setNestedScrollingEnabled(true);
         bio.setNestedScrollingEnabled(true);
-        pakeisti = v.findViewById(R.id.buttonRedaguotiKoreptitorius);
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listItems);
+        pakeisti = findViewById(R.id.buttonRedaguotiKoreptitorius);
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listItems);
         dalykuSarasas.setAdapter(adapter);
 
-        vardasText = v.findViewById(R.id.vardasKorepetitoriusRedaguoti);
-        emailText = v.findViewById(R.id.emailKorepetitoriusRedaguoti);
-        vartotojoVardasText = v.findViewById(R.id.vartotojoKorepetitoriusRedaguoti);
-        slaptazodisText = v.findViewById(R.id.slaptazodisRedaguotiKorepetitorius);
-        patvirtintiPassText = v.findViewById(R.id.slaptazodisPatvirtintiRedaguotiKorepetitorius);
+        vardasText = findViewById(R.id.vardasKorepetitoriusRedaguoti);
+        emailText = findViewById(R.id.emailKorepetitoriusRedaguoti);
+        vartotojoVardasText = findViewById(R.id.vartotojoKorepetitoriusRedaguoti);
+        slaptazodisText = findViewById(R.id.slaptazodisRedaguotiKorepetitorius);
+        patvirtintiPassText = findViewById(R.id.slaptazodisPatvirtintiRedaguotiKorepetitorius);
 
         UzpildytiProfili task = new UzpildytiProfili(prisijungti.currentKorepetitorius.getId());
         task.execute();
 
+        Picasso.get()
+                .load("http://192.168.0.101/PHPscriptai/" + prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
+                .transform(new CircleTransform())
+                .into(pfp);
+
+        pfp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), 1);
+            }
+        });
+
         pakeisti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean[][] checkboxState = getCheckboxState(v);
+                boolean[][] checkboxState = getCheckboxState();
                 String miestas, adresas, istaigaGet, bioGet, dalykasGet, kainaGet, vardasGet, emailGet, vartotojoGet, slaptazodisGet, patvirtintiGet;
                 miestas = String.valueOf(profilisMiestas.getText());
                 adresas = String.valueOf(profilisAdresas.getText());
@@ -138,33 +134,36 @@ public class RedaguotiKorepetitorius extends Fragment {
 
                 if (miestas.isEmpty() || adresas.isEmpty() || istaigaGet.isEmpty() || bioGet.isEmpty() || dalykasGet.isEmpty() ||
                         kainaGet.isEmpty() || vardasGet.isEmpty() || emailGet.isEmpty() || vartotojoGet.isEmpty() || slaptazodisGet.isEmpty() || patvirtintiGet.isEmpty()
-                || listItems.isEmpty() || !gyvai.isChecked() || !nuotoliniu.isChecked()) {
-                    Toast.makeText(getContext(), "Užpildykite visus laukus!", Toast.LENGTH_SHORT).show();
+                        || listItems.isEmpty() || !gyvai.isChecked() || !nuotoliniu.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "Užpildykite visus laukus!", Toast.LENGTH_SHORT).show();
                 } else if (!slaptazodisGet.isEmpty() && !patvirtintiGet.isEmpty() && !slaptazodisGet.equals(patvirtintiGet)) {
-                    Toast.makeText(getContext(), "Slaptažodžiai nesutampa!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Slaptažodžiai nesutampa!", Toast.LENGTH_SHORT).show();
                 } else {
                     if (gyvai.isChecked() && !nuotoliniu.isChecked())
                     {
                         new SukurtiProfili().execute(miestas, adresas, 1, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId(), vardasGet, emailGet, vartotojoGet, slaptazodisGet);
+                        new PakeistiNuotrauka().execute(filepath, prisijungti.currentKorepetitorius.getId());
                         prisijungti.currentKorepetitorius = null;
                         prisijungti.currentMokinys = null;
-                        Intent intent = new Intent(getContext(), prisijungti.class);
+                        Intent intent = new Intent(getApplicationContext(), prisijungti.class);
                         startActivity(intent);
                     }
                     else if (!gyvai.isChecked() && nuotoliniu.isChecked())
                     {
                         new SukurtiProfili().execute(miestas, adresas, 2, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId(), vardasGet, emailGet, vartotojoGet, slaptazodisGet);
+                        new PakeistiNuotrauka().execute(filepath, prisijungti.currentKorepetitorius.getId());
                         prisijungti.currentKorepetitorius = null;
                         prisijungti.currentMokinys = null;
-                        Intent intent = new Intent(getContext(), prisijungti.class);
+                        Intent intent = new Intent(getApplicationContext(), prisijungti.class);
                         startActivity(intent);
                     }
                     else
                     {
                         new SukurtiProfili().execute(miestas, adresas, 3, listItems, kainaGet, bioGet, istaigaGet, dalykasGet, checkboxState, prisijungti.currentKorepetitorius.getId(), vardasGet, emailGet, vartotojoGet, slaptazodisGet);
+                        new PakeistiNuotrauka().execute(filepath, prisijungti.currentKorepetitorius.getId());
                         prisijungti.currentKorepetitorius = null;
                         prisijungti.currentMokinys = null;
-                        Intent intent = new Intent(getContext(), prisijungti.class);
+                        Intent intent = new Intent(getApplicationContext(), prisijungti.class);
                         startActivity(intent);
                     }
                 }
@@ -184,7 +183,7 @@ public class RedaguotiKorepetitorius extends Fragment {
         dalykuSarasas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(), "Laikykite, kad pašalinti.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Laikykite, kad pašalinti.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -198,8 +197,145 @@ public class RedaguotiKorepetitorius extends Fragment {
                 return true;
             }
         });
+    }
 
-        return v;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && data != null && data.getData() != null) {
+
+            filepath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath);
+                BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+                Paint paint = new Paint();
+                paint.setShader(shader);
+                paint.setAntiAlias(true);
+                int width = bitmap.getWidth();
+                int height = bitmap.getHeight();
+                int size = Math.min(width, height);
+                Bitmap output = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(output);
+                canvas.drawCircle(size / 2f, size / 2f, size / 2f, paint);
+                pfp.setImageBitmap(output);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    private byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+    private boolean[][] getCheckboxState(){
+        TableLayout table = findViewById(R.id.lentelePasirinkimuRedaguoti);
+        int numRows = table.getChildCount();
+        int numCols = ((TableRow) table.getChildAt(0)).getChildCount() - 1; // Exclude first column
+        boolean[][] checkboxState = new boolean[numRows][numCols];
+        for (int i = 1; i < numRows; i++) { // Exclude first row
+            TableRow row = (TableRow) table.getChildAt(i);
+            for (int j = 1; j <= numCols; j++) {
+                CheckBox checkbox = (CheckBox) row.getChildAt(j);
+                checkboxState[i - 1][j - 1] = checkbox.isChecked();
+            }
+        }
+        return checkboxState;
+    }
+
+    private class PakeistiNuotrauka extends AsyncTask<Object, Void, String> {
+
+        @Override
+        protected String doInBackground(Object... params) {
+            Uri filepath = (Uri) params[0];
+            int korepetitoriausId = (int) params[1];
+            URL url;
+            try {
+                url = new URL("http://192.168.0.101/PHPscriptai/korepetitoriusAtnaujintiNuotrauka.php");
+                String data = "korepetitoriaus_id=" + korepetitoriausId;
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                InputStream inputStream = getContentResolver().openInputStream(filepath);
+                byte[] fileBytes = getBytes(inputStream);
+
+                String boundary = "*****";
+                String twoHyphens = "--";
+                String lineEnd = "\r\n";
+                connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\"" +
+                        getFileName(filepath) + "\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
+                outputStream.write(fileBytes);
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"korepetitoriaus_id\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(String.valueOf(korepetitoriausId));
+                outputStream.writeBytes(lineEnd);
+
+                outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                outputStream.writeBytes("Content-Disposition: form-data; name=\"data\"" + lineEnd);
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(data);
+                outputStream.writeBytes(lineEnd);
+                outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                outputStream.flush();
+                outputStream.close();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                return response.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("edit nuotrauka", result);
+        }
     }
 
     private class SukurtiProfili extends AsyncTask<Object, Void, String> {
@@ -223,7 +359,7 @@ public class RedaguotiKorepetitorius extends Fragment {
 
             URL url;
             try {
-                url = new URL("http://192.168.0.100/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
+                url = new URL("http://192.168.0.101/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -231,7 +367,7 @@ public class RedaguotiKorepetitorius extends Fragment {
                 String data;
 
                 data = "korepetitoriaus_id=" + korepetitoriausId + "&profilio_adresas=" + adresas + "&profilio_miestas=" + miestas + "&profilio_mokymo_tipas=" + mokymoTipas + "&profilio_val=" + kaina + "&profilio_mokymo_tipas=" + mokymoTipas + "&profilio_aprasymas=" + bio  + "&profilio_istaiga=" + istaiga + "&profilio_dalykai_istaigoj=" + dalykas
-                + "&pilnas_korepetitoriaus_vardas=" + vardas + "&korepetitoriaus_vartotojo_vardas=" + vartotojas + "&korepetitoriaus_slaptazodis=" + slaptazodis + "&korepetitoriaus_el_pastas=" + email;
+                        + "&pilnas_korepetitoriaus_vardas=" + vardas + "&korepetitoriaus_vartotojo_vardas=" + vartotojas + "&korepetitoriaus_slaptazodis=" + slaptazodis + "&korepetitoriaus_el_pastas=" + email;
 
                 Gson gson = new Gson();
                 String selectionArrayString = gson.toJson(selectionArray);
@@ -260,7 +396,7 @@ public class RedaguotiKorepetitorius extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
             Log.d("edit kor", result);
         }
     }
@@ -356,6 +492,41 @@ public class RedaguotiKorepetitorius extends Fragment {
                     }
                 }
             }
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

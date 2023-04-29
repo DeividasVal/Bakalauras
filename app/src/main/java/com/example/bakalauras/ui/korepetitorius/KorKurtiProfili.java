@@ -139,6 +139,11 @@ public class KorKurtiProfili extends Fragment {
         pridetiDalyka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (listItems.size() >= 3) {
+                    Toast.makeText(getContext(), "Galite pasirinkti tik 3 dalykus arba mažiau!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!listItems.contains(spinnerDalykai.getSelectedItem().toString())) {
                     listItems.add(spinnerDalykai.getSelectedItem().toString());
                     adapter.notifyDataSetChanged();
@@ -184,7 +189,7 @@ public class KorKurtiProfili extends Fragment {
             int korepetitoriausId = (int) params[9];
             URL url;
             try {
-                url = new URL("http://192.168.0.103/PHPscriptai/korepetitoriusKurtiProfili.php");
+                url = new URL("http://192.168.0.101/PHPscriptai/korepetitoriusKurtiProfili.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");

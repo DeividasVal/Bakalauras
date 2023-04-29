@@ -89,10 +89,10 @@ public class prisijungti extends AppCompatActivity {
             URL url;
             String requestBody;
             if (type == "mokinys") {
-                url = new URL("http://192.168.0.103/PHPscriptai/loginMokinys.php");
+                url = new URL("http://192.168.0.101/PHPscriptai/loginMokinys.php");
                 requestBody = "mokinio_vartotojo_vardas=" + username + "&mokinio_slaptazodis=" + password;
             } else {
-                url = new URL("http://192.168.0.103/PHPscriptai/loginKorepetitorius.php");
+                url = new URL("http://192.168.0.101/PHPscriptai/loginKorepetitorius.php");
                 requestBody = "korepetitoriaus_vartotojo_vardas=" + username + "&korepetitoriaus_slaptazodis=" + password;
             }
 
@@ -155,7 +155,7 @@ public class prisijungti extends AppCompatActivity {
         protected Mokinys doInBackground(String... params) {
             String username = params[0];
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiMokini.php?mokinio_vartotojo_vardas=" + username);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiMokini.php?mokinio_vartotojo_vardas=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -169,7 +169,8 @@ public class prisijungti extends AppCompatActivity {
                     String column3 = obj.getString("mokinio_vartotojo_vardas");
                     String column4 = obj.getString("mokinio_slaptazodis");
                     String column5 = obj.getString("mokinio_el_pastas");
-                    currentMokinys = new Mokinys(Integer.parseInt(column1), column3, column4, column5, column2);
+                    String column6 = obj.getString("mokinio_nuotrauka");
+                    currentMokinys = new Mokinys(Integer.parseInt(column1), column3, column4, column5, column2, column6);
                 }
                 conn.disconnect();
             } catch (Exception e) {
@@ -192,7 +193,7 @@ public class prisijungti extends AppCompatActivity {
         protected Korepetitorius doInBackground(String... params) {
             String username = params[0];
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiKorepetitoriu.php?korepetitoriaus_vartotojo_vardas=" + username);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriu.php?korepetitoriaus_vartotojo_vardas=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -207,7 +208,8 @@ public class prisijungti extends AppCompatActivity {
                     String column3 = obj.getString("korepetitoriaus_vartotojo_vardas");
                     String column4 = obj.getString("korepetitoriaus_slaptazodis");
                     String column5 = obj.getString("korepetitoriaus_el_pastas");
-                    currentKorepetitorius = new Korepetitorius(Integer.parseInt(column1), column3, column4, column5, column2);
+                    String column6 = obj.getString("korepetitoriaus_nuotrauka");
+                    currentKorepetitorius = new Korepetitorius(Integer.parseInt(column1), column3, column4, column5, column2, column6);
                 }
                 conn.disconnect();
             } catch (Exception e) {

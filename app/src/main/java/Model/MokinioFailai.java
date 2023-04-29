@@ -8,6 +8,15 @@ public class MokinioFailai {
     private String laikas;
     private String failas;
     private String vardas;
+    private String korepetitoriausNuotrauka;
+
+    public String getKorepetitoriausNuotrauka() {
+        return korepetitoriausNuotrauka;
+    }
+
+    public void setKorepetitoriausNuotrauka(String korepetitoriausNuotrauka) {
+        this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
+    }
 
     public String getPavadinimas() {
         return pavadinimas;
@@ -46,5 +55,13 @@ public class MokinioFailai {
         this.laikas = laikas;
         this.failas = failas;
         this.vardas = vardas;
+    }
+
+    public MokinioFailai(String pavadinimas, String laikas, String failas, String vardas, String korepetitoriausNuotrauka) {
+        this.pavadinimas = pavadinimas;
+        this.laikas = laikas;
+        this.failas = failas;
+        this.vardas = vardas;
+        this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
     }
 }

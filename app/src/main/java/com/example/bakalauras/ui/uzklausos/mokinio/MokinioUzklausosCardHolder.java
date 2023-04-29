@@ -2,6 +2,7 @@ package com.example.bakalauras.ui.uzklausos.mokinio;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ public class MokinioUzklausosCardHolder extends RecyclerView.ViewHolder{
 
     public static TextView korepetitoriausVardas, statusas;
     public static Button atsaukti;
+    public static ImageView pfp;
 
     public MokinioUzklausosCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -20,5 +22,6 @@ public class MokinioUzklausosCardHolder extends RecyclerView.ViewHolder{
         korepetitoriausVardas = itemView.findViewById(R.id.vardasKorteleLaukiamoKorepetitoriaus);
         statusas = itemView.findViewById(R.id.uzklausosStatusasMokiniui);
         atsaukti = itemView.findViewById(R.id.buttonAtšauktiMokiniui);
+        pfp = itemView.findViewById(R.id.mokinioUzklausosKorPFP);
     }
 }

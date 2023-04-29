@@ -8,6 +8,15 @@ public class MokiniuiPatvirtintasKorepetitoriusKortele {
     private String adresas;
     private int korepetitoriausId;
     private int profilioId;
+    private String korepetitoriausNuotrauka;
+
+    public int getProfilioId() {
+        return profilioId;
+    }
+
+    public void setProfilioId(int profilioId) {
+        this.profilioId = profilioId;
+    }
 
     public int getProfiliausId() {
         return profilioId;
@@ -57,6 +66,14 @@ public class MokiniuiPatvirtintasKorepetitoriusKortele {
         this.adresas = adresas;
     }
 
+    public String getKorepetitoriausNuotrauka() {
+        return korepetitoriausNuotrauka;
+    }
+
+    public void setKorepetitoriausNuotrauka(String korepetitoriausNuotrauka) {
+        this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
+    }
+
     public MokiniuiPatvirtintasKorepetitoriusKortele(int kaina, String vardasKorepetitoriaus, String dalykai, String adresas, int korepetitoriausId, int profilioId) {
         this.kaina = kaina;
         this.vardasKorepetitoriaus = vardasKorepetitoriaus;
@@ -64,5 +81,15 @@ public class MokiniuiPatvirtintasKorepetitoriusKortele {
         this.adresas = adresas;
         this.korepetitoriausId = korepetitoriausId;
         this.profilioId = profilioId;
+    }
+
+    public MokiniuiPatvirtintasKorepetitoriusKortele(int kaina, String vardasKorepetitoriaus, String dalykai, String adresas, int korepetitoriausId, int profilioId, String korepetitoriausNuotrauka) {
+        this.kaina = kaina;
+        this.vardasKorepetitoriaus = vardasKorepetitoriaus;
+        this.dalykai = dalykai;
+        this.adresas = adresas;
+        this.korepetitoriausId = korepetitoriausId;
+        this.profilioId = profilioId;
+        this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
     }
 }

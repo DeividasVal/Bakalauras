@@ -88,7 +88,7 @@ public class popup_atsiliepimas extends AppCompatActivity {
                 long currentTimeMillis = System.currentTimeMillis();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 String formattedTime = sdf.format(new Date(currentTimeMillis));
-                URL url = new URL("http://192.168.0.103/PHPscriptai/skelbtiAtsiliepima.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/skelbtiAtsiliepima.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

@@ -37,12 +37,6 @@ import java.util.ArrayList;
 import Model.KorepetitoriausUzklausaKortele;
 import Model.MokinioFailai;
 import Model.ZinutesKortele;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link mokinio_failai#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class mokinio_failai extends Fragment {
 
     private RecyclerView recyclerView;
@@ -95,7 +89,7 @@ public class mokinio_failai extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiSarasaFailuMokiniui.php?mokinio_id=" + mokinioId);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiSarasaFailuMokiniui.php?mokinio_id=" + mokinioId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

@@ -18,17 +18,17 @@
             android:padding="20dp">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/korepetitoriausNuotraukaVienameLange"
                 android:layout_width="100dp"
                 android:layout_height="94dp"
-                android:src="@drawable/ic_baseline_account_circle_24"/>
+                android:src="@drawable/ic_baseline_account_circle_24" />
 
             <TextView
                 android:id="@+id/vardasPavardeisDB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toEndOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/korepetitoriausNuotraukaVienameLange"
                 android:paddingTop="10dp"
                 android:text="Vardas Pavardė"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -41,7 +41,7 @@
                 android:layout_below="@+id/vardasPavardeisDB"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="9dp"
-                android:layout_toEndOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/korepetitoriausNuotraukaVienameLange"
                 android:text="Adresas" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_below="@+id/adresasIsDB"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="9dp"
-                android:layout_toEndOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/korepetitoriausNuotraukaVienameLange"
                 android:text="Mokymo būdas" />
 
             <me.grantland.widget.AutofitTextView
@@ -61,7 +61,7 @@
                 android:layout_below="@+id/mokymoBudasIsDB"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="9dp"
-                android:layout_toEndOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/korepetitoriausNuotraukaVienameLange"
                 android:text="Dalykai: "
                 app:autoSizeTextType="uniform" />
 
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dalykaiIsDB"
-                android:layout_toEndOf="@+id/imageView4">
+                android:layout_toEndOf="@+id/korepetitoriausNuotraukaVienameLange">
 
                 <TextView
                     android:id="@+id/vidurkisIsDB"
@@ -111,7 +111,7 @@
                 android:layout_below="@+id/dalykaiIsDB"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="40dp"
-                android:layout_toEndOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/korepetitoriausNuotraukaVienameLange"
                 android:text="Kaina                        "
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:fontFamily="sans-serif-black" />
@@ -557,34 +557,54 @@
                 </ScrollView>
             </HorizontalScrollView>
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/horizontalScrollView"
-                android:layout_marginTop="16dp"
-                android:text="Atsiliepimai"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/neraAtsiliepimu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView21"
-                android:layout_marginTop="16dp"
-                android:text="Nėra atsiliepimų."
-                android:layout_centerInParent="true" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewProfilisReviews"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView21"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="4dp">
+                android:layout_below="@+id/horizontalScrollView"
+                android:orientation="vertical">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/horizontalScrollView"
+                    android:layout_marginTop="16dp"
+                    android:text="Atsiliepimai"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewProfilisReviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView21"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/neraAtsiliepimu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView21"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:text="Nėra atsiliepimų." />
+
+                <Button
+                    android:id="@+id/redaguotiButtonKorepetitorius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/recyclerViewProfilisReviews"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/button_shape"
+                    android:text="Redaguoti"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
         </RelativeLayout>
 
     </LinearLayout>

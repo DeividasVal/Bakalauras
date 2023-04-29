@@ -7,6 +7,15 @@ public class KorepetitoriausFailai {
     private String failas;
     private String vardas;
     private int failoId;
+    private String mokinioNuotrauka;
+
+    public String getMokinioNuotrauka() {
+        return mokinioNuotrauka;
+    }
+
+    public void setMokinioNuotrauka(String mokinioNuotrauka) {
+        this.mokinioNuotrauka = mokinioNuotrauka;
+    }
 
     public String getPavadinimas() {
         return pavadinimas;
@@ -54,5 +63,14 @@ public class KorepetitoriausFailai {
         this.failas = failas;
         this.vardas = vardas;
         this.failoId = failoId;
+    }
+
+    public KorepetitoriausFailai(String pavadinimas, String laikas, String failas, String vardas, int failoId, String mokinioNuotrauka) {
+        this.pavadinimas = pavadinimas;
+        this.laikas = laikas;
+        this.failas = failas;
+        this.vardas = vardas;
+        this.failoId = failoId;
+        this.mokinioNuotrauka = mokinioNuotrauka;
     }
 }

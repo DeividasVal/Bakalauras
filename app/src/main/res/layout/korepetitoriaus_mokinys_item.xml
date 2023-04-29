@@ -18,7 +18,7 @@
         android:padding="20dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/mokinioPFPKorepetitoriuiPatvirtintas"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentStart="true"
@@ -31,11 +31,11 @@
             android:id="@+id/vardasKorteleMokinioPatvirtintas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignBottom="@+id/mokinioPFPKorepetitoriuiPatvirtintas"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/mokinioPFPKorepetitoriuiPatvirtintas"
             android:gravity="center|left"
             android:text="Vardas Pavardė"
             android:textSize="20sp"
@@ -47,7 +47,7 @@
             app:fontFamily="sans-serif-black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/mokinioPFPKorepetitoriuiPatvirtintas"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -59,11 +59,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/mokinioPFPKorepetitoriuiPatvirtintas"
             android:gravity="top|left"
             android:text="Mokinys"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/mokinioPFPKorepetitoriuiPatvirtintas"
             app:layout_constraintTop_toBottomOf="@+id/vardasKorteleMokinioPatvirtintas" />
 
         <Button

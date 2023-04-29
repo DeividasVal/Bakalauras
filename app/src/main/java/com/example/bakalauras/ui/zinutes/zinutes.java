@@ -92,7 +92,7 @@ public class zinutes extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiZinuciuSarasaMokiniui.php?gavejo_id=" + dabartinisId);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiZinuciuSarasaMokiniui.php?gavejo_id=" + dabartinisId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -114,8 +114,9 @@ public class zinutes extends Fragment {
                     String laikas = obj.getString("laikas_zinutes");
                     int siuntejoId = obj.getInt("siuntejo_id");
                     int gavejoId = obj.getInt("gavejo_id");
+                    String korepetitoriausNuotrauka = obj.getString("korepetitoriaus_nuotrauka");
 
-                    arrayList.add(new ZinutesKortele(vardas, zinutes, laikas, siuntejoId, gavejoId));
+                    arrayList.add(new ZinutesKortele(vardas, zinutes, laikas, siuntejoId, gavejoId, korepetitoriausNuotrauka));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -147,7 +148,7 @@ public class zinutes extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiZinuciuSarasaKorepetitoriui.php?gavejo_id=" + dabartinisId);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiZinuciuSarasaKorepetitoriui.php?gavejo_id=" + dabartinisId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -169,8 +170,9 @@ public class zinutes extends Fragment {
                     String laikas = obj.getString("laikas_zinutes");
                     int siuntejoId = obj.getInt("siuntejo_id");
                     int gavejoId = obj.getInt("gavejo_id");
+                    String mokinioNuotrauka = obj.getString("mokinio_nuotrauka");
 
-                    arrayList.add(new ZinutesKortele(vardas, zinutes, laikas, siuntejoId, gavejoId));
+                    arrayList.add(new ZinutesKortele(vardas, zinutes, laikas, siuntejoId, gavejoId, mokinioNuotrauka));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

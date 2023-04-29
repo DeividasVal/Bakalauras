@@ -74,14 +74,6 @@
                 android:icon="@drawable/ic_round_account_box_24"
                 android:title="Žiūrėti profilį" />
             <item
-                android:id="@+id/nav_redaguotiMokinys"
-                android:icon="@drawable/ic_baseline_settings_24"
-                android:title="Redaguoti" />
-            <item
-                android:id="@+id/nav_redaguotiKor"
-                android:icon="@drawable/ic_baseline_settings_24"
-                android:title="Redaguoti" />
-            <item
                 android:id="@+id/nav_pasalinti"
                 android:icon="@drawable/ic_baseline_person_remove_24"
                 android:title="Pašalinti profilį" />

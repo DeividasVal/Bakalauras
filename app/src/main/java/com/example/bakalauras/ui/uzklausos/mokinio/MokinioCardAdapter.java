@@ -2,6 +2,10 @@ package com.example.bakalauras.ui.uzklausos.mokinio;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
+import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
+import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardHolder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -62,6 +70,11 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
             MokinioUzklausosCardHolder.atsaukti.setVisibility(View.GONE);
         }
 
+        Picasso.get()
+                .load("http://192.168.0.101/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .transform(new CircleTransform())
+                .into(MokinioUzklausosCardHolder.pfp);
+
         MokinioUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +109,7 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/pasalintiUzklausaMokinys.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/pasalintiUzklausaMokinys.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -125,6 +138,41 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
         protected void onPostExecute(String response) {
             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
             notifyDataSetChanged();
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

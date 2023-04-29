@@ -34,11 +34,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:text="failoPavadinimas"
             app:autoSizeMaxTextSize="80sp"
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
-            android:text="failoPavadinimas"
             app:layout_constraintEnd_toStartOf="@+id/failoLaikasKorepetitoriui"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -54,13 +54,18 @@
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_baseline_insert_drive_file_24"/>
 
-        <TextView
+        <me.grantland.widget.AutofitTextView
             android:id="@+id/vardasKorteleFailoKorepetitoriui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="80sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_toRightOf="@+id/imageView"
@@ -73,14 +78,16 @@
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <me.grantland.widget.AutofitTextView
             android:id="@+id/failoPavKorepetitoriui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:maxLength="15"
-            android:maxLines="1"
+            app:autoSizeMaxTextSize="80sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
             android:text="Pavadinimas"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/vardasKorteleFailoKorepetitoriui" />
@@ -93,7 +100,7 @@
             android:layout_marginEnd="8dp"
             android:text="laikas"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/failoPavKorepetitoriui" />
+            app:layout_constraintTop_toBottomOf="@+id/failoPavadinimasKorepetitoriui" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -4,6 +4,7 @@ public class KorepetitoriausUzklausaKortele
 {
     private String vardasMokinio;
     private int stausas;
+    private String mokinioNuotrauka;
 
     public int getStausas() {
         return stausas;
@@ -24,5 +25,19 @@ public class KorepetitoriausUzklausaKortele
 
     public void setVardasMokinio(String vardasMokinio) {
         this.vardasMokinio = vardasMokinio;
+    }
+
+    public String getMokinioNuotrauka() {
+        return mokinioNuotrauka;
+    }
+
+    public void setMokinioNuotrauka(String mokinioNuotrauka) {
+        this.mokinioNuotrauka = mokinioNuotrauka;
+    }
+
+    public KorepetitoriausUzklausaKortele(String vardasMokinio, int stausas, String mokinioVardas) {
+        this.vardasMokinio = vardasMokinio;
+        this.stausas = stausas;
+        this.mokinioNuotrauka = mokinioVardas;
     }
 }

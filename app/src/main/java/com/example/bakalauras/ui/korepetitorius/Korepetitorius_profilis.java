@@ -1,5 +1,10 @@
 package com.example.bakalauras.ui.korepetitorius;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -12,14 +17,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
+import com.example.bakalauras.activity_redaguoti_korepetitorius;
+import com.example.bakalauras.activity_redaguoti_mokinys;
 import com.example.bakalauras.prisijungti;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,7 +51,7 @@ import Model.Atsiliepimas;
 public class Korepetitorius_profilis extends Fragment {
 
     private TextView vardasText, adresasText, mokymoBudasText, bioText, istaigaText, dalykasText, dalykaiText, kainaText, vidurkisIsDB, countisDB, emptyRecycler;
-    private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined;
+    private String adresas, miestas, tipas, val, bio, istaiga, dalykaiIst, dalykaiJoined, pfpNuotrauka;
     private TableLayout uzpildyti;
     private boolean[][] prieinamumas;
     private RecyclerView recyclerView;
@@ -49,6 +60,8 @@ public class Korepetitorius_profilis extends Fragment {
     private Double ivertinimasVidurkis;
     private int invertinimasCount;
     private RatingBar ratingBar;
+    private ImageView pfp;
+    private Button redaguoti;
 
     public Korepetitorius_profilis() {
     }
@@ -84,6 +97,8 @@ public class Korepetitorius_profilis extends Fragment {
         countisDB = v.findViewById(R.id.atsiliepimuKiekisIsDB);
         ratingBar = v.findViewById(R.id.ratingBarProfilis);
         emptyRecycler = v.findViewById(R.id.neraAtsiliepimu);
+        pfp = v.findViewById(R.id.korepetitoriausNuotraukaVienameLange);
+        redaguoti = v.findViewById(R.id.redaguotiButtonKorepetitorius);
 
         recyclerView = v.findViewById(R.id.recyclerViewProfilisReviews);
         recyclerView.setHasFixedSize(true);
@@ -96,6 +111,14 @@ public class Korepetitorius_profilis extends Fragment {
 
         UzkrautiAtsiliepimus task2 = new UzkrautiAtsiliepimus(prisijungti.currentKorepetitorius.getId());
         task2.execute();
+
+        redaguoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), activity_redaguoti_korepetitorius.class);
+                startActivity(intent);
+            }
+        });
 
         return v;
     }
@@ -111,7 +134,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -171,7 +194,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -182,6 +205,7 @@ public class Korepetitorius_profilis extends Fragment {
                     JSONObject obj = new JSONObject(output);
                     Log.d("response", output);
                     adresas = obj.getString("profilio_adresas");
+                    pfpNuotrauka = obj.getString("korepetitoriaus_nuotrauka");
                     miestas = obj.getString("profilio_miestas");
                     tipas = obj.getString("profilio_mokymo_tipas");
                     val = obj.getString("profilio_val");
@@ -250,6 +274,11 @@ public class Korepetitorius_profilis extends Fragment {
             istaigaText.setText(istaiga);
             dalykasText.setText(dalykaiIst);
 
+            Picasso.get()
+                    .load("http://192.168.0.101/PHPscriptai/" + pfpNuotrauka)
+                    .transform(new CircleTransform())
+                    .into(pfp);
+
             for (int i = 1; i < uzpildyti.getChildCount(); i++) {
                 TableRow row = (TableRow) uzpildyti.getChildAt(i);
                 for (int j = 1; j < row.getChildCount(); j++) {
@@ -263,6 +292,41 @@ public class Korepetitorius_profilis extends Fragment {
                     }
                 }
             }
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

@@ -92,7 +92,7 @@ public class MokinioUzklausos extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
                 try {
-                    URL url = new URL("http://192.168.0.103/PHPscriptai/gautiUzklausosDuomenisMokiniui.php?mokinio_id=" + mokinysId);
+                    URL url = new URL("http://192.168.0.101/PHPscriptai/gautiUzklausosDuomenisMokiniui.php?mokinio_id=" + mokinysId);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
                     conn.setRequestProperty("Accept", "application/json");
@@ -111,8 +111,9 @@ public class MokinioUzklausos extends Fragment {
                         JSONObject obj = jsonArray.getJSONObject(i);
                         String vardasKorepetitoriaus = obj.getString("pilnas_korepetitoriaus_vardas");
                         int busena = obj.getInt("būsena");
+                        String korepetitoriausNuotrauka = obj.getString("korepetitoriaus_nuotrauka");
 
-                        arrayList.add(new MokinioUzklausaKortele(vardasKorepetitoriaus, busena));
+                        arrayList.add(new MokinioUzklausaKortele(vardasKorepetitoriaus, busena, korepetitoriausNuotrauka));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

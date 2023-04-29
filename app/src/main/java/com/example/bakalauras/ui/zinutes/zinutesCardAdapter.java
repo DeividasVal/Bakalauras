@@ -3,6 +3,10 @@ package com.example.bakalauras.ui.zinutes;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.prisijungti;
+import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardAdapter;
+import com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai.KorepetitoriuiPatvirtintiMokiniaiCardHolder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -42,10 +50,25 @@ public class zinutesCardAdapter extends RecyclerView.Adapter<zinutesCardHolder>{
         if (prisijungti.currentKorepetitorius != null)
         {
             zinutesCardHolder.vardas.setText("Mokinys: " + sarasas.getVardas());
+            if (sarasas.getNuotrauka().isEmpty())
+            {
+                zinutesCardHolder.pfp.setImageResource(R.drawable.ic_baseline_account_circle_24);
+            }
+            else
+            {
+                Picasso.get()
+                        .load("http://192.168.0.101/PHPscriptai/" + sarasas.getNuotrauka())
+                        .transform(new CircleTransform())
+                        .into(zinutesCardHolder.pfp);
+            }
         }
         else
         {
             zinutesCardHolder.vardas.setText("Korepetitorius: " + sarasas.getVardas());
+            Picasso.get()
+                    .load("http://192.168.0.101/PHPscriptai/" + sarasas.getNuotrauka())
+                    .transform(new CircleTransform())
+                    .into(zinutesCardHolder.pfp);
         }
 
         if (prisijungti.currentKorepetitorius != null)
@@ -123,6 +146,41 @@ public class zinutesCardAdapter extends RecyclerView.Adapter<zinutesCardHolder>{
         else
         {
             return 0;
+        }
+    }
+
+    public class CircleTransform implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

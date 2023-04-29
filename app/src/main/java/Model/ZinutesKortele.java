@@ -6,6 +6,15 @@ public class ZinutesKortele {
     private String laikas;
     private int siuntejoId;
     private int gavejoId;
+    private String nuotrauka;
+
+    public String getNuotrauka() {
+        return nuotrauka;
+    }
+
+    public void setNuotrauka(String nuotrauka) {
+        this.nuotrauka = nuotrauka;
+    }
 
     public int getSiuntejoId() {
         return siuntejoId;
@@ -53,5 +62,14 @@ public class ZinutesKortele {
         this.laikas = laikas;
         this.siuntejoId = siuntejoId;
         this.gavejoId = gavejoId;
+    }
+
+    public ZinutesKortele(String vardas, String zinutes, String laikas, int siuntejoId, int gavejoId, String nuotrauka) {
+        this.vardas = vardas;
+        this.zinutes = zinutes;
+        this.laikas = laikas;
+        this.siuntejoId = siuntejoId;
+        this.gavejoId = gavejoId;
+        this.nuotrauka = nuotrauka;
     }
 }

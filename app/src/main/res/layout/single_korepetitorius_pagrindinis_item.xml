@@ -18,7 +18,7 @@
         android:padding="20dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/korKortelePagrindinisPFP"
             android:layout_width="74dp"
             android:layout_height="76dp"
             android:layout_alignParentStart="true"
@@ -31,18 +31,18 @@
             android:id="@+id/vardasKortelePagrindinis"
             android:layout_width="177dp"
             android:layout_height="23dp"
-            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignBottom="@+id/korKortelePagrindinisPFP"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/korKortelePagrindinisPFP"
             android:gravity="center|left"
             android:text="Vardas Pavardė"
             android:textSize="20sp"
             app:fontFamily="sans-serif-black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePagrindinisPFP"
             app:layout_constraintTop_toTopOf="parent" />
 
         <me.grantland.widget.AutofitTextView
@@ -54,7 +54,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/korKortelePagrindinisPFP"
             android:gravity="top|left"
             android:text="Mokymo tipas"
             android:textSize="14sp"
@@ -62,7 +62,7 @@
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePagrindinisPFP"
             app:layout_constraintTop_toBottomOf="@+id/vardasKortelePagrindinis" />
 
         <TextView
@@ -76,11 +76,11 @@
             app:fontFamily="sans-serif-black"
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/korKortelePagrindinisPFP"
             android:gravity="center|left"
             android:text="Kaina                 "
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePagrindinisPFP"
             app:layout_constraintTop_toBottomOf="@+id/atsiliepimaiVidurkisKortelePagrindinis" />
 
         <me.grantland.widget.AutofitTextView
@@ -92,7 +92,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_toRightOf="@+id/imageView"
+            android:layout_toRightOf="@+id/korKortelePagrindinisPFP"
             android:gravity="top|left"
             android:text="Dalykai"
             android:textSize="14sp"
@@ -100,7 +100,7 @@
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePagrindinisPFP"
             app:layout_constraintTop_toBottomOf="@+id/budasKortelePagrindinis" />
 
         <Button
@@ -123,7 +123,7 @@
             android:layout_marginTop="8dp"
             android:text="4.5"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePagrindinisPFP"
             app:layout_constraintTop_toBottomOf="@+id/dalykaiKortelePagrindinis" />
 
         <ImageView

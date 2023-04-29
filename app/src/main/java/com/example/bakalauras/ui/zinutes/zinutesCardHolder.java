@@ -1,6 +1,8 @@
 package com.example.bakalauras.ui.zinutes;
 
+import android.media.Image;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import com.example.bakalauras.R;
 public class zinutesCardHolder extends RecyclerView.ViewHolder{
 
     public static TextView vardas, laikas, zinutesTekstas;
+    public static ImageView pfp;
 
     public zinutesCardHolder(@NonNull View itemView) {
         super(itemView);
@@ -18,5 +21,6 @@ public class zinutesCardHolder extends RecyclerView.ViewHolder{
         vardas = itemView.findViewById(R.id.vardasKorteleZinuciu);
         laikas = itemView.findViewById(R.id.zinutesLaikas);
         zinutesTekstas = itemView.findViewById(R.id.zinutesTekstas);
+        pfp = itemView.findViewById(R.id.zinutesPFP);
     }
 }

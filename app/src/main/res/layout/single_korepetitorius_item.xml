@@ -18,7 +18,7 @@
         android:padding="20dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/korKortelePFP"
             android:layout_width="74dp"
             android:layout_height="76dp"
             android:layout_alignParentStart="true"
@@ -42,7 +42,7 @@
             app:fontFamily="sans-serif-black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePFP"
             app:layout_constraintTop_toTopOf="parent" />
 
         <me.grantland.widget.AutofitTextView
@@ -62,7 +62,7 @@
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePFP"
             app:layout_constraintTop_toBottomOf="@+id/vardasKortele" />
 
         <TextView
@@ -80,7 +80,7 @@
             android:gravity="center|left"
             android:text="Kaina                 "
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePFP"
             app:layout_constraintTop_toBottomOf="@+id/atsiliepimaiVidurkisKortele" />
 
         <me.grantland.widget.AutofitTextView
@@ -100,7 +100,7 @@
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePFP"
             app:layout_constraintTop_toBottomOf="@+id/budasKortele" />
 
         <Button
@@ -123,7 +123,7 @@
             android:layout_marginTop="8dp"
             android:text="4.5"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/korKortelePFP"
             app:layout_constraintTop_toBottomOf="@+id/dalykaiKortele" />
 
         <ImageView

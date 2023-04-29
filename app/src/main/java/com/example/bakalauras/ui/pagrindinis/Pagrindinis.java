@@ -171,7 +171,7 @@ public class Pagrindinis extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.0.103/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
+                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -191,6 +191,7 @@ public class Pagrindinis extends Fragment {
                     JSONObject obj = jsonArray.getJSONObject(i);
                     String vardas = obj.getString("pilnas_korepetitoriaus_vardas");
                     String kaina = obj.getString("profilio_val");
+                    String nuotrauka = obj.getString("korepetitoriaus_nuotrauka");
 
                     JSONArray dalykaiJson = obj.getJSONArray("profilio_dalykai");
                     ArrayList<String> dalykai = new ArrayList<String>();
@@ -203,7 +204,7 @@ public class Pagrindinis extends Fragment {
 
                     Double average = 0.0;
                     try {
-                        URL url2 = new URL("http://192.168.0.103/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
+                        URL url2 = new URL("http://192.168.0.101/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
                         HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
                         conn2.setRequestMethod("GET");
                         conn2.setRequestProperty("Accept", "application/json");
@@ -234,17 +235,17 @@ public class Pagrindinis extends Fragment {
 
                     if (mokymoBudas == 1)
                     {
-                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Gyvai"));
+                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Gyvai", nuotrauka));
                         average = 0.0;
                     }
                     else if (mokymoBudas == 2)
                     {
-                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis"));
+                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis", nuotrauka));
                         average = 0.0;
                     }
                     else
                     {
-                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu"));
+                        arrayList.add(new KorepetitoriusKortelePagrindinis(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu", nuotrauka));
                         average = 0.0;
                     }
                 }
