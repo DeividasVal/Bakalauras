@@ -1,5 +1,6 @@
 package com.example.bakalauras.ui.failai.mokinio;
 
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.Prisijungti;
@@ -76,7 +78,7 @@ public class MokinioFailai extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiSarasaFailuMokiniui.php?mokinio_id=" + mokinioId);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiSarasaFailuMokiniui.php?mokinio_id=" + mokinioId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

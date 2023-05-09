@@ -71,16 +71,6 @@ public class Atsiliepimas {
         return laikas;
     }
 
-    public Atsiliepimas(String vardas, int skelbejoID, int profilioID, int korepetitoriausID, String tekstas, Double ivertinimas, String laikas) {
-        this.vardas = vardas;
-        this.skelbejoID = skelbejoID;
-        this.profilioID = profilioID;
-        this.korepetitoriausID = korepetitoriausID;
-        this.tekstas = tekstas;
-        this.ivertinimas = ivertinimas;
-        this.laikas = laikas;
-    }
-
     public Atsiliepimas(String vardas, int skelbejoID, int profilioID, int korepetitoriausID, String tekstas, Double ivertinimas, String laikas, String mokinioNuotrauka) {
         this.vardas = vardas;
         this.skelbejoID = skelbejoID;

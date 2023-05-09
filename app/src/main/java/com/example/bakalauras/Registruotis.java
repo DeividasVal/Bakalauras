@@ -23,14 +23,21 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bakalauras.ui.zinutes.Susirasyti;
+import com.example.bakalauras.ui.zinutes.SusirasytiCardAdapter;
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class Registruotis extends AppCompatActivity {
 
@@ -75,7 +82,14 @@ public class Registruotis extends AppCompatActivity {
                     email = String.valueOf(emailField.getText());
                     fullname = String.valueOf(fullnameField.getText());
                     if (!username.equals("") && !password.equals("") && !email.equals("") && !fullname.equals("")) {
-                        new RegisterTask().execute(username, password, email, fullname, "registracijaMokinys", filepath);
+                        if (filepath == null)
+                        {
+                            new RegisterTaskBeNuotraukos().execute(username, password, email, fullname, "registracijaMokinys");
+                        }
+                        else
+                        {
+                            new RegisterTask().execute(username, password, email, fullname, "registracijaMokinys", filepath);
+                        }
                         Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
                         startActivity(intent);
                         finish();
@@ -173,7 +187,52 @@ public class Registruotis extends AppCompatActivity {
         return byteBuffer.toByteArray();
     }
 
+    private class RegisterTaskBeNuotraukos extends AsyncTask<Object, Void, String> {
+
+        @Override
+        protected String doInBackground(Object... params) {
+
+            String username = (String) params[0];
+            String password = (String) params[1];
+            String email = (String) params[2];
+            String fullname = (String) params[3];
+            URL url;
+            try {
+                url = new URL("http://192.168.0.108/PHPscriptai/registracijaMokinysBeNuotraukos.php");
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+
+                String data = "mokinio_el_pastas=" + email + "&mokinio_slaptazodis=" + password + "&pilnas_mokinio_vardas=" + fullname + "&mokinio_vartotojo_vardas=" + username;
+
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(data);
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                return response.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+            Log.d("result", result);
+        }
+    }
+
     private class RegisterTask extends AsyncTask<Object, Void, String> {
+
 
         @Override
         protected String doInBackground(Object... params) {
@@ -186,9 +245,9 @@ public class Registruotis extends AppCompatActivity {
             URL url;
             try {
                 if (filename == "registracijaMokinys") {
-                    url = new URL("http://192.168.0.101/PHPscriptai/registracijaMokinys.php");
+                    url = new URL("http://192.168.0.108/PHPscriptai/registracijaMokinys.php");
                 } else {
-                    url = new URL("http://192.168.0.101/PHPscriptai/registracijaKorepetitorius.php");
+                    url = new URL("http://192.168.0.108/PHPscriptai/registracijaKorepetitorius.php");
                 }
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -317,8 +376,8 @@ public class Registruotis extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("asdasdasdasd", result);
             Toast.makeText(Registruotis.this, result, Toast.LENGTH_SHORT).show();
+            Log.d("result", result);
         }
     }
 }

@@ -81,7 +81,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
-            android:id="@+id/kvalAukst"
+            android:id="@+id/mokinysRadio"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -94,7 +94,7 @@
             android:textColor="@drawable/text_color" />
 
         <RadioButton
-            android:id="@+id/kvalVid"
+            android:id="@+id/korRadio"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

@@ -150,7 +150,7 @@ public class KorepetitoriuSarasas extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiKorepetitoriausKorteleiDuomenis.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -184,7 +184,7 @@ public class KorepetitoriuSarasas extends Fragment {
 
                     Double average = 0.0;
                     try {
-                        URL url2 = new URL("http://192.168.0.101/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
+                        URL url2 = new URL("http://192.168.0.108/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
                         HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
                         conn2.setRequestMethod("GET");
                         conn2.setRequestProperty("Accept", "application/json");

@@ -22,12 +22,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import Model.IsimintasKorepetitoriusKortele;
+import Model.IsimintasKorepetitorius;
 
 public class IsimintiKorepetitoriai extends Fragment {
 
     private RecyclerView recyclerView;
-    private ArrayList<IsimintasKorepetitoriusKortele> arrayList;
+    private ArrayList<IsimintasKorepetitorius> arrayList;
     private IsimintasKorepetitoriusAdapter adapter;
     private TextView emptyRecycler;
 
@@ -57,7 +57,7 @@ public class IsimintiKorepetitoriai extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         emptyRecycler = v.findViewById(R.id.neraIsimintuKorepetitoriu);
 
-        arrayList = new ArrayList<IsimintasKorepetitoriusKortele>();
+        arrayList = new ArrayList<IsimintasKorepetitorius>();
 
         GautiIsimintusKorepetitorius task = new GautiIsimintusKorepetitorius(Prisijungti.currentMokinys.getId());
         task.execute();
@@ -75,7 +75,7 @@ public class IsimintiKorepetitoriai extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiIsimintusKorepetitorius.php?mokinio_id=" + mokinioId);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiIsimintusKorepetitorius.php?mokinio_id=" + mokinioId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -109,7 +109,7 @@ public class IsimintiKorepetitoriai extends Fragment {
 
                     Double average = 0.0;
                     try {
-                        URL url2 = new URL("http://192.168.0.101/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
+                        URL url2 = new URL("http://192.168.0.108/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
                         HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
                         conn2.setRequestMethod("GET");
                         conn2.setRequestProperty("Accept", "application/json");
@@ -140,17 +140,17 @@ public class IsimintiKorepetitoriai extends Fragment {
 
                     if (mokymoBudas == 1)
                     {
-                        arrayList.add(new IsimintasKorepetitoriusKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai", profilioId, korepetitoriausNuotrauka));
+                        arrayList.add(new IsimintasKorepetitorius(vardas, kaina, dalykaiJoined, id, average,"Gyvai", profilioId, korepetitoriausNuotrauka));
                         average = 0.0;
                     }
                     else if (mokymoBudas == 2)
                     {
-                        arrayList.add(new IsimintasKorepetitoriusKortele(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis", profilioId, korepetitoriausNuotrauka));
+                        arrayList.add(new IsimintasKorepetitorius(vardas, kaina, dalykaiJoined, id, average,"Nuotolinis", profilioId, korepetitoriausNuotrauka));
                         average = 0.0;
                     }
                     else
                     {
-                        arrayList.add(new IsimintasKorepetitoriusKortele(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu", profilioId, korepetitoriausNuotrauka));
+                        arrayList.add(new IsimintasKorepetitorius(vardas, kaina, dalykaiJoined, id, average,"Gyvai ir nuotoliniu", profilioId, korepetitoriausNuotrauka));
                         average = 0.0;
                     }
                 }

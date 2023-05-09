@@ -35,12 +35,10 @@
         <activity
             android:name=".ui.zinutes.Susirasyti"
             android:exported="false"
-            android:label="@string/title_activity_susirasyti"
-            android:theme="@style/Theme.Bakalauras.NoActionBar" />
+            android:label="@string/title_activity_susirasyti" />
         <activity
             android:name=".RecyclerViewPaspaustasKorepetitorius"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".PagrindinisLangas"
             android:exported="false"

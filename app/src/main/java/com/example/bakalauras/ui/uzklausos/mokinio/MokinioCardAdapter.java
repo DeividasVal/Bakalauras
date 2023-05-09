@@ -68,14 +68,14 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
         }
 
         Picasso.get()
-                .load("http://192.168.0.101/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.108/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(MokinioUzklausosCardHolder.pfp);
 
         MokinioUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiUzklausaTask task = new PasalintiUzklausaTask(Prisijungti.currentMokinys.getId());
+                PasalintiUzklausaTask task = new PasalintiUzklausaTask(Prisijungti.currentMokinys.getId(), sarasas.getId());
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);
@@ -97,20 +97,22 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
     private class PasalintiUzklausaTask extends AsyncTask<String, Void, String> {
 
         private int mokinysId;
+        private int id;
 
-        public PasalintiUzklausaTask(int mokinysId) {
+        public PasalintiUzklausaTask(int mokinysId, int id) {
             this.mokinysId = mokinysId;
+            this.id = id;
         }
 
         @Override
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/pasalintiUzklausaMokinys.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/pasalintiUzklausaMokinys.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
-                String data = "mokinio_id=" + mokinysId;
+                String data = "mokinio_id=" + mokinysId + "&id=" + id;
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(data);
                 writer.flush();

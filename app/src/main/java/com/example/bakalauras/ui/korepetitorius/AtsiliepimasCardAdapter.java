@@ -59,7 +59,7 @@ public class AtsiliepimasCardAdapter extends RecyclerView.Adapter<AtsiliepimasCa
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + sarasas.getMokinioNuotrauka())
+                    .load("http://192.168.0.108/PHPscriptai/" + sarasas.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(AtsiliepimasCardHolder.pfp);
         }

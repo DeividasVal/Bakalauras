@@ -79,7 +79,7 @@ public class PagrindinisCardAdapter extends RecyclerView.Adapter<korepetitoriusP
         holder.budasKortele.setText("Mokymo tipas: " + sarasas.getMokymoBudas());
 
         Picasso.get()
-                .load("http://192.168.0.101/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.108/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(holder.pfp);
 

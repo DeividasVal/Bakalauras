@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_pagrindinis" />
     <fragment
         android:id="@+id/nav_sukurti_profili"
-        android:label="Kurti profili"
+        android:label="Kurti profilį"
         android:name="com.example.bakalauras.ui.korepetitorius.KorKurtiProfili"
         tools:layout="@layout/fragment_kor_kurti_profili" />
     <fragment

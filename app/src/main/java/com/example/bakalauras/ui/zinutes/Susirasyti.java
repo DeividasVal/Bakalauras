@@ -6,8 +6,10 @@ import android.os.Bundle;
 
 import com.example.bakalauras.R;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,9 +45,26 @@ public class Susirasyti extends AppCompatActivity {
     private TextView emptyRecycler;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("");
+        setTitle("Susirašinėjimo laukas");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_susirasyti);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         recyclerView = findViewById(R.id.zinuciuRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -116,7 +135,7 @@ public class Susirasyti extends AppCompatActivity {
             String laikas = params[3];
             URL url;
             try {
-                url = new URL("http://192.168.0.101/PHPscriptai/iterptiZinute.php");
+                url = new URL("http://192.168.0.108/PHPscriptai/iterptiZinute.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -159,7 +178,7 @@ public class Susirasyti extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiZinutes.php?" +
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiZinutes.php?" +
                         "gavejo_id=" + gavejoId + "&dabartinis_id=" + prisijungesVartotojas);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

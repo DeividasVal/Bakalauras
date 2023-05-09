@@ -1,5 +1,6 @@
 package com.example.bakalauras.ui.redaguoti_korepetitorius;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -66,11 +68,26 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
     private ImageView pfp;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("");
         setTitle("Redaguoti profilį");
         setContentView(R.layout.activity_redaguoti_korepetitorius);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         pridetiDalyka = findViewById(R.id.buttonPridėtiRedaguoti);
         dalykuSarasas = findViewById(R.id.pasirinktiDalykaiRedaguoti);
@@ -101,7 +118,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
         task.execute();
 
         Picasso.get()
-                .load("http://192.168.0.101/PHPscriptai/" + Prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(pfp);
 
@@ -147,6 +164,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
                         Prisijungti.currentMokinys = null;
                         Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
                         startActivity(intent);
+
                     }
                     else if (!gyvai.isChecked() && nuotoliniu.isChecked())
                     {
@@ -173,6 +191,11 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
         pridetiDalyka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (listItems.size() >= 3) {
+                    Toast.makeText(getApplicationContext(), "Galite pasirinkti tik 3 dalykus arba mažiau!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!listItems.contains(spinnerDalykai.getSelectedItem().toString())) {
                     listItems.add(spinnerDalykai.getSelectedItem().toString());
                     adapter.notifyDataSetChanged();
@@ -280,7 +303,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
             int korepetitoriausId = (int) params[1];
             URL url;
             try {
-                url = new URL("http://192.168.0.101/PHPscriptai/korepetitoriusAtnaujintiNuotrauka.php");
+                url = new URL("http://192.168.0.108/PHPscriptai/korepetitoriusAtnaujintiNuotrauka.php");
                 String data = "korepetitoriaus_id=" + korepetitoriausId;
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -359,7 +382,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
 
             URL url;
             try {
-                url = new URL("http://192.168.0.101/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
+                url = new URL("http://192.168.0.108/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -412,7 +435,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiRedagavimuiDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiRedagavimuiDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

@@ -1,6 +1,6 @@
 package Model;
 
-public class IsimintasKorepetitoriusKortele {
+public class IsimintasKorepetitorius {
 
     private String vardas;
     private String kaina;
@@ -75,7 +75,7 @@ public class IsimintasKorepetitoriusKortele {
         this.dalykai = dalykai;
     }
 
-    public IsimintasKorepetitoriusKortele(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas, int profilioId) {
+    public IsimintasKorepetitorius(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas, int profilioId) {
         this.vardas = vardas;
         this.kaina = kaina;
         this.dalykai = dalykai;
@@ -85,7 +85,7 @@ public class IsimintasKorepetitoriusKortele {
         this.profilioId = profilioId;
     }
 
-    public IsimintasKorepetitoriusKortele(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas, int profilioId, String korepetitoriausNuotrauka) {
+    public IsimintasKorepetitorius(String vardas, String kaina, String dalykai, int id, Double ivertinimas, String mokymoBudas, int profilioId, String korepetitoriausNuotrauka) {
         this.vardas = vardas;
         this.kaina = kaina;
         this.dalykai = dalykai;

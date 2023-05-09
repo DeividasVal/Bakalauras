@@ -39,8 +39,8 @@ public class Prisijungti extends AppCompatActivity {
         setContentView(R.layout.activity_prisijungti);
         registerText = findViewById(R.id.registerText);
         login = findViewById(R.id.prisijungtiButton);
-        radioMokinys = findViewById(R.id.kvalAukst);
-        radioKorepetitorius = findViewById(R.id.kvalVid);
+        radioMokinys = findViewById(R.id.mokinysRadio);
+        radioKorepetitorius = findViewById(R.id.korRadio);
         usernameField = findViewById(R.id.prisijungtiVardas);
         passwordField = findViewById(R.id.slaptazodisPrisijungti);
 
@@ -87,10 +87,10 @@ public class Prisijungti extends AppCompatActivity {
             URL url;
             String requestBody;
             if (type == "mokinys") {
-                url = new URL("http://192.168.0.101/PHPscriptai/loginMokinys.php");
+                url = new URL("http://192.168.0.108/PHPscriptai/loginMokinys.php");
                 requestBody = "mokinio_vartotojo_vardas=" + username + "&mokinio_slaptazodis=" + password;
             } else {
-                url = new URL("http://192.168.0.101/PHPscriptai/loginKorepetitorius.php");
+                url = new URL("http://192.168.0.108/PHPscriptai/loginKorepetitorius.php");
                 requestBody = "korepetitoriaus_vartotojo_vardas=" + username + "&korepetitoriaus_slaptazodis=" + password;
             }
 
@@ -153,7 +153,7 @@ public class Prisijungti extends AppCompatActivity {
         protected Mokinys doInBackground(String... params) {
             String username = params[0];
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiMokini.php?mokinio_vartotojo_vardas=" + username);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiMokini.php?mokinio_vartotojo_vardas=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -191,7 +191,7 @@ public class Prisijungti extends AppCompatActivity {
         protected Korepetitorius doInBackground(String... params) {
             String username = params[0];
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriu.php?korepetitoriaus_vartotojo_vardas=" + username);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiKorepetitoriu.php?korepetitoriaus_vartotojo_vardas=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

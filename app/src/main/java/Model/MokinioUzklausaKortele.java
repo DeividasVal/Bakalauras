@@ -4,6 +4,15 @@ public class MokinioUzklausaKortele {
     private String vardasKorepetitoriaus;
     private int stausas;
     private String korepetitoriausNuotrauka;
+    private int Id;
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
 
     public String getKorepetitoriausNuotrauka() {
         return korepetitoriausNuotrauka;
@@ -34,9 +43,10 @@ public class MokinioUzklausaKortele {
         this.stausas = stausas;
     }
 
-    public MokinioUzklausaKortele(String vardasKorepetitoriaus, int stausas, String korepetitoriausNuotrauka) {
+    public MokinioUzklausaKortele(String vardasKorepetitoriaus, int stausas, String korepetitoriausNuotrauka, int Id) {
         this.vardasKorepetitoriaus = vardasKorepetitoriaus;
         this.stausas = stausas;
         this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
+        this.Id = Id;
     }
 }

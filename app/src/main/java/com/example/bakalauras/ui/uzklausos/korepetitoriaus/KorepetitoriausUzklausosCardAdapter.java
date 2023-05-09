@@ -61,7 +61,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + sarasas.getMokinioNuotrauka())
+                    .load("http://192.168.0.108/PHPscriptai/" + sarasas.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(KorepetitoriausUzklausosCardHolder.pfp);
         }
@@ -69,7 +69,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         KorepetitoriausUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(Prisijungti.currentKorepetitorius.getId(), 2);
+                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(sarasas.getId(), 2);
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);
@@ -79,7 +79,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         KorepetitoriausUzklausosCardHolder.patvirtinti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(Prisijungti.currentKorepetitorius.getId(), 1);
+                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(sarasas.getId(), 1);
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);
@@ -101,11 +101,11 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
 
     private class UzklausosVeiksmasTask extends AsyncTask<String, Void, String> {
 
-        private int korepetitoriausId;
+        private int Id;
         private int busena;
 
-        public UzklausosVeiksmasTask(int korepetitoriausId, int busena) {
-            this.korepetitoriausId = korepetitoriausId;
+        public UzklausosVeiksmasTask(int Id, int busena) {
+            this.Id = Id;
             this.busena = busena;
         }
 
@@ -113,11 +113,11 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
-                String data = "korepetitoriaus_id=" + korepetitoriausId + "&būsena=" + busena;
+                String data = "id=" + Id + "&būsena=" + busena;
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(data);
                 writer.flush();

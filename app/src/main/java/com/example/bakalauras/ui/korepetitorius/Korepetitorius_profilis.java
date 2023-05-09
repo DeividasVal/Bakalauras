@@ -38,9 +38,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import Model.Atsiliepimas;
+import Model.KorepetitoriusProfilis;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +63,7 @@ public class Korepetitorius_profilis extends Fragment {
     private RatingBar ratingBar;
     private ImageView pfp;
     private Button redaguoti;
+    public static KorepetitoriusProfilis profilis;
 
     public Korepetitorius_profilis() {
     }
@@ -133,7 +136,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -158,8 +161,9 @@ public class Korepetitorius_profilis extends Fragment {
                     double ivertinimas = obj.getDouble("ivertinimas");
                     String laikas = obj.getString("laikas");
                     String vardasMokinio = obj.getString("pilnas_mokinio_vardas");
+                    String mokinioNuotrauka = obj.getString("mokinio_nuotrauka");
 
-                    arrayList.add(new Atsiliepimas(vardasMokinio, mokinioId, profilioId, korId, atsiliepimoTekstas, ivertinimas, laikas));
+                    arrayList.add(new Atsiliepimas(vardasMokinio, mokinioId, profilioId, korId, atsiliepimoTekstas, ivertinimas, laikas, mokinioNuotrauka));
 
                 }
             } catch (Exception e) {
@@ -193,7 +197,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -239,6 +243,7 @@ public class Korepetitorius_profilis extends Fragment {
                         }
                     }
                 }
+                profilis = new KorepetitoriusProfilis(adresas, pfpNuotrauka, miestas, tipas, val, bio, istaiga, dalykaiIst, ivertinimasVidurkis, invertinimasCount, dalykaiJoined, prieinamumas);
                 conn.disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -249,13 +254,13 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             vardasText.setText(Prisijungti.currentKorepetitorius.getName());
-            dalykaiText.setText("Dalykai: " + dalykaiJoined);
-            adresasText.setText(adresas + ", " + miestas);
-            if (Integer.parseInt(tipas) == 1)
+            dalykaiText.setText("Dalykai: " + profilis.getDalykaiMokymosi());
+            adresasText.setText(profilis.getAdresas() + ", " + profilis.getMiestas());
+            if (Integer.parseInt(profilis.getTipas()) == 1)
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai");
             }
-            else if (Integer.parseInt(tipas) == 2)
+            else if (Integer.parseInt(profilis.getTipas()) == 2)
             {
                 mokymoBudasText.setText("Mokymo tipas: Nuotoliniu");
             }
@@ -263,18 +268,19 @@ public class Korepetitorius_profilis extends Fragment {
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
-            countisDB.setText("("+ invertinimasCount + " atsiliepimų)");
-            vidurkisIsDB.setText(ivertinimasVidurkis.toString());
+            countisDB.setText("("+ profilis.getIvertinimuKiekis() + " atsiliepimai)");
+            DecimalFormat df = new DecimalFormat("#0.0");
+            vidurkisIsDB.setText(df.format(profilis.getIvertinimas()));
             ratingBar.setNumStars(5);
             ratingBar.setIsIndicator(true);
-            ratingBar.setRating(ivertinimasVidurkis.floatValue());
+            ratingBar.setRating(profilis.getIvertinimas().floatValue());
             kainaText.setText("Kaina: " + val + " Eur/val.");
-            bioText.setText(bio);
-            istaigaText.setText(istaiga);
-            dalykasText.setText(dalykaiIst);
+            bioText.setText(profilis.getBio());
+            istaigaText.setText(profilis.getIstaiga());
+            dalykasText.setText(profilis.getDalykaiIstaigoje());
 
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + pfpNuotrauka)
+                    .load("http://192.168.0.108/PHPscriptai/" + profilis.getNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
 
@@ -283,7 +289,7 @@ public class Korepetitorius_profilis extends Fragment {
                 for (int j = 1; j < row.getChildCount(); j++) {
                     CheckBox checkBox = (CheckBox) row.getChildAt(j);
                     if (checkBox != null) {
-                        if (prieinamumas[i-1][j-1]) {
+                        if (profilis.getPrieinamumas()[i-1][j-1]) {
                             checkBox.setChecked(true);
                         } else {
                             checkBox.setChecked(false);

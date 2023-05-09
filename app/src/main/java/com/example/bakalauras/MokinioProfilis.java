@@ -78,7 +78,7 @@ public class MokinioProfilis extends Fragment {
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
+                    .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
         }
@@ -105,7 +105,7 @@ public class MokinioProfilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

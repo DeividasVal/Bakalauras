@@ -3,15 +3,27 @@ package com.example.bakalauras.ui.failai.mokinio;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.AsyncTask;
+import android.os.Environment;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -62,7 +74,17 @@ public class MokinioFailaiAdapter extends RecyclerView.Adapter<MokinioFailaiCard
         MokinioFailaiCardHolder.atsisiusti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DownloadFile().execute("http://192.168.0.101/PHPscriptai/" + sarasas.getFailas());
+                String fileUrl = "http://192.168.0.108/PHPscriptai/" + sarasas.getFailas();
+                String fileName = sarasas.getFailas();
+
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(fileUrl));
+                request.setTitle(fileName);
+                request.setDescription(fileName);
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+
+                DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                downloadManager.enqueue(request);
+                Toast.makeText(context, "Failas atsisiųstas sėkmingai!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -70,45 +92,5 @@ public class MokinioFailaiAdapter extends RecyclerView.Adapter<MokinioFailaiCard
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    private class DownloadFile extends AsyncTask<String, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(String... params) {
-            String fileUrl = params[0];
-            String fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
-            try {
-                URL url = new URL(fileUrl);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setDoOutput(true);
-                conn.connect();
-
-                InputStream inputStream = conn.getInputStream();
-                FileOutputStream outputStream = new FileOutputStream(new File(Environment.getExternalStorageDirectory(), fileName));
-
-                byte[] buffer = new byte[1024];
-                int len;
-                while ((len = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, len);
-                }
-                outputStream.flush();
-                outputStream.close();
-                inputStream.close();
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                Toast.makeText(context, "Failas atsisiųstas sėkmingai!", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, "Nepavyko atsisiųsti failo.", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 }

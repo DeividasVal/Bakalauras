@@ -1,8 +1,10 @@
 package com.example.bakalauras;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.view.MenuInflater;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +15,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,9 +40,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import Model.Atsiliepimas;
+import Model.KorepetitoriusProfilis;
+import Model.Mokinys;
 
 public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
@@ -48,6 +56,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
     private Button susisiekti;
     private RecyclerView recyclerView;
     private ArrayList<Atsiliepimas> arrayList;
+    public static KorepetitoriusProfilis profilis;
     private AtsiliepimasCardAdapter adapter;
     private Double ivertinimasVidurkis;
     private int invertinimasCount;
@@ -55,8 +64,25 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
     private ImageView pfp;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("");
+        setTitle("Korepetitoriaus profilis");
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         setContentView(R.layout.activity_recycler_view_paspaustas_korepetitorius);
 
         Intent intent = getIntent();
@@ -115,7 +141,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -143,7 +169,6 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
                     String mokinioNuotrauka = obj.getString("mokinio_nuotrauka");
 
                     arrayList.add(new Atsiliepimas(vardasMokinio, mokinioId, profilioId, korId, atsiliepimoTekstas, ivertinimas, laikas, mokinioNuotrauka));
-
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -174,7 +199,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             int busena = params[2];
 
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/uzklausaMokytis.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/uzklausaMokytis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -219,7 +244,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -266,6 +291,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
                         }
                     }
                 }
+                profilis = new KorepetitoriusProfilis(adresas, nuotraukaURL, miestas, tipas, val, bio, istaiga, dalykaiIst, ivertinimasVidurkis, invertinimasCount, dalykaiJoined, prieinamumas);
                 conn.disconnect();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -276,17 +302,17 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + nuotraukaURL)
+                    .load("http://192.168.0.108/PHPscriptai/" + profilis.getNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
             vardasText.setText(vardas);
-            dalykaiText.setText("Dalykai: " + dalykaiJoined);
-            adresasText.setText(adresas + ", " + miestas);
-            if (Integer.parseInt(tipas) == 1)
+            dalykaiText.setText("Dalykai: " + profilis.getDalykaiMokymosi());
+            adresasText.setText(profilis.getAdresas() + ", " + profilis.getMiestas());
+            if (Integer.parseInt(profilis.getTipas()) == 1)
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai");
             }
-            else if (Integer.parseInt(tipas) == 2)
+            else if (Integer.parseInt(profilis.getTipas()) == 2)
             {
                 mokymoBudasText.setText("Mokymo tipas: Nuotoliniu");
             }
@@ -294,22 +320,23 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
-            count.setText("("+ invertinimasCount + " atsiliepimų)");
-            vidurkis.setText(ivertinimasVidurkis.toString());
+            count.setText("("+ profilis.getIvertinimuKiekis() + " atsiliepimai)");
+            DecimalFormat df = new DecimalFormat("#0.0");
+            vidurkis.setText(df.format(ivertinimasVidurkis));
             ratingBar.setNumStars(5);
             ratingBar.setIsIndicator(true);
-            ratingBar.setRating(ivertinimasVidurkis.floatValue());
-            kainaText.setText("Kaina: " + val + " Eur/val.");
-            bioText.setText(bio);
-            istaigaText.setText(istaiga);
-            dalykasText.setText(dalykaiIst);
+            ratingBar.setRating(profilis.getIvertinimas().floatValue());
+            kainaText.setText("Kaina: " + profilis.getVal() + " Eur/val.");
+            bioText.setText(profilis.getBio());
+            istaigaText.setText(profilis.getIstaiga());
+            dalykasText.setText(profilis.getDalykaiIstaigoje());
 
             for (int i = 1; i < uzpildyti.getChildCount(); i++) {
                 TableRow row = (TableRow) uzpildyti.getChildAt(i);
                 for (int j = 1; j < row.getChildCount(); j++) {
                     CheckBox checkBox = (CheckBox) row.getChildAt(j);
                     if (checkBox != null) {
-                        if (prieinamumas[i-1][j-1]) {
+                        if (profilis.getPrieinamumas()[i-1][j-1]) {
                             checkBox.setChecked(true);
                         } else {
                             checkBox.setChecked(false);

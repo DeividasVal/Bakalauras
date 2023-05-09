@@ -9,6 +9,15 @@ public class MokiniuiPatvirtintasKorepetitoriusKortele {
     private int korepetitoriausId;
     private int profilioId;
     private String korepetitoriausNuotrauka;
+    private int patvirtintasId;
+
+    public int getPatvirtintasId() {
+        return patvirtintasId;
+    }
+
+    public void setPatvirtintasId(int patvirtintasId) {
+        this.patvirtintasId = patvirtintasId;
+    }
 
     public int getProfilioId() {
         return profilioId;
@@ -83,7 +92,7 @@ public class MokiniuiPatvirtintasKorepetitoriusKortele {
         this.profilioId = profilioId;
     }
 
-    public MokiniuiPatvirtintasKorepetitoriusKortele(int kaina, String vardasKorepetitoriaus, String dalykai, String adresas, int korepetitoriausId, int profilioId, String korepetitoriausNuotrauka) {
+    public MokiniuiPatvirtintasKorepetitoriusKortele(int kaina, String vardasKorepetitoriaus, String dalykai, String adresas, int korepetitoriausId, int profilioId, String korepetitoriausNuotrauka, int patvirtintasId) {
         this.kaina = kaina;
         this.vardasKorepetitoriaus = vardasKorepetitoriaus;
         this.dalykai = dalykai;
@@ -91,5 +100,6 @@ public class MokiniuiPatvirtintasKorepetitoriusKortele {
         this.korepetitoriausId = korepetitoriausId;
         this.profilioId = profilioId;
         this.korepetitoriausNuotrauka = korepetitoriausNuotrauka;
+        this.patvirtintasId = patvirtintasId;
     }
 }

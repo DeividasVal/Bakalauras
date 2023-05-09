@@ -26,9 +26,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import Model.IsimintasKorepetitoriusKortele;
+import Model.IsimintasKorepetitorius;
 
 class IsimintasKorepetitoriusCardHolder extends RecyclerView.ViewHolder {
 
@@ -52,10 +53,10 @@ class IsimintasKorepetitoriusCardHolder extends RecyclerView.ViewHolder {
 
 public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<IsimintasKorepetitoriusCardHolder> {
 
-    private ArrayList<IsimintasKorepetitoriusKortele> list;
+    private ArrayList<IsimintasKorepetitorius> list;
     private Context context;
 
-    public IsimintasKorepetitoriusAdapter(ArrayList<IsimintasKorepetitoriusKortele> list, Context context) {
+    public IsimintasKorepetitoriusAdapter(ArrayList<IsimintasKorepetitorius> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -71,7 +72,8 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
 
     @Override
     public void onBindViewHolder(@NonNull IsimintasKorepetitoriusCardHolder holder, int position) {
-        IsimintasKorepetitoriusKortele sarasas = list.get(position);
+        IsimintasKorepetitorius sarasas = list.get(position);
+        DecimalFormat df = new DecimalFormat("#0.0");
         new CheckFavoriteAsyncTask(holder, sarasas.getProfilioId()).execute();
         holder.vardas.setText(sarasas.getVardas());
         holder.dalykai.setText("Moko: " + sarasas.getDalykai());
@@ -79,7 +81,7 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
         holder.budasKortele.setText("Mokymo tipas: " + sarasas.getMokymoBudas());
 
         Picasso.get()
-                .load("http://192.168.0.101/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.108/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(holder.pfp);
 
@@ -90,7 +92,7 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
         }
         else
         {
-            holder.ivertinimas.setText(sarasas.getIvertinimas().toString());
+            holder.ivertinimas.setText(df.format(sarasas.getIvertinimas()));
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +165,7 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/isimenaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/isimenaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -201,7 +203,7 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -233,7 +235,7 @@ public class IsimintasKorepetitoriusAdapter extends RecyclerView.Adapter<Isimint
 
     public static boolean paziuretiArIsiminta(int profilioId, int mokinioId) {
         try {
-            URL url = new URL("http://192.168.0.101/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
+            URL url = new URL("http://192.168.0.108/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
             String requestBody = "profilio_id=" + profilioId + "&mokinio_id=" + mokinioId;
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

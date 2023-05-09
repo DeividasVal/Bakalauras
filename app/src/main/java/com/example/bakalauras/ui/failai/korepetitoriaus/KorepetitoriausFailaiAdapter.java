@@ -77,7 +77,7 @@ public class KorepetitoriausFailaiAdapter extends RecyclerView.Adapter<Korepetit
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/pasalintiFaila.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/pasalintiFaila.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

@@ -63,7 +63,7 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         MokiniuiPatvirtintiKorepetitoriaiCardHolder.dalykai.setText("Dalykai: " + sarasas.getDalykai());
 
         Picasso.get()
-                .load("http://192.168.0.101/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.108/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(MokiniuiPatvirtintiKorepetitoriaiCardHolder.pfp);
 
@@ -72,7 +72,7 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         MokiniuiPatvirtintiKorepetitoriaiCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiKorepetitoriuTask task = new PasalintiKorepetitoriuTask(Prisijungti.currentMokinys.getId());
+                PasalintiKorepetitoriuTask task = new PasalintiKorepetitoriuTask(Prisijungti.currentMokinys.getId(), sarasas.getPatvirtintasId());
                 task.execute();
                 list.remove(position);
                 notifyItemRemoved(position);
@@ -116,20 +116,22 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
     private class PasalintiKorepetitoriuTask extends AsyncTask<String, Void, String> {
 
         private int mokinioId;
+        private int id;
 
-        public PasalintiKorepetitoriuTask(int mokinioId) {
+        public PasalintiKorepetitoriuTask(int mokinioId, int id) {
             this.mokinioId = mokinioId;
+            this.id = id;
         }
 
         @Override
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/pasalintiUzklausaMokinys.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/pasalintiUzklausaMokinys.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
-                String data = "mokinio_id=" + mokinioId;
+                String data = "mokinio_id=" + mokinioId + "&id=" + id;
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(data);
                 writer.flush();

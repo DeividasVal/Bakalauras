@@ -1,5 +1,6 @@
 package com.example.bakalauras.ui.redaguoti_mokinys;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -44,11 +47,26 @@ public class RedaguotiMokinys extends AppCompatActivity {
     private Uri filepath;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("");
         setTitle("Redaguoti profilį");
         setContentView(R.layout.activity_redaguoti_mokinys);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         vardasText = findViewById(R.id.vardasMokinys);
         emailText = findViewById(R.id.emailMokinysRedaguoti);
@@ -65,7 +83,7 @@ public class RedaguotiMokinys extends AppCompatActivity {
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.101/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
+                    .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
         }
@@ -94,12 +112,24 @@ public class RedaguotiMokinys extends AppCompatActivity {
                 } else if (!slaptazodis.isEmpty() && !patvirtinti.isEmpty() && !slaptazodis.equals(patvirtinti)) {
                     Toast.makeText(getApplicationContext(), "Slaptazodziai nesutampa", Toast.LENGTH_SHORT).show();
                 } else {
-                    PakeistiMokinioDuomenis task = new PakeistiMokinioDuomenis(Prisijungti.currentMokinys.getId(), vardas, email, vartotojoVardas, slaptazodis, filepath);
-                    task.execute();
-                    Prisijungti.currentKorepetitorius = null;
-                    Prisijungti.currentMokinys = null;
-                    Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
-                    startActivity(intent);
+                    if (filepath == null)
+                    {
+                        PakeistiMokinioDuomenisBeNuotraukos task = new PakeistiMokinioDuomenisBeNuotraukos(Prisijungti.currentMokinys.getId(), vardas, email, vartotojoVardas, slaptazodis);
+                        task.execute();
+                        Prisijungti.currentKorepetitorius = null;
+                        Prisijungti.currentMokinys = null;
+                        Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        PakeistiMokinioDuomenis task = new PakeistiMokinioDuomenis(Prisijungti.currentMokinys.getId(), vardas, email, vartotojoVardas, slaptazodis, filepath);
+                        task.execute();
+                        Prisijungti.currentKorepetitorius = null;
+                        Prisijungti.currentMokinys = null;
+                        Intent intent = new Intent(getApplicationContext(), Prisijungti.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -163,6 +193,58 @@ public class RedaguotiMokinys extends AppCompatActivity {
         return byteBuffer.toByteArray();
     }
 
+    private class PakeistiMokinioDuomenisBeNuotraukos extends AsyncTask<Object, Void, String> {
+
+        private int mokinioId;
+        private String fullname;
+        private String email;
+        private String username;
+        private String password;
+
+        public PakeistiMokinioDuomenisBeNuotraukos(int mokinioId, String fullname, String email, String username, String password) {
+            this.mokinioId = mokinioId;
+            this.fullname = fullname;
+            this.email = email;
+            this.username = username;
+            this.password = password;
+        }
+
+        @Override
+        protected String doInBackground(Object... params) {
+            URL url;
+            try {
+                url = new URL("http://192.168.0.108/PHPscriptai/mokinysAtnaujintiDuomenisBeNuotraukos.php");
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+
+                String data = "mokinio_id=" + mokinioId + "&mokinio_slaptazodis=" + password + "&pilnas_mokinio_vardas=" + fullname + "&mokinio_vartotojo_vardas=" + username + "&mokinio_el_pastas=" + email;
+                Log.d("result", data);
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(data);
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                return response.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Error!";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private class PakeistiMokinioDuomenis extends AsyncTask<String, Void, String> {
 
         private int mokinioId;
@@ -184,7 +266,7 @@ public class RedaguotiMokinys extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/mokinysAtnaujintiDuomenis.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/mokinysAtnaujintiDuomenis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

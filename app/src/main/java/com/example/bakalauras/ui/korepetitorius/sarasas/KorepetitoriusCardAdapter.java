@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import Model.KorepetitoriausKortele;
@@ -76,7 +77,7 @@ public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<Korepetitori
     @Override
     public void onBindViewHolder(@NonNull KorepetitoriusCardHolder holder, int position) {
         KorepetitoriausKortele sarasas = list.get(position);
-
+        DecimalFormat df = new DecimalFormat("#0.0");
         if (Prisijungti.currentMokinys != null)
         {
             new CheckFavoriteAsyncTask(holder, sarasas.getProfilioId()).execute();
@@ -100,7 +101,7 @@ public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<Korepetitori
         holder.budasKortele.setText("Mokymo tipas: " + sarasas.getMokymoBudas());
 
         Picasso.get()
-                .load("http://192.168.0.101/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.108/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(holder.pfp);
 
@@ -111,7 +112,7 @@ public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<Korepetitori
         }
         else
         {
-            holder.ivertinimas.setText(sarasas.getIvertinimas().toString());
+            holder.ivertinimas.setText(df.format(sarasas.getIvertinimas()));
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +177,7 @@ public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<Korepetitori
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/isimenaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/isimenaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -214,7 +215,7 @@ public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<Korepetitori
             int mokinioId = params[1];
 
             try {
-                URL url = new URL("http://192.168.0.101/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
+                URL url = new URL("http://192.168.0.108/PHPscriptai/pasalintiIsimintaKorepetitoriu.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -246,7 +247,7 @@ public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<Korepetitori
 
     public static boolean paziuretiArIsiminta(int profilioId, int mokinioId) {
         try {
-            URL url = new URL("http://192.168.0.101/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
+            URL url = new URL("http://192.168.0.108/PHPscriptai/arMokinysIsimineKorepetitoriu.php");;
             String requestBody = "profilio_id=" + profilioId + "&mokinio_id=" + mokinioId;
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
