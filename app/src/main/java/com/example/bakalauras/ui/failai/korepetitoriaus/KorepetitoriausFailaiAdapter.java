@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bakalauras.R;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -47,15 +48,14 @@ public class KorepetitoriausFailaiAdapter extends RecyclerView.Adapter<Korepetit
         KorepetitoriausFailaiCardHolder.vardas.setText("Mokiniui: "+sarasas.getVardas());
         KorepetitoriausFailaiCardHolder.laikas.setText(sarasas.getLaikas());
         KorepetitoriausFailaiCardHolder.pavadinimas.setText(sarasas.getPavadinimas());
-        KorepetitoriausFailaiCardHolder.failoPav.setText(sarasas.getFailas());
+        File file = new File(sarasas.getFailas());
+        String fileName = file.getName();
+        KorepetitoriausFailaiCardHolder.failoPav.setText(fileName);
         KorepetitoriausFailaiCardHolder.pasalinti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiFaila task = new PasalintiFaila(sarasas.getFailoId());
+                PasalintiFaila task = new PasalintiFaila(sarasas.getFailoId(), position);
                 task.execute();
-                list.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, list.size());
             }
         });
     }
@@ -68,9 +68,11 @@ public class KorepetitoriausFailaiAdapter extends RecyclerView.Adapter<Korepetit
     private class PasalintiFaila extends AsyncTask<String, Void, String> {
 
         private int failoId;
+        private int position;
 
-        public PasalintiFaila(int failoId) {
+        public PasalintiFaila(int failoId, int position) {
             this.failoId = failoId;
+            this.position = position;
         }
 
         @Override
@@ -104,7 +106,11 @@ public class KorepetitoriausFailaiAdapter extends RecyclerView.Adapter<Korepetit
         @Override
         protected void onPostExecute(String response) {
             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-            notifyDataSetChanged();
+            if (position < list.size()) {
+                list.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, list.size());
+            }
         }
     }
 }

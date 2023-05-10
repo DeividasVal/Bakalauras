@@ -69,6 +69,7 @@ public class IkeltiFailaPopup extends AppCompatActivity {
             public void onClick(View view) {
                 if (filepath != null) { // check if a file has been selected
                     new IkeltiFaila().execute(mokinioId, korepetitorius_id, filepath, pavadinimas.getText().toString());
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Pasirinkite failą!", Toast.LENGTH_SHORT).show();
                 }

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bakalauras.R;
 import com.example.bakalauras.PopupAtsiliepimas;
 import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.RecyclerViewPaspaustasKorepetitorius;
 import com.example.bakalauras.ui.zinutes.Susirasyti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -72,11 +73,8 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         MokiniuiPatvirtintiKorepetitoriaiCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiKorepetitoriuTask task = new PasalintiKorepetitoriuTask(Prisijungti.currentMokinys.getId(), sarasas.getPatvirtintasId());
+                PasalintiKorepetitoriuTask task = new PasalintiKorepetitoriuTask(Prisijungti.currentMokinys.getId(), sarasas.getPatvirtintasId(), position);
                 task.execute();
-                list.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, list.size());
             }
         });
 
@@ -100,6 +98,16 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
                 context.startActivity(intent);
             }
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, RecyclerViewPaspaustasKorepetitorius.class);
+                intent.putExtra("korepetitorius_id", sarasas.getKorepetitoriausId());
+                intent.putExtra("korepetitorius_vardas", sarasas.getVardasKorepetitoriaus());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -117,10 +125,12 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
 
         private int mokinioId;
         private int id;
+        private int position;
 
-        public PasalintiKorepetitoriuTask(int mokinioId, int id) {
+        public PasalintiKorepetitoriuTask(int mokinioId, int id, int position) {
             this.mokinioId = mokinioId;
             this.id = id;
+            this.position = position;
         }
 
         @Override
@@ -154,7 +164,11 @@ public class MokiniuiPatvirtintiKorepetitoriaiCardAdapter extends RecyclerView.A
         @Override
         protected void onPostExecute(String response) {
             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-            notifyDataSetChanged();
+            if (position < list.size()) {
+                list.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, list.size());
+            }
         }
     }
     public class CircleTransform implements Transformation {

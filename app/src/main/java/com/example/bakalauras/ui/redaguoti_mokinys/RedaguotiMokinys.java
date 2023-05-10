@@ -19,14 +19,19 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -42,7 +47,7 @@ public class RedaguotiMokinys extends AppCompatActivity {
 
     private EditText vardasText, emailText, vartotojoVardasText, slaptazodisText, patvirtintiPassText;
     private Button pakeisti;
-    private String vardas, email, vartotojoVardas, slaptazodis, patvirtinti;
+    private String vardas, email, vartotojoVardas, slaptazodis, patvirtinti, Vardas, Username, Pastas;
     private ImageView pfp;
     private Uri filepath;
 
@@ -75,6 +80,9 @@ public class RedaguotiMokinys extends AppCompatActivity {
         patvirtintiPassText = findViewById(R.id.slaptazodisPatvirtintiRedaguotiMokinys);
         pakeisti = findViewById(R.id.redaguotiMokinysButton);
         pfp = findViewById(R.id.redaguotiMokinysPFP);
+
+        UzpildytiProfiliMokinio task = new UzpildytiProfiliMokinio(Prisijungti.currentMokinys.getLogin());
+        task.execute();
 
         if (Prisijungti.currentMokinys.getMokinioNuotrauka().isEmpty())
         {
@@ -346,10 +354,50 @@ public class RedaguotiMokinys extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String response) {
-            Log.d("update ", response);
             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
         }
     }
+
+    private class UzpildytiProfiliMokinio extends AsyncTask<Void, Void, Void> {
+
+        private String mokinio_vartotojo_vardas;
+
+        public UzpildytiProfiliMokinio(String mokinio_vartotojo_vardas) {
+            this.mokinio_vartotojo_vardas = mokinio_vartotojo_vardas;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiDuomenisMokinioRedagavimui.php?mokinio_vartotojo_vardas=" + mokinio_vartotojo_vardas);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Accept", "application/json");
+
+                BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+                String output;
+                while ((output = br.readLine()) != null) {
+                    JSONObject obj = new JSONObject(output);
+                    Log.d("response", output);
+
+                    Vardas = obj.getString("pilnas_mokinio_vardas");
+                    Username = obj.getString("mokinio_vartotojo_vardas");
+                    Pastas = obj.getString("mokinio_el_pastas");
+                }
+                conn.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            vardasText.setText(Vardas);
+            vartotojoVardasText.setText(Username);
+            emailText.setText(Pastas);
+            }
+        }
 
     public class CircleTransform implements Transformation {
 

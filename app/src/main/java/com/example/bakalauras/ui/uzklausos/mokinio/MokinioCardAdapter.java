@@ -2,11 +2,13 @@ package com.example.bakalauras.ui.uzklausos.mokinio;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.RecyclerViewPaspaustasKorepetitorius;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -75,11 +78,20 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
         MokinioUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PasalintiUzklausaTask task = new PasalintiUzklausaTask(Prisijungti.currentMokinys.getId(), sarasas.getId());
+                PasalintiUzklausaTask task = new PasalintiUzklausaTask(Prisijungti.currentMokinys.getId(), sarasas.getId(), position);
                 task.execute();
-                list.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, list.size());
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("kor id", String.valueOf(sarasas.getId()));
+                Log.d("kor vard", sarasas.getVardasKorepetitoriaus());
+                Intent intent = new Intent(context, RecyclerViewPaspaustasKorepetitorius.class);
+                intent.putExtra("korepetitorius_id", sarasas.getId());
+                intent.putExtra("korepetitorius_vardas", sarasas.getVardasKorepetitoriaus());
+                context.startActivity(intent);
             }
         });
     }
@@ -98,10 +110,12 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
 
         private int mokinysId;
         private int id;
+        private int position;
 
-        public PasalintiUzklausaTask(int mokinysId, int id) {
+        public PasalintiUzklausaTask(int mokinysId, int id, int position) {
             this.mokinysId = mokinysId;
             this.id = id;
+            this.position = position;
         }
 
         @Override
@@ -136,7 +150,11 @@ public class MokinioCardAdapter extends RecyclerView.Adapter<MokinioUzklausosCar
         @Override
         protected void onPostExecute(String response) {
             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-            notifyDataSetChanged();
+            if (position < list.size()) {
+                list.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, list.size());
+            }
         }
     }
 

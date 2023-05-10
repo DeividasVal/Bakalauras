@@ -151,7 +151,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
 
                 if (miestas.isEmpty() || adresas.isEmpty() || istaigaGet.isEmpty() || bioGet.isEmpty() || dalykasGet.isEmpty() ||
                         kainaGet.isEmpty() || vardasGet.isEmpty() || emailGet.isEmpty() || vartotojoGet.isEmpty() || slaptazodisGet.isEmpty() || patvirtintiGet.isEmpty()
-                        || listItems.isEmpty() || !gyvai.isChecked() || !nuotoliniu.isChecked()) {
+                        || listItems.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Užpildykite visus laukus!", Toast.LENGTH_SHORT).show();
                 } else if (!slaptazodisGet.isEmpty() && !patvirtintiGet.isEmpty() && !slaptazodisGet.equals(patvirtintiGet)) {
                     Toast.makeText(getApplicationContext(), "Slaptažodžiai nesutampa!", Toast.LENGTH_SHORT).show();

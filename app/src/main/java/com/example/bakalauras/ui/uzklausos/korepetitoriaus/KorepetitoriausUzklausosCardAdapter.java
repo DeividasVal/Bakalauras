@@ -69,21 +69,15 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         KorepetitoriausUzklausosCardHolder.atsaukti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(sarasas.getId(), 2);
+                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(sarasas.getId(), 2, position);
                 task.execute();
-                list.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, list.size());
             }
         });
         KorepetitoriausUzklausosCardHolder.patvirtinti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(sarasas.getId(), 1);
+                UzklausosVeiksmasTask task = new UzklausosVeiksmasTask(sarasas.getId(), 1, position);
                 task.execute();
-                list.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, list.size());
             }
         });
     }
@@ -103,10 +97,12 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
 
         private int Id;
         private int busena;
+        private int position;
 
-        public UzklausosVeiksmasTask(int Id, int busena) {
+        public UzklausosVeiksmasTask(int Id, int busena, int position) {
             this.Id = Id;
             this.busena = busena;
+            this.position = position;
         }
 
         @Override
@@ -141,7 +137,11 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         protected void onPostExecute(String response) {
             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
             Log.d("kor", response);
-            notifyDataSetChanged();
+            if (position < list.size()) {
+                list.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, list.size());
+            }
         }
     }
 

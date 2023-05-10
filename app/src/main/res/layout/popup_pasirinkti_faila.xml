@@ -43,6 +43,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:gravity="top|left"
+            app:backgroundTint="#2135B6"
             android:hint="Pavadinimas"
             android:inputType="textMultiLine"
             android:isScrollContainer="true" />

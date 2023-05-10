@@ -40,7 +40,6 @@ class KorepetitoriusCardHolder extends RecyclerView.ViewHolder {
     public Button favorite;
     public ImageView zvaigzde, pfp;
 
-
     public KorepetitoriusCardHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -94,7 +93,6 @@ public class KorepetitoriusCardAdapter extends RecyclerView.Adapter<Korepetitori
         {
             holder.favorite.setVisibility(View.GONE);
         }
-
         holder.vardas.setText(sarasas.getVardas());
         holder.dalykai.setText("Moko: " + sarasas.getDalykai());
         holder.kaina.setText(sarasas.getKaina() + " Eur/val.");

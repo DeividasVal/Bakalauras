@@ -320,7 +320,15 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
-            count.setText("("+ profilis.getIvertinimuKiekis() + " atsiliepimai)");
+            if (profilis.getIvertinimuKiekis() == 0)
+            {
+                count.setText("(0 atsiliepimų)");
+
+            }
+            else
+            {
+                count.setText("("+ profilis.getIvertinimuKiekis() + " atsiliepimai)");
+            }
             DecimalFormat df = new DecimalFormat("#0.0");
             vidurkis.setText(df.format(ivertinimasVidurkis));
             ratingBar.setNumStars(5);

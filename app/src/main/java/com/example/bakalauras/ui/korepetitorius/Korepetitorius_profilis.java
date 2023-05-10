@@ -268,7 +268,15 @@ public class Korepetitorius_profilis extends Fragment {
             {
                 mokymoBudasText.setText("Mokymo tipas: Gyvai ir nuotoliniu");
             }
-            countisDB.setText("("+ profilis.getIvertinimuKiekis() + " atsiliepimai)");
+            if (profilis.getIvertinimuKiekis() == 0)
+            {
+                countisDB.setText("(0 atsiliepimų)");
+
+            }
+            else
+            {
+                countisDB.setText("("+ profilis.getIvertinimuKiekis() + " atsiliepimai)");
+            }
             DecimalFormat df = new DecimalFormat("#0.0");
             vidurkisIsDB.setText(df.format(profilis.getIvertinimas()));
             ratingBar.setNumStars(5);
