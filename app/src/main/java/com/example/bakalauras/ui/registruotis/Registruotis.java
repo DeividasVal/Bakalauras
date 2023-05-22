@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.registruotis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,9 +23,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bakalauras.ui.zinutes.Susirasyti;
-import com.example.bakalauras.ui.zinutes.SusirasytiCardAdapter;
-import com.google.gson.Gson;
+import com.example.bakalauras.R;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -36,8 +35,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 
 public class Registruotis extends AppCompatActivity {
 
@@ -198,7 +195,7 @@ public class Registruotis extends AppCompatActivity {
             String fullname = (String) params[3];
             URL url;
             try {
-                url = new URL("http://192.168.0.108/PHPscriptai/registracijaMokinysBeNuotraukos.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/registracijaMokinysBeNuotraukos.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -245,9 +242,9 @@ public class Registruotis extends AppCompatActivity {
             URL url;
             try {
                 if (filename == "registracijaMokinys") {
-                    url = new URL("http://192.168.0.108/PHPscriptai/registracijaMokinys.php");
+                    url = new URL("http://192.168.0.106/PHPscriptai/registracijaMokinys.php");
                 } else {
-                    url = new URL("http://192.168.0.108/PHPscriptai/registracijaKorepetitorius.php");
+                    url = new URL("http://192.168.0.106/PHPscriptai/registracijaKorepetitorius.php");
                 }
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

@@ -76,7 +76,7 @@ public class MokinioFailaiAdapter extends RecyclerView.Adapter<MokinioFailaiCard
         MokinioFailaiCardHolder.atsisiusti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fileUrl = "http://192.168.0.108/PHPscriptai/" + sarasas.getFailas();
+                String fileUrl = "http://192.168.0.106/PHPscriptai/" + sarasas.getFailas();
                 String fileName = sarasas.getFailas();
                 File file = new File(fileName);
                 String fileName2 = file.getName();

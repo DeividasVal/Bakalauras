@@ -48,17 +48,17 @@
     <fragment
         android:id="@+id/nav_profilisMokinys"
         android:label="Mano profilis"
-        android:name="com.example.bakalauras.MokinioProfilis"
+        android:name="com.example.bakalauras.ui.mokinio_profilis.MokinioProfilis"
         tools:layout="@layout/fragment_mokinio_profilis" />
     <fragment
         android:id="@+id/nav_kategorija"
         android:label="Kategorijos"
-        android:name="com.example.bakalauras.Kategorijos"
+        android:name="com.example.bakalauras.ui.kategorijos.Kategorijos"
         tools:layout="@layout/fragment_kategorijos" />
     <fragment
         android:id="@+id/nav_issaugotikop"
         android:label="Įsiminti korepetitoriai"
-        android:name="com.example.bakalauras.IsimintiKorepetitoriai"
+        android:name="com.example.bakalauras.ui.isiminti.IsimintiKorepetitoriai"
         tools:layout="@layout/fragment_isiminti_korepetitoriai" />
     <fragment
         android:id="@+id/nav_zinutes"

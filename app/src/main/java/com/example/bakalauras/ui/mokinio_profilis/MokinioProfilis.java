@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.mokinio_profilis;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.bakalauras.R;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.example.bakalauras.ui.redaguoti_mokinys.RedaguotiMokinys;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -78,7 +80,7 @@ public class MokinioProfilis extends Fragment {
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
         }
@@ -105,7 +107,7 @@ public class MokinioProfilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiMokinioProfilisVienameLange.php?mokinio_id=" + mokinio_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

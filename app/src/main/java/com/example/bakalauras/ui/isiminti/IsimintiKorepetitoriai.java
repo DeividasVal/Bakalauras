@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.isiminti;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
+import com.example.bakalauras.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -75,7 +78,7 @@ public class IsimintiKorepetitoriai extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiIsimintusKorepetitorius.php?mokinio_id=" + mokinioId);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiIsimintusKorepetitorius.php?mokinio_id=" + mokinioId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -109,7 +112,7 @@ public class IsimintiKorepetitoriai extends Fragment {
 
                     Double average = 0.0;
                     try {
-                        URL url2 = new URL("http://192.168.0.108/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
+                        URL url2 = new URL("http://192.168.0.106/PHPscriptai/gautiVidurkiKortelei.php?korepetitoriaus_id="+id);
                         HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection();
                         conn2.setRequestMethod("GET");
                         conn2.setRequestProperty("Accept", "application/json");

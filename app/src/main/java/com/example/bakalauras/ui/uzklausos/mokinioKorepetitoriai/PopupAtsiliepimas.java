@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.uzklausos.mokinioKorepetitoriai;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.example.bakalauras.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -88,7 +90,7 @@ public class PopupAtsiliepimas extends AppCompatActivity {
                 long currentTimeMillis = System.currentTimeMillis();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 String formattedTime = sdf.format(new Date(currentTimeMillis));
-                URL url = new URL("http://192.168.0.108/PHPscriptai/skelbtiAtsiliepima.php");
+                URL url = new URL("http://192.168.0.106/PHPscriptai/skelbtiAtsiliepima.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -86,7 +86,7 @@ public class Zinutes extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiZinuciuSarasaMokiniui.php?gavejo_id=" + dabartinisId);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiZinuciuSarasaMokiniui.php?gavejo_id=" + dabartinisId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -142,7 +142,7 @@ public class Zinutes extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiZinuciuSarasaKorepetitoriui.php?gavejo_id=" + dabartinisId);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiZinuciuSarasaKorepetitoriui.php?gavejo_id=" + dabartinisId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

@@ -17,8 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
-import com.example.bakalauras.RecyclerViewPaspaustasKorepetitorius;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
+import com.example.bakalauras.ui.korepetitorius.sarasas.RecyclerViewPaspaustasKorepetitorius;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -79,7 +79,7 @@ public class PagrindinisCardAdapter extends RecyclerView.Adapter<korepetitoriusP
         holder.budasKortele.setText("Mokymo tipas: " + sarasas.getMokymoBudas());
 
         Picasso.get()
-                .load("http://192.168.0.108/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.106/PHPscriptai/" + sarasas.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(holder.pfp);
 

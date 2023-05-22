@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -55,7 +55,7 @@ public class ZinutesCardAdapter extends RecyclerView.Adapter<ZinutesCardHolder>{
             else
             {
                 Picasso.get()
-                        .load("http://192.168.0.108/PHPscriptai/" + sarasas.getNuotrauka())
+                        .load("http://192.168.0.106/PHPscriptai/" + sarasas.getNuotrauka())
                         .transform(new CircleTransform())
                         .into(ZinutesCardHolder.pfp);
             }
@@ -64,7 +64,7 @@ public class ZinutesCardAdapter extends RecyclerView.Adapter<ZinutesCardHolder>{
         {
             ZinutesCardHolder.vardas.setText("Korepetitorius: " + sarasas.getVardas());
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + sarasas.getNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + sarasas.getNuotrauka())
                     .transform(new CircleTransform())
                     .into(ZinutesCardHolder.pfp);
         }

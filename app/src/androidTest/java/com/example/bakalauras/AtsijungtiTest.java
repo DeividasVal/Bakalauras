@@ -15,6 +15,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
 
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;

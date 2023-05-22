@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -83,7 +83,7 @@ public class KorepetitoriausUzklausos extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiUzklausosDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriausId);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiUzklausosDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriausId);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

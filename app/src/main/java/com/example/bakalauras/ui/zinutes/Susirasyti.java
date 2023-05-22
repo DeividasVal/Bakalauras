@@ -135,7 +135,7 @@ public class Susirasyti extends AppCompatActivity {
             String laikas = params[3];
             URL url;
             try {
-                url = new URL("http://192.168.0.108/PHPscriptai/iterptiZinute.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/iterptiZinute.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -178,7 +178,7 @@ public class Susirasyti extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiZinutes.php?" +
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiZinutes.php?" +
                         "gavejo_id=" + gavejoId + "&dabartinis_id=" + prisijungesVartotojas);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

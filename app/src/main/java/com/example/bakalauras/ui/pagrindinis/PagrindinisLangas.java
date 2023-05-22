@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.pagrindinis;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bakalauras.R;
 import com.example.bakalauras.databinding.ActivityPagrindinisLangasBinding;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -83,7 +85,7 @@ public class PagrindinisLangas extends AppCompatActivity {
             prisijungesVardas.setText(korepetitorius.getName());
             prisijungesPastas.setText(korepetitorius.getEmail());
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + Prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
             navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -104,7 +106,7 @@ public class PagrindinisLangas extends AppCompatActivity {
             else
             {
                 Picasso.get()
-                        .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
+                        .load("http://192.168.0.106/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                         .transform(new CircleTransform())
                         .into(pfp);
             }
@@ -257,7 +259,7 @@ public class PagrindinisLangas extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/pasalintiProfiliKorepetitorius.php");
+                URL url = new URL("http://192.168.0.106/PHPscriptai/pasalintiProfiliKorepetitorius.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -299,7 +301,7 @@ public class PagrindinisLangas extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/pasalintiProfiliMokinys.php");
+                URL url = new URL("http://192.168.0.106/PHPscriptai/pasalintiProfiliMokinys.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -350,7 +352,7 @@ public class PagrindinisLangas extends AppCompatActivity {
 
     public static boolean paziuretiArYraProfilis(int korepetitoriausId) {
         try {
-            URL url = new URL("http://192.168.0.108/PHPscriptai/arKorepetitoriusTuriProfili.php?korepetitoriaus_id=" + korepetitoriausId);
+            URL url = new URL("http://192.168.0.106/PHPscriptai/arKorepetitoriusTuriProfili.php?korepetitoriaus_id=" + korepetitoriausId);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");

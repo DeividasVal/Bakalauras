@@ -25,11 +25,11 @@
             android:name=".ui.redaguoti_mokinys.RedaguotiMokinys"
             android:exported="false" />
         <activity
-            android:name=".PopupAtsiliepimas"
+            android:name=".ui.uzklausos.mokinioKorepetitoriai.PopupAtsiliepimas"
             android:exported="false"
             android:theme="@style/MyDialogTheme" />
         <activity
-            android:name=".IkeltiFailaPopup"
+            android:name=".ui.uzklausos.korepetitoriausMokiniai.IkeltiFailaPopup"
             android:exported="false"
             android:theme="@style/MyDialogTheme" />
         <activity
@@ -37,15 +37,15 @@
             android:exported="false"
             android:label="@string/title_activity_susirasyti" />
         <activity
-            android:name=".RecyclerViewPaspaustasKorepetitorius"
+            android:name=".ui.korepetitorius.sarasas.RecyclerViewPaspaustasKorepetitorius"
             android:exported="false" />
         <activity
-            android:name=".PagrindinisLangas"
+            android:name=".ui.pagrindinis.PagrindinisLangas"
             android:exported="false"
             android:label="@string/title_activity_pagrindinis_langas"
             android:theme="@style/Theme.Bakalauras.NoActionBar" />
         <activity
-            android:name=".Prisijungti"
+            android:name=".ui.prisijungti.Prisijungti"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
@@ -55,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Registruotis"
+            android:name=".ui.registruotis.Registruotis"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>

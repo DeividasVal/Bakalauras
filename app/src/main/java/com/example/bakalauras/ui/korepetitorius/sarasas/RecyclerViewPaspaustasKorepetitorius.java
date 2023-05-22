@@ -1,10 +1,9 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.korepetitorius.sarasas;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.MenuInflater;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,8 +14,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +25,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bakalauras.R;
 import com.example.bakalauras.ui.korepetitorius.AtsiliepimasCardAdapter;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -45,7 +44,6 @@ import java.util.ArrayList;
 
 import Model.Atsiliepimas;
 import Model.KorepetitoriusProfilis;
-import Model.Mokinys;
 
 public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
 
@@ -141,7 +139,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -199,7 +197,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
             int busena = params[2];
 
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/uzklausaMokytis.php");
+                URL url = new URL("http://192.168.0.106/PHPscriptai/uzklausaMokytis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -244,7 +242,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -302,7 +300,7 @@ public class RecyclerViewPaspaustasKorepetitorius extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + profilis.getNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + profilis.getNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
             vardasText.setText(vardas);

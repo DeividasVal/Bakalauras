@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.prisijungti;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.bakalauras.ui.pagrindinis.PagrindinisLangas;
+import com.example.bakalauras.R;
+import com.example.bakalauras.ui.registruotis.Registruotis;
 
 import org.json.JSONObject;
 
@@ -87,10 +91,10 @@ public class Prisijungti extends AppCompatActivity {
             URL url;
             String requestBody;
             if (type == "mokinys") {
-                url = new URL("http://192.168.0.108/PHPscriptai/loginMokinys.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/loginMokinys.php");
                 requestBody = "mokinio_vartotojo_vardas=" + username + "&mokinio_slaptazodis=" + password;
             } else {
-                url = new URL("http://192.168.0.108/PHPscriptai/loginKorepetitorius.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/loginKorepetitorius.php");
                 requestBody = "korepetitoriaus_vartotojo_vardas=" + username + "&korepetitoriaus_slaptazodis=" + password;
             }
 
@@ -153,7 +157,7 @@ public class Prisijungti extends AppCompatActivity {
         protected Mokinys doInBackground(String... params) {
             String username = params[0];
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiMokini.php?mokinio_vartotojo_vardas=" + username);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiMokini.php?mokinio_vartotojo_vardas=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -191,7 +195,7 @@ public class Prisijungti extends AppCompatActivity {
         protected Korepetitorius doInBackground(String... params) {
             String username = params[0];
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiKorepetitoriu.php?korepetitoriaus_vartotojo_vardas=" + username);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiKorepetitoriu.php?korepetitoriaus_vartotojo_vardas=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

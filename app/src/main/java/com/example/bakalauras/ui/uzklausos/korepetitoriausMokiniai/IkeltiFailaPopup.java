@@ -1,4 +1,4 @@
-package com.example.bakalauras;
+package com.example.bakalauras.ui.uzklausos.korepetitoriausMokiniai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.bakalauras.R;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -135,7 +137,7 @@ public class IkeltiFailaPopup extends AppCompatActivity {
             Uri filepath = (Uri) params[2];
             String pavadinimas = (String) params[3];
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/ikeltiFaila.php");
+                URL url = new URL("http://192.168.0.106/PHPscriptai/ikeltiFaila.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

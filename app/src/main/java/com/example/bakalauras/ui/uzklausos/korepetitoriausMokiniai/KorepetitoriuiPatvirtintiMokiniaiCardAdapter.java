@@ -14,8 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
-import com.example.bakalauras.IkeltiFailaPopup;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.example.bakalauras.ui.zinutes.Susirasyti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -55,7 +54,7 @@ public class KorepetitoriuiPatvirtintiMokiniaiCardAdapter extends RecyclerView.A
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + sarasas.getMokinioNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + sarasas.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(KorepetitoriuiPatvirtintiMokiniaiCardHolder.pfp);
         }

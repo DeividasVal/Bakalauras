@@ -27,7 +27,7 @@ import android.widget.TextView;
 
 import com.example.bakalauras.R;
 import com.example.bakalauras.ui.redaguoti_korepetitorius.RedaguotiKorepetitorius;
-import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -136,7 +136,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiAtsiliepimus.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -197,7 +197,7 @@ public class Korepetitorius_profilis extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiKorepetitoriusProfilisVienamLange.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -288,7 +288,7 @@ public class Korepetitorius_profilis extends Fragment {
             dalykasText.setText(profilis.getDalykaiIstaigoje());
 
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + profilis.getNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + profilis.getNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
 

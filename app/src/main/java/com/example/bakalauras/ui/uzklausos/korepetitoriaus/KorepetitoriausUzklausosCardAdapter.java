@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -61,7 +60,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + sarasas.getMokinioNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + sarasas.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(KorepetitoriausUzklausosCardHolder.pfp);
         }
@@ -109,7 +108,7 @@ public class KorepetitoriausUzklausosCardAdapter extends RecyclerView.Adapter<Ko
         protected String doInBackground(String... params) {
             String response = "";
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
+                URL url = new URL("http://192.168.0.106/PHPscriptai/uzklausaKorepetitoriuiPasirinkti.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);

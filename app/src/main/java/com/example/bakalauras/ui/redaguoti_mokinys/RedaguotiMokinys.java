@@ -19,18 +19,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -91,7 +88,7 @@ public class RedaguotiMokinys extends AppCompatActivity {
         else
         {
             Picasso.get()
-                    .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
+                    .load("http://192.168.0.106/PHPscriptai/" + Prisijungti.currentMokinys.getMokinioNuotrauka())
                     .transform(new CircleTransform())
                     .into(pfp);
         }
@@ -221,7 +218,7 @@ public class RedaguotiMokinys extends AppCompatActivity {
         protected String doInBackground(Object... params) {
             URL url;
             try {
-                url = new URL("http://192.168.0.108/PHPscriptai/mokinysAtnaujintiDuomenisBeNuotraukos.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/mokinysAtnaujintiDuomenisBeNuotraukos.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -274,7 +271,7 @@ public class RedaguotiMokinys extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/mokinysAtnaujintiDuomenis.php");
+                URL url = new URL("http://192.168.0.106/PHPscriptai/mokinysAtnaujintiDuomenis.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -369,7 +366,7 @@ public class RedaguotiMokinys extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiDuomenisMokinioRedagavimui.php?mokinio_vartotojo_vardas=" + mokinio_vartotojo_vardas);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiDuomenisMokinioRedagavimui.php?mokinio_vartotojo_vardas=" + mokinio_vartotojo_vardas);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

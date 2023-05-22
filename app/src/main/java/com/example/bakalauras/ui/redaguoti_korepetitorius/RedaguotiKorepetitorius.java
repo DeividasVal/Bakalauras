@@ -31,7 +31,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -118,7 +118,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
         task.execute();
 
         Picasso.get()
-                .load("http://192.168.0.108/PHPscriptai/" + Prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
+                .load("http://192.168.0.106/PHPscriptai/" + Prisijungti.currentKorepetitorius.getKorepetitoriausNuotrauka())
                 .transform(new CircleTransform())
                 .into(pfp);
 
@@ -303,7 +303,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
             int korepetitoriausId = (int) params[1];
             URL url;
             try {
-                url = new URL("http://192.168.0.108/PHPscriptai/korepetitoriusAtnaujintiNuotrauka.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/korepetitoriusAtnaujintiNuotrauka.php");
                 String data = "korepetitoriaus_id=" + korepetitoriausId;
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -382,7 +382,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
 
             URL url;
             try {
-                url = new URL("http://192.168.0.108/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/korepetitoriusAtnaujintiProfili.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -435,7 +435,7 @@ public class RedaguotiKorepetitorius extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL url = new URL("http://192.168.0.108/PHPscriptai/gautiRedagavimuiDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriaus_id);
+                URL url = new URL("http://192.168.0.106/PHPscriptai/gautiRedagavimuiDuomenisKorepetitoriui.php?korepetitoriaus_id=" + korepetitoriaus_id);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");

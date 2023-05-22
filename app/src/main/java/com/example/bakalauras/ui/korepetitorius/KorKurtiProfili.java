@@ -21,7 +21,7 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.bakalauras.R;
-import com.example.bakalauras.Prisijungti;
+import com.example.bakalauras.ui.prisijungti.Prisijungti;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -189,7 +189,7 @@ public class KorKurtiProfili extends Fragment {
             int korepetitoriausId = (int) params[9];
             URL url;
             try {
-                url = new URL("http://192.168.0.108/PHPscriptai/korepetitoriusKurtiProfili.php");
+                url = new URL("http://192.168.0.106/PHPscriptai/korepetitoriusKurtiProfili.php");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
