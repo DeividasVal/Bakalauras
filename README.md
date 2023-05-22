@@ -6,9 +6,9 @@ Norint, kad programėlė veiktų sukompiliavus projektą, reikia kode nurodyti s
 Per IDE galima surasti "192.168.0.106" atitikimus naudojant filtrą (per Android Studio spaudžiant SHIFT 2 kartus), ir pakeiskite šį IP adresą su savo kompiuterio IP adresu:<br>
 ![image](https://github.com/DeividasVal/Bakalauras/assets/105603552/ed46f4c1-504b-41a2-89fe-9143ab6892ab)
 
-XAMPP serveryje turi būti visi reikalingi PHP failai, juos galima surasti čia: https://github.com/DeividasVal/BakalauroPHPFailai<br>
+XAMPP serveryje turi būti visi reikalingi PHP failai, juos galima surasti čia: https://studgit.vilniustech.lt/20194196/BakalauroPHPFailai<br>
 Šie failai turi būti šioje direktorijoje: C:\xampp\htdocs\PHPscriptai **PAVADINIMAS FOLDERIO TURI BŪTI PHPscriptai!**<br>
 
-Galiausiai lieka įsikelti duomenų bazę į savo MySQL serverį naudojant IMPORT (Duomenų bazę galima surasti čia: https://github.com/DeividasVal/BakalauroDuomenuBaze):<br>
+Galiausiai lieka įsikelti duomenų bazę į savo MySQL serverį naudojant IMPORT (Duomenų bazę galima surasti čia: https://studgit.vilniustech.lt/20194196/BakalauroDuomenuBaze):<br>
 ![image](https://github.com/DeividasVal/Bakalauras/assets/105603552/e087e547-93d3-420b-8a72-fed4caaf1483)
 
